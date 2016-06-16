@@ -70,6 +70,14 @@ public class Login extends JDialog {
 		getContentPane().add(btnEntrar);
 		
 		JButton btnCadastrar = new JButton("Cadastrar");
+		btnCadastrar.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				Cadastro cad = new Cadastro();
+				cad.setLocationRelativeTo(null);
+				cad.setVisible(true);
+				//dispose();
+			}
+		});
 		btnCadastrar.setBounds(320, 103, 89, 27);
 		getContentPane().add(btnCadastrar);
 	}

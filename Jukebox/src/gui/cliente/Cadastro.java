@@ -80,6 +80,7 @@ public class Cadastro extends JDialog {
 		JButton btnCancelar = new JButton("Cancelar");
 		btnCancelar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
+				dispose();
 			}
 		});
 		btnCancelar.setBounds(100, 207, 89, 23);
