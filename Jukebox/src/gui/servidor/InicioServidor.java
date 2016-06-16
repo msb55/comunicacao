@@ -2,18 +2,35 @@ package gui.servidor;
 
 import java.awt.BorderLayout;
 import java.awt.EventQueue;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
 import java.util.ArrayList;
 
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
+import javax.swing.event.ListSelectionEvent;
+import javax.swing.event.ListSelectionListener;
 import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
 
 import model.Cliente;
+
 import javax.swing.ListSelectionModel;
 import javax.swing.JScrollBar;
 import javax.swing.JScrollPane;
+import javax.swing.JButton;
+import java.awt.event.ActionListener;
+import java.awt.event.ActionEvent;
+import javax.swing.GroupLayout;
+import javax.swing.GroupLayout.Alignment;
+import java.awt.CardLayout;
+import javax.swing.LayoutStyle.ComponentPlacement;
+import java.awt.FlowLayout;
+import javax.swing.BoxLayout;
+import java.awt.GridLayout;
+import javax.swing.JLabel;
+import net.miginfocom.swing.MigLayout;
 
 public class InicioServidor extends JFrame {
 
@@ -28,6 +45,8 @@ public class InicioServidor extends JFrame {
 			public void run() {
 				try {
 					InicioServidor frame = new InicioServidor();
+					frame.setLocationRelativeTo(null);
+					frame.setResizable(false);
 					frame.setVisible(true);
 				} catch (Exception e) {
 					e.printStackTrace();
@@ -41,11 +60,10 @@ public class InicioServidor extends JFrame {
 	 */
 	public InicioServidor() {
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		setBounds(100, 100, 450, 300);
+		setBounds(100, 100, 507, 379);
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(contentPane);
-		contentPane.setLayout(null);
 		
 		ArrayList<Cliente> clientes = new ArrayList<Cliente>();
 		clientes.add(new Cliente("232.2323","leo","las3"));
@@ -60,14 +78,46 @@ public class InicioServidor extends JFrame {
         }
 		
 		JScrollPane scrollPane = new JScrollPane();
-		scrollPane.setBounds(0, 0, 434, 250);
-		contentPane.add(scrollPane);
+		scrollPane.setBounds(10, 10, 481, 285);
 		
-		table = new JTable();
+		table = new JTable(){
+			  public boolean isCellEditable(int row,int column){
+			    return false;
+			  }
+			};
+		
+		
+		
+		table.addMouseListener(new MouseAdapter() { // ABRE O JFRAME STATUS
+		    public void mouseClicked(MouseEvent e) {  
+		        if (e.getClickCount() == 2) { 
+		        	StatusCliente status = new StatusCliente();
+		        	status.setLocationRelativeTo(null);
+		        	status.setVisible(true);
+		        }  
+		    }  
+		}); 
+		contentPane.setLayout(null);
 		scrollPane.setViewportView(table);
-		table.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
-		
+		table.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);		
 		
 		table.setModel(df);
+		contentPane.add(scrollPane);
+		
+		JButton btnAdicionarMusicas = new JButton("Adicionar Musicas");
+		btnAdicionarMusicas.setBounds(10, 306, 152, 23);
+		btnAdicionarMusicas.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mousePressed(MouseEvent arg0) {
+				UploadMusica uploadMusica = new UploadMusica();
+				uploadMusica.setLocationRelativeTo(null);
+				uploadMusica.setVisible(true);
+			}
+		});
+		btnAdicionarMusicas.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+			}
+		});
+		contentPane.add(btnAdicionarMusicas);
 	}
 }
