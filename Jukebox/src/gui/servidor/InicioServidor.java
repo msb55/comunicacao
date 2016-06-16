@@ -15,20 +15,29 @@ import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
 
 import model.Cliente;
+import model.ModelLocator;
 
 import javax.swing.ListSelectionModel;
 import javax.swing.JScrollBar;
 import javax.swing.JScrollPane;
 import javax.swing.JButton;
+
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
+
 import javax.swing.GroupLayout;
 import javax.swing.GroupLayout.Alignment;
+
 import java.awt.CardLayout;
+
 import javax.swing.LayoutStyle.ComponentPlacement;
+
 import java.awt.FlowLayout;
+
 import javax.swing.BoxLayout;
+
 import java.awt.GridLayout;
+
 import javax.swing.JLabel;
 
 
@@ -94,6 +103,10 @@ public class InicioServidor extends JFrame {
 		        	StatusCliente status = new StatusCliente();
 		        	status.setLocationRelativeTo(null);
 		        	status.setVisible(true);
+		        	
+		        	ModelLocator.setCliente(clientes.get(table.getSelectedRow()));		        	
+		        	System.out.println("Nome " + ModelLocator.getCliente().getNome());
+		        	
 		        }  
 		    }  
 		}); 
