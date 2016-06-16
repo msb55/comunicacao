@@ -91,8 +91,9 @@ public class Musicas extends JFrame {
 		table.getSelectionModel().addListSelectionListener(new ListSelectionListener(){
 	        public void valueChanged(ListSelectionEvent event) {
 	        	if(table.getSelectedColumn() == 1){
-	        		String nome = (String)table.getValueAt(table.getSelectedRow(), 0);
-	        		JOptionPane.showMessageDialog(null, nome);
+	        		Download download = new Download();
+	        		download.setLocationRelativeTo(null);
+	        		download.setVisible(true);
 	        	}
 	        }
 	    });

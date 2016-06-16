@@ -1,11 +1,28 @@
 package model;
 
+import java.net.Socket;
+import java.util.ArrayList;
+
 public class ModelLocator {
+	private static ArrayList<Socket> transferencia = new ArrayList<Socket>();
+	private static ArrayList<Socket> ted = new ArrayList<Socket>();
+	
 	private static String ipServidor;
 	private static int porta;
 	private static Cliente cliente;
 	
-	
+	public static void addTransferencia(Socket socket){
+		ModelLocator.transferencia.add(socket);
+	}
+	public static Socket getTransferencia(int i){
+		return ModelLocator.transferencia.get(i);
+	}
+	public static void addTed(Socket socket){
+		ModelLocator.ted.add(socket);
+	}
+	public static Socket getTed(int i){
+		return ModelLocator.ted.get(i);
+	}
 	public static String getIpServidor() {
 		return ipServidor;
 	}
@@ -23,7 +40,5 @@ public class ModelLocator {
 	}
 	public static void setCliente(Cliente cliente) {
 		ModelLocator.cliente = cliente;
-	}
-	
-	
+	}	
 }
