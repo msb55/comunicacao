@@ -74,7 +74,7 @@ public class Cadastro extends JDialog {
 			public void actionPerformed(ActionEvent e) {
 			}
 		});
-		btnCadastrar.setBounds(261, 207, 89, 23);
+		btnCadastrar.setBounds(261, 207, 102, 23);
 		contentPanel.add(btnCadastrar);
 		
 		JButton btnCancelar = new JButton("Cancelar");

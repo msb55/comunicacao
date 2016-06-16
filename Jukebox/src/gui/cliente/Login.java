@@ -66,7 +66,7 @@ public class Login extends JDialog {
 				
 			}
 		});
-		btnEntrar.setBounds(320, 35, 89, 27);
+		btnEntrar.setBounds(300, 33, 89, 27);
 		getContentPane().add(btnEntrar);
 		
 		JButton btnCadastrar = new JButton("Cadastrar");
@@ -78,7 +78,7 @@ public class Login extends JDialog {
 				//dispose();
 			}
 		});
-		btnCadastrar.setBounds(320, 103, 89, 27);
+		btnCadastrar.setBounds(300, 101, 104, 27);
 		getContentPane().add(btnCadastrar);
 	}
 }
