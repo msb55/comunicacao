@@ -16,6 +16,8 @@ import javax.swing.table.DefaultTableModel;
 
 import model.Cliente;
 import model.ModelLocator;
+import model.thread.Conexao;
+import model.thread.Servidor;
 
 import javax.swing.ListSelectionModel;
 import javax.swing.JScrollBar;
@@ -83,19 +85,21 @@ public class InicioServidor extends JFrame {
 		
 		
 		DefaultTableModel df = new DefaultTableModel(null,	new String[] {"Login", "IP" });
-		for (Cliente cliente : clientes) {
-            df.addRow(new Object[] { cliente.getLogin(),cliente.getIp()});
-        }
 		
-		JScrollPane scrollPane = new JScrollPane();
-		scrollPane.setBounds(10, 10, 481, 285);
-		
+
 		table = new JTable(){
 			  public boolean isCellEditable(int row,int column){
 			    return false;
 			  }
 		};
 		
+		table.setModel(df);
+		for (Cliente cliente : clientes) {
+            df.addRow(new Object[] { cliente.getLogin(),cliente.getIp()});
+        }
+		
+		JScrollPane scrollPane = new JScrollPane();
+		scrollPane.setBounds(10, 10, 481, 285);
 		
 		
 		table.addMouseListener(new MouseAdapter() { // ABRE O JFRAME STATUS
@@ -105,8 +109,6 @@ public class InicioServidor extends JFrame {
 		        	status.setLocationRelativeTo(null);
 		        	status.setVisible(true);
 		        	
-		        	ModelLocator.setCliente(clientes.get(table.getSelectedRow()));		        	
-		        	System.out.println("Nome " + ModelLocator.getCliente().getNome());
 		        	
 		        }  
 		    }  
@@ -115,7 +117,7 @@ public class InicioServidor extends JFrame {
 		scrollPane.setViewportView(table);
 		table.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);		
 		
-		table.setModel(df);
+		
 		contentPane.add(scrollPane);
 		
 		JButton btnAdicionarMusicas = new JButton("Adicionar Musicas");
@@ -133,5 +135,7 @@ public class InicioServidor extends JFrame {
 			}
 		});
 		contentPane.add(btnAdicionarMusicas);
+		
+		new Thread(new Servidor(df)).start(); //INICIA O SERVIDOR
 	}
 }
