@@ -45,7 +45,7 @@ public class Download extends JDialog {
 		contentPanel.add(progressBarDownload);
 		
 		JLabel lblNomeArquivo = new JLabel("Progresso...");
-		lblNomeArquivo.setBounds(35, 51, 87, 16);
+		lblNomeArquivo.setBounds(35, 62, 87, 16);
 		contentPanel.add(lblNomeArquivo);
 		
 		JButton btnCancelar = new JButton("Cancelar");
@@ -64,5 +64,29 @@ public class Download extends JDialog {
 		});
 		btnPlayOrPause.setBounds(35, 156, 97, 25);
 		contentPanel.add(btnPlayOrPause);
+		
+		JLabel lblNome = new JLabel("Nome:");
+		lblNome.setBounds(35, 13, 56, 16);
+		contentPanel.add(lblNome);
+		
+		JLabel lblNomeMusica = new JLabel("...");
+		lblNomeMusica.setBounds(94, 13, 441, 16);
+		contentPanel.add(lblNomeMusica);
+		
+		JLabel lblTamanho = new JLabel("Tamanho:");
+		lblTamanho.setBounds(35, 33, 71, 16);
+		contentPanel.add(lblTamanho);
+		
+		JLabel lblTamArquivo = new JLabel("...");
+		lblTamArquivo.setBounds(104, 33, 77, 16);
+		contentPanel.add(lblTamArquivo);
+		
+		JLabel lblTempoRestante = new JLabel("Tempo Restante:");
+		lblTempoRestante.setBounds(35, 129, 117, 16);
+		contentPanel.add(lblTempoRestante);
+		
+		JLabel lblTempo = new JLabel("0");
+		lblTempo.setBounds(158, 129, 56, 16);
+		contentPanel.add(lblTempo);
 	}
 }
