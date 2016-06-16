@@ -94,7 +94,7 @@ public class InicioServidor extends JFrame {
 			  public boolean isCellEditable(int row,int column){
 			    return false;
 			  }
-			};
+		};
 		
 		
 		
