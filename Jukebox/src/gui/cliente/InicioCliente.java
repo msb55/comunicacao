@@ -46,7 +46,7 @@ public class InicioCliente extends JFrame implements ActionListener{
 		btSair.addActionListener(this);
 
 
-		imagem = new ImageIcon(getClass().getResource("musica.jpg"));
+		imagem = new ImageIcon(getClass().getResource("/gui/imagens/musica.jpg"));
 
 		label = new JLabel(imagem);
 		add(label);
