@@ -2,8 +2,11 @@ package gui.cliente;
 
 import java.awt.event.*;
 import java.awt.*;
+import java.net.Socket;
 
 import javax.swing.*;
+
+import model.ModelLocator;
 
 public class InicioCliente extends JFrame implements ActionListener{
 
@@ -70,10 +73,13 @@ public class InicioCliente extends JFrame implements ActionListener{
 			ip = tfIP;
 
 			if(e.getSource()==btEntrar) {
+				Socket socket = new Socket(ip.getText(), 3493);
+				ModelLocator.setSocketPrincipal(socket);
 
 				Login frameSecundario = new Login();
+				frameSecundario.setLocationRelativeTo(null);
 				frameSecundario.setVisible(true);
-
+				dispose();
 			}
 
 			if(e.getSource()==btSair) {

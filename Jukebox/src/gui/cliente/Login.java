@@ -9,14 +9,17 @@ import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 import javax.swing.JLabel;
 import javax.swing.JTextField;
+
+import model.Cliente;
+import model.ModelLocator;
+
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
+import java.io.DataOutputStream;
+import java.io.IOException;
 
 public class Login extends JDialog {
-
-	private final JPanel contentPanel = new JPanel();
-	private JTextField textField;
-	private JTextField textField_1;
+	private JTextField txtNome;
 
 	/**
 	 * Launch the application.
@@ -35,50 +38,37 @@ public class Login extends JDialog {
 	 * Create the dialog.
 	 */
 	public Login() {
-		setBounds(100, 100, 450, 300);
+		setBounds(100, 100, 450, 175);
 		getContentPane().setLayout(null);
-		contentPanel.setBounds(0, 0, 434, 20);
-		contentPanel.setLayout(new FlowLayout());
-		contentPanel.setBorder(new EmptyBorder(5, 5, 5, 5));
-		getContentPane().add(contentPanel);
 		
-		JLabel lblLogin = new JLabel("Login:");
-		lblLogin.setBounds(42, 34, 83, 24);
-		getContentPane().add(lblLogin);
-		
-		textField = new JTextField();
-		textField.setBounds(118, 31, 172, 31);
-		getContentPane().add(textField);
-		textField.setColumns(10);
-		
-		JLabel lblSenha = new JLabel("Senha:");
-		lblSenha.setBounds(42, 107, 46, 14);
-		getContentPane().add(lblSenha);
-		
-		textField_1 = new JTextField();
-		textField_1.setBounds(118, 99, 172, 31);
-		getContentPane().add(textField_1);
-		textField_1.setColumns(10);
+		txtNome = new JTextField();
+		txtNome.setBounds(66, 57, 259, 20);
+		getContentPane().add(txtNome);
+		txtNome.setColumns(10);
 		
 		JButton btnEntrar = new JButton("Entrar");
 		btnEntrar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				
+				try {
+					DataOutputStream out = new DataOutputStream(ModelLocator.getSocketPrincipal().getOutputStream());
+					out.writeBytes(txtNome.getText() + "\n");
+					
+					ModelLocator.setCliente(txtNome.getText());
+					
+					Perfil perfil = new Perfil();
+					perfil.setLocationRelativeTo(null);
+					perfil.setVisible(true);
+					dispose();					
+				} catch (IOException e1) {
+					e1.printStackTrace();
+				}
 			}
 		});
-		btnEntrar.setBounds(300, 33, 89, 27);
+		btnEntrar.setBounds(335, 54, 89, 27);
 		getContentPane().add(btnEntrar);
-		
-		JButton btnCadastrar = new JButton("Cadastrar");
-		btnCadastrar.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				Cadastro cad = new Cadastro();
-				cad.setLocationRelativeTo(null);
-				cad.setVisible(true);
-				//dispose();
-			}
-		});
-		btnCadastrar.setBounds(300, 101, 104, 27);
-		getContentPane().add(btnCadastrar);
+				
+		JLabel lblNome = new JLabel("Nome:");
+		lblNome.setBounds(10, 60, 46, 14);
+		getContentPane().add(lblNome);
 	}
 }

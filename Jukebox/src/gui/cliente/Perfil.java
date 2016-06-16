@@ -2,6 +2,11 @@ package gui.cliente;
 
 import java.awt.BorderLayout;
 import java.awt.EventQueue;
+import java.io.BufferedReader;
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.FileReader;
+import java.io.IOException;
 
 import javax.swing.JFrame;
 import javax.swing.JPanel;
@@ -11,6 +16,8 @@ import javax.swing.table.DefaultTableModel;
 import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JTable;
+
+import model.ModelLocator;
 
 public class Perfil extends JFrame {
 
@@ -50,8 +57,7 @@ public class Perfil extends JFrame {
 		btnBaixarMusicas.setBounds(458, 326, 89, 23);
 		contentPane.add(btnBaixarMusicas);
 		
-		String nome = "Paula"; //adicionar parâmetro
-		JLabel lblOl = new JLabel("Ol\u00E1, " + nome + "! Seja bem-vinda!");
+		JLabel lblOl = new JLabel("Ol\u00E1, " + ModelLocator.getCliente() + "! Seja bem-vindx!");
 		lblOl.setBounds(10, 11, 414, 14);
 		contentPane.add(lblOl);
 		
@@ -59,14 +65,39 @@ public class Perfil extends JFrame {
 		df.addColumn("Artista");
 		df.addColumn("Duração");
 		
+		carregarMusicas();
+		
 		table = new JTable(df);
 		table.setBounds(10, 36, 537, 279);
 		contentPane.add(table);
 		
 		barraRolagem = new JScrollPane(table);
 		barraRolagem.setBounds(10, 36, 537, 279);
-		contentPane.add(barraRolagem);
-		
-		
+		contentPane.add(barraRolagem);		
+	}
+	
+	public void carregarMusicas(){		
+		try {
+			File f = new File("C:\\Users\\Public\\Documents\\log.txt");
+			FileReader ler = new FileReader(f);
+			BufferedReader lerArquivo = new BufferedReader(ler);
+			
+			do{
+				String nome = lerArquivo.readLine();
+				String artista = lerArquivo.readLine();
+				String duracao = lerArquivo.readLine();
+				
+				Object[] obj = {nome, artista, duracao};
+				
+				df.addRow(obj);				
+			}while(lerArquivo.readLine() != null);
+			
+		} catch (FileNotFoundException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}		
 	}
 }

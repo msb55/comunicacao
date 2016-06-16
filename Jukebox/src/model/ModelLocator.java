@@ -7,9 +7,10 @@ public class ModelLocator {
 	private static ArrayList<Socket> transferencia = new ArrayList<Socket>();
 	private static ArrayList<Socket> ted = new ArrayList<Socket>();
 	
+	private static Socket socketPrincipal;
 	private static String ipServidor;
 	private static int porta;
-	private static Cliente cliente;
+	private static String cliente;
 	
 	public static void addTransferencia(Socket socket){
 		ModelLocator.transferencia.add(socket);
@@ -35,10 +36,16 @@ public class ModelLocator {
 	public static void setPorta(int porta) {
 		ModelLocator.porta = porta;
 	}
-	public static Cliente getCliente() {
+	public static String getCliente() {
 		return cliente;
 	}
-	public static void setCliente(Cliente cliente) {
+	public static void setCliente(String cliente) {
 		ModelLocator.cliente = cliente;
 	}	
+	public static Socket getSocketPrincipal() {
+		return socketPrincipal;
+	}
+	public static void setSocketPrincipal(Socket socketPrincipal) {
+		ModelLocator.socketPrincipal = socketPrincipal;
+	}
 }
