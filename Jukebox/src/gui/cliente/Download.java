@@ -88,5 +88,9 @@ public class Download extends JDialog {
 		JLabel lblTempo = new JLabel("0");
 		lblTempo.setBounds(158, 129, 56, 16);
 		contentPanel.add(lblTempo);
+		
+		JButton btnReiniciar = new JButton("Reiniciar");
+		btnReiniciar.setBounds(234, 156, 97, 25);
+		contentPanel.add(btnReiniciar);
 	}
 }
