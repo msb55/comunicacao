@@ -33,7 +33,8 @@ public class Download extends JDialog {
 	 * Create the dialog.
 	 */
 	public Download() {
-		setBounds(100, 100, 587, 388);
+		setTitle("Download");
+		setBounds(100, 100, 587, 258);
 		getContentPane().setLayout(new BorderLayout());
 		contentPanel.setBorder(new EmptyBorder(5, 5, 5, 5));
 		getContentPane().add(contentPanel, BorderLayout.CENTER);
