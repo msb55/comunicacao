@@ -30,7 +30,7 @@ import java.awt.FlowLayout;
 import javax.swing.BoxLayout;
 import java.awt.GridLayout;
 import javax.swing.JLabel;
-import net.miginfocom.swing.MigLayout;
+
 
 public class InicioServidor extends JFrame {
 
