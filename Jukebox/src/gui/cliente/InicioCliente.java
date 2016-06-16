@@ -1,42 +1,91 @@
 package gui.cliente;
 
-import java.awt.BorderLayout;
-import java.awt.EventQueue;
+import java.awt.event.*;
+import java.awt.*;
 
-import javax.swing.JFrame;
-import javax.swing.JPanel;
-import javax.swing.border.EmptyBorder;
+import javax.swing.*;
 
-public class InicioCliente extends JFrame {
+public class InicioCliente extends JFrame implements ActionListener{
 
-	private JPanel contentPane;
+	//ActionListener - interface para adicionar ações
 
-	/**
-	 * Launch the application.
-	 */
-	public static void main(String[] args) {
-		EventQueue.invokeLater(new Runnable() {
-			public void run() {
-				try {
-					InicioCliente frame = new InicioCliente();
-					frame.setVisible(true);
-				} catch (Exception e) {
-					e.printStackTrace();
-				}
-			}
-		});
+	JTextField tfIP; //Caixas
+	JButton btEntrar, btSair;
+
+	public JTextField ip;
+	public JLabel textoIp;
+	public ImageIcon imagem;
+	public JLabel label;
+	
+	public InicioCliente() {
+		
+		setSize(600, 400); //tamanho da tela
+		setTitle("MUSICAS");
+		setDefaultCloseOperation(EXIT_ON_CLOSE); //Fechar o programa
+		//setResizable(false); //Não permite maximar a tela
+		
+		//instanciando os componentes
+		tfIP = new JTextField(15);
+		btEntrar = new JButton("Entrar");
+		btSair = new JButton("Sair");
+
+		//Definindo o Layout
+		getContentPane().setLayout(new FlowLayout(FlowLayout.CENTER)); 
+
+		textoIp = new JLabel("IP");
+		add(textoIp);
+
+		
+		//Adicionar os objetos a tela
+		getContentPane().add(tfIP);
+		getContentPane().add(btEntrar);
+		getContentPane().add(btSair);
+
+		//Adicionar ações aos componentes
+		btEntrar.addActionListener(this);
+		btSair.addActionListener(this);
+
+
+		imagem = new ImageIcon(getClass().getResource("musica.jpg"));
+
+		label = new JLabel(imagem);
+		add(label);
+
 	}
 
-	/**
-	 * Create the frame.
-	 */
-	public InicioCliente() {
-		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		setBounds(100, 100, 450, 300);
-		contentPane = new JPanel();
-		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
-		contentPane.setLayout(new BorderLayout(0, 0));
-		setContentPane(contentPane);
+	public static void main(String [] args) {
+		
+		InicioCliente framePrincipal = new InicioCliente();
+		
+		framePrincipal.setVisible(true); //Para a tela ficar visivel
+		
+	}
+
+	@Override
+	public void actionPerformed(ActionEvent e) {
+
+		try{
+
+			//Tudo que digitar na caixinha TextField vai ser armazenado aqui
+			ip = tfIP;
+
+			if(e.getSource()==btEntrar) {
+
+				Login frameSecundario = new Login();
+				frameSecundario.setVisible(true);
+
+			}
+
+			if(e.getSource()==btSair) {
+
+				System.exit(0);
+
+			}
+
+		} catch(Exception e2) {
+
+			JOptionPane.showMessageDialog(null, "Digite novamente");
+		}
 	}
 
 }
