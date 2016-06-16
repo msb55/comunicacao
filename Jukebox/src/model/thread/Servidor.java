@@ -6,10 +6,15 @@ import java.io.InputStreamReader;
 import java.net.ServerSocket;
 import java.net.Socket;
 
-public class Servidor implements Runnable {
+import javax.swing.JTable;
+import javax.swing.table.DefaultTableModel;
 
-	public Servidor() {
-		
+public class Servidor implements Runnable {
+	
+	DefaultTableModel tabela;
+
+	public Servidor(DefaultTableModel tabela) {
+		this.tabela = tabela;
 	}
 
 	@Override
@@ -26,7 +31,7 @@ public class Servidor implements Runnable {
 				
 				nome = socketEntrada.readLine();
 				
-				new Thread(new Conexao(nome, socket)).start();	
+				new Thread(new Conexao(nome, socket,tabela)).start();	
 				
 				
 				
