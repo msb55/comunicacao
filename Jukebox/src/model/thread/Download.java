@@ -12,10 +12,12 @@ import java.net.Socket;
 public class Download implements Runnable {
 	
 	private Socket socketDownload;
+	private Socket socketAck;
 	private String musica;
 
 	public Download(Socket socketDownload, Socket socketAck, String musica) {		
 		this.socketDownload = socketDownload;
+		this.socketAck = socketAck;
 		this.musica = musica;
 	}
 
@@ -27,32 +29,27 @@ public class Download implements Runnable {
 		
 			socketOut = new DataOutputStream(socketDownload.getOutputStream());			
 			
-			socketIn = new BufferedReader(new InputStreamReader(socketDownload.getInputStream()));	
+			socketIn = new BufferedReader(new InputStreamReader(socketAck.getInputStream()));	
 			
 			
 			byte[] buffer = new byte[512]; //BUFER DE 512 BYTES
-	        FileInputStream file = new FileInputStream("C:/Users/Public/Documents/Jukebox/"+ this.musica);
-	      
-	        long enviados = 0;
+	        FileInputStream file = new FileInputStream("C:/Users/Public/Documents/Jukebox/"+ this.musica);       
 
-			DataInputStream arq = new DataInputStream(file);
-
-			
-			
+			DataInputStream arq = new DataInputStream(file);			
 			
 			 int leitura = 0;
 	         while((leitura = arq.read(buffer)) > 0) {         	  
 	        	         	  
 	              socketOut.write(buffer,0,leitura);
-	              socketOut.flush();	  
-	         	              
-	              socketIn.readLine(); 
-	               
+	              socketOut.flush();	
+	              
+	              socketIn.readLine();               
 	              
 	          }         
 	         
 	         arq.close();
 	         socketOut.close();
+	         socketIn.close();
 		} catch (IOException e) {			
 			e.printStackTrace();
 		}		

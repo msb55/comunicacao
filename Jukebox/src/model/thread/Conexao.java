@@ -46,17 +46,16 @@ public class Conexao implements Runnable {
 		try {		
 						
 			
-			while(true){
-				
+			while(true){				
 							
 				musica = socketEntrada.readLine();
 				
 				porta1 = ModelLocator.newPorta();
-				porta2 = ModelLocator.newPorta();
-					
+				porta2 = ModelLocator.newPorta();				
+				socketSaida = new DataOutputStream(this.servidor.getOutputStream());	
 				
-			
-				socketSaida.writeBytes(""+porta1 + "-"+porta2+"\n");
+				socketSaida.writeBytes(""+porta1+ "-"+porta2+"\n");
+				
 				aceita = new ServerSocket(porta1);
 				aceita2 = new ServerSocket(porta2);	
 				
