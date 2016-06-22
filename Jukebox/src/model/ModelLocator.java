@@ -9,8 +9,12 @@ public class ModelLocator {
 	
 	private static Socket socketPrincipal;
 	private static String ipServidor;
-	private static int porta;
+	private static int porta = 0;
 	private static String cliente;
+	
+	
+	
+
 	
 	public static void addTransferencia(Socket socket){
 		ModelLocator.transferencia.add(socket);
@@ -47,5 +51,13 @@ public class ModelLocator {
 	}
 	public static void setSocketPrincipal(Socket socketPrincipal) {
 		ModelLocator.socketPrincipal = socketPrincipal;
+	}
+	
+	public static int newPorta(){		
+		return ModelLocator.porta++;
+	}
+	
+	public static void initPorta(){
+		ModelLocator.porta = 5000;
 	}
 }
