@@ -18,6 +18,8 @@ import javax.swing.JLabel;
 import javax.swing.JTable;
 
 import model.ModelLocator;
+import java.awt.event.ActionListener;
+import java.awt.event.ActionEvent;
 
 public class Perfil extends JFrame {
 
@@ -47,14 +49,22 @@ public class Perfil extends JFrame {
 	 */
 	public Perfil() {
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		setBounds(100, 100, 573, 399);
+		setBounds(100, 100, 700, 399);
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(contentPane);
 		contentPane.setLayout(null);
 		
 		JButton btnBaixarMusicas = new JButton("Baixar");
-		btnBaixarMusicas.setBounds(458, 326, 89, 23);
+		btnBaixarMusicas.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				Musicas musicas = new Musicas();
+				musicas.setLocationRelativeTo(null);
+				musicas.setVisible(true);
+				
+			}
+		});
+		btnBaixarMusicas.setBounds(585, 326, 89, 23);
 		contentPane.add(btnBaixarMusicas);
 		
 		JLabel lblOl = new JLabel("Ol\u00E1, " + ModelLocator.getCliente() + "! Seja bem-vindx!");
@@ -62,8 +72,9 @@ public class Perfil extends JFrame {
 		contentPane.add(lblOl);
 		
 		df.addColumn("Nome");
+		df.addColumn("Álbum");
 		df.addColumn("Artista");
-		df.addColumn("Duração");
+		df.addColumn("Tamanho");
 		
 		carregarMusicas();
 		
@@ -71,8 +82,17 @@ public class Perfil extends JFrame {
 		table.setBounds(10, 36, 537, 279);
 		contentPane.add(table);
 		
+		table.getColumnModel().getColumn(0).setPreferredWidth (150);
+		table.getColumnModel().getColumn(1).setPreferredWidth (150);
+		table.getColumnModel().getColumn(2).setPreferredWidth (150);
+		table.getColumnModel().getColumn(3).setPreferredWidth (1);
+		table.getColumnModel().getColumn(0).setResizable(false);
+		table.getColumnModel().getColumn(1).setResizable(false);
+		table.getColumnModel().getColumn(2).setResizable(false);
+		table.getColumnModel().getColumn(3).setResizable(false);
+		
 		barraRolagem = new JScrollPane(table);
-		barraRolagem.setBounds(10, 36, 537, 279);
+		barraRolagem.setBounds(10, 36, 664, 279);
 		contentPane.add(barraRolagem);		
 	}
 	
@@ -82,21 +102,30 @@ public class Perfil extends JFrame {
 			FileReader ler = new FileReader(f);
 			BufferedReader lerArquivo = new BufferedReader(ler);
 			
-			while(lerArquivo.readLine() != null){
-				String nome = lerArquivo.readLine();
+			String nome = lerArquivo.readLine();
+			while(nome != null){
+				String album = lerArquivo.readLine();
 				String artista = lerArquivo.readLine();
-				String duracao = lerArquivo.readLine();
+				String tamanho = lerArquivo.readLine();
 				
-				Object[] obj = {nome, artista, duracao};
+				Object[] obj = {nome, album, artista, tamanho};
 				
 				df.addRow(obj);
-			}			
+				
+				nome = lerArquivo.readLine();
+			}
+			
+			lerArquivo.close();
+			ler.close();
 		} catch (FileNotFoundException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+			try {
+				File f = new File("C:\\Users\\Public\\Documents\\log.txt");
+				f.createNewFile();
+			} catch (IOException e1) {
+				System.out.println(e1.getMessage());
+			}
 		} catch (IOException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+			System.out.println(e.getMessage());
 		}		
 	}
 }

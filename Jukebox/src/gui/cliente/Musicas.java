@@ -1,17 +1,10 @@
 package gui.cliente;
 
-import java.awt.BorderLayout;
 import java.awt.Component;
 import java.awt.EventQueue;
-import java.awt.Graphics;
-import java.awt.Image;
-import java.awt.ScrollPane;
-import java.awt.Toolkit;
 
-import javax.swing.Icon;
 import javax.swing.ImageIcon;
 import javax.swing.JFrame;
-import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.border.EmptyBorder;
@@ -21,15 +14,14 @@ import javax.swing.JLabel;
 import javax.swing.SwingConstants;
 
 import java.awt.Font;
-import java.awt.image.ImageObserver;
-import java.awt.image.ImageProducer;
+import java.io.IOException;
 import java.net.Socket;
 
 import javax.swing.JTable;
-import javax.swing.table.DefaultTableCellRenderer;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableCellRenderer;
-import javax.swing.ListSelectionModel;
+
+import model.ModelLocator;
 
 public class Musicas extends JFrame {
 
@@ -38,7 +30,7 @@ public class Musicas extends JFrame {
 	private JScrollPane barraRolagem;
 	private DefaultTableModel modelo = new DefaultTableModel();
 	
-	private Socket socket;
+	//private Socket socket;
 
 	/**
 	 * Launch the application.
@@ -78,8 +70,7 @@ public class Musicas extends JFrame {
 		modelo.addColumn("Nome");
 		modelo.addColumn("Download");
 		
-		modelo.addRow(new Object[]{"test",null});
-		modelo.addRow(new Object[]{"teste",null});
+		carregarMusicas();
 		
 		table = new JTable(modelo){
 			private static final long serialVersionUID = 1L;
@@ -116,5 +107,15 @@ public class Musicas extends JFrame {
 		barraRolagem = new JScrollPane(table);
 		barraRolagem.setBounds(10, 62, 505, 388);
 		contentPane.add(barraRolagem);
+	}
+	
+	public void carregarMusicas(){
+		try {
+			Socket conexao = new Socket(ModelLocator.getIpServidor(), 3502);
+			
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 	}
 }
