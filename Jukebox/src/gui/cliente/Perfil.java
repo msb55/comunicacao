@@ -82,16 +82,15 @@ public class Perfil extends JFrame {
 			FileReader ler = new FileReader(f);
 			BufferedReader lerArquivo = new BufferedReader(ler);
 			
-			do{
+			while(lerArquivo.readLine() != null){
 				String nome = lerArquivo.readLine();
 				String artista = lerArquivo.readLine();
 				String duracao = lerArquivo.readLine();
 				
 				Object[] obj = {nome, artista, duracao};
 				
-				df.addRow(obj);				
-			}while(lerArquivo.readLine() != null);
-			
+				df.addRow(obj);
+			}			
 		} catch (FileNotFoundException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
