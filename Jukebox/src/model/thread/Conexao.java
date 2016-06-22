@@ -60,11 +60,10 @@ public class Conexao implements Runnable {
 				aceita2 = new ServerSocket(porta2);	
 				
 				socketDownload = aceita.accept();
-				socketAck = aceita2.accept();
+				socketAck = aceita2.accept();			
 				
-				socketEntrada = new BufferedReader(new InputStreamReader(socketDownload.getInputStream()));
 				
-				new Thread(new Conexao(socketDownload,tabela)).start();				
+				new Thread(new Download(socketDownload,socketAck,musica)).start();				
 				
 				
 			}
