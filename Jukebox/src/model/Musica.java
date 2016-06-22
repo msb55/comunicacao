@@ -5,6 +5,7 @@ public class Musica {
 	private String nome;
 	private String album;
 	private String artista;	
+	private double tamanho;
 	
 	public Musica(String nome, String album, String artista) {
 		this.nome = nome;
@@ -29,6 +30,14 @@ public class Musica {
 	}
 	public void setArtista(String artista) {
 		this.artista = artista;
+	}
+
+	public double getTamanho() {
+		return tamanho;
+	}
+
+	public void setTamanho(double tamanho) {
+		this.tamanho = tamanho;
 	}
 
 }
