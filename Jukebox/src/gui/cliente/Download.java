@@ -9,12 +9,20 @@ import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 import javax.swing.JProgressBar;
 import javax.swing.JLabel;
+
+import model.ModelLocator;
+
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 
 public class Download extends JDialog {
 
 	private final JPanel contentPanel = new JPanel();
+
+	private JButton btnCancelar;
+	
+	private JLabel lblNomeMusica;
+	private JLabel lblTamanhoMusica;
 
 	/**
 	 * Launch the application.
@@ -49,7 +57,7 @@ public class Download extends JDialog {
 		lblNomeArquivo.setBounds(35, 62, 87, 16);
 		contentPanel.add(lblNomeArquivo);
 		
-		JButton btnCancelar = new JButton("Cancelar");
+		btnCancelar = new JButton("Cancelar");
 		btnCancelar.setBounds(438, 156, 97, 25);
 		contentPanel.add(btnCancelar);
 		
@@ -70,28 +78,33 @@ public class Download extends JDialog {
 		lblNome.setBounds(35, 13, 56, 16);
 		contentPanel.add(lblNome);
 		
-		JLabel lblNomeMusica = new JLabel("...");
-		lblNomeMusica.setBounds(94, 13, 441, 16);
+		lblNomeMusica = new JLabel("...");
+		lblNomeMusica.setBounds(101, 13, 195, 16);
 		contentPanel.add(lblNomeMusica);
 		
 		JLabel lblTamanho = new JLabel("Tamanho:");
 		lblTamanho.setBounds(35, 33, 71, 16);
 		contentPanel.add(lblTamanho);
 		
-		JLabel lblTamArquivo = new JLabel("...");
-		lblTamArquivo.setBounds(104, 33, 77, 16);
-		contentPanel.add(lblTamArquivo);
+		lblTamanhoMusica = new JLabel("...");
+		lblTamanhoMusica.setBounds(104, 33, 192, 16);
+		contentPanel.add(lblTamanhoMusica);
 		
 		JLabel lblTempoRestante = new JLabel("Tempo Restante:");
 		lblTempoRestante.setBounds(35, 129, 117, 16);
 		contentPanel.add(lblTempoRestante);
 		
 		JLabel lblTempo = new JLabel("0");
-		lblTempo.setBounds(158, 129, 56, 16);
+		lblTempo.setBounds(158, 129, 195, 16);
 		contentPanel.add(lblTempo);
 		
 		JButton btnReiniciar = new JButton("Reiniciar");
 		btnReiniciar.setBounds(234, 156, 97, 25);
 		contentPanel.add(btnReiniciar);
+	}
+	
+	public void iniciar(){
+		lblNomeMusica.setText(ModelLocator.getNomeMusicas());
+		lblTamanhoMusica.setText(""+ModelLocator.getTamanhoMusicas());		
 	}
 }

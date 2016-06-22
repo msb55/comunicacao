@@ -12,10 +12,23 @@ public class ModelLocator {
 	private static int porta = 0;
 	private static String cliente;
 	
+	private static String nomeMusicas;
+	private static double tamanhoMusicas;
+	private static int porta1;
+	private static int porta2;
 	
-	
-
-	
+	public static int getPorta1() {
+		return porta1;
+	}
+	public static void setPorta1(int porta1) {
+		ModelLocator.porta1 = porta1;
+	}
+	public static int getPorta2() {
+		return porta2;
+	}
+	public static void setPorta2(int porta2) {
+		ModelLocator.porta2 = porta2;
+	}
 	public static void addTransferencia(Socket socket){
 		ModelLocator.transferencia.add(socket);
 	}
@@ -59,5 +72,17 @@ public class ModelLocator {
 	
 	public static void initPorta(){
 		ModelLocator.porta = 5000;
+	}
+	public static String getNomeMusicas() {
+		return nomeMusicas;
+	}
+	public static void setNomeMusicas(String nomeMusicas) {
+		ModelLocator.nomeMusicas = nomeMusicas;
+	}
+	public static double getTamanhoMusicas() {
+		return tamanhoMusicas;
+	}
+	public static void setTamanhoMusicas(double tamanhoMusicas) {
+		ModelLocator.tamanhoMusicas = tamanhoMusicas;
 	}
 }
