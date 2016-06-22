@@ -11,15 +11,22 @@ import javax.swing.JProgressBar;
 import javax.swing.JLabel;
 
 import model.ModelLocator;
+import model.thread.RecebeMusica;
 
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
 
 public class Download extends JDialog {
 
 	private final JPanel contentPanel = new JPanel();
 
 	private JButton btnCancelar;
+	private JButton btnReiniciar;
+	private JButton btnPlayOrPause;
+	private JProgressBar progressBarDownload;
+	private JLabel lblTempo;
 	
 	private JLabel lblNomeMusica;
 	private JLabel lblTamanhoMusica;
@@ -40,7 +47,7 @@ public class Download extends JDialog {
 	/**
 	 * Create the dialog.
 	 */
-	public Download() {
+	public Download() {	
 		setTitle("Download");
 		setBounds(100, 100, 587, 258);
 		getContentPane().setLayout(new BorderLayout());
@@ -48,7 +55,7 @@ public class Download extends JDialog {
 		getContentPane().add(contentPanel, BorderLayout.CENTER);
 		contentPanel.setLayout(null);
 		
-		JProgressBar progressBarDownload = new JProgressBar();
+		progressBarDownload = new JProgressBar();
 		progressBarDownload.setBounds(35, 91, 500, 37);
 		progressBarDownload.setValue(0);
 		contentPanel.add(progressBarDownload);
@@ -61,16 +68,8 @@ public class Download extends JDialog {
 		btnCancelar.setBounds(438, 156, 97, 25);
 		contentPanel.add(btnCancelar);
 		
-		final JButton btnPlayOrPause = new JButton("Pausar"); //play \u25BA pause \u23F8
-		btnPlayOrPause.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent arg0) {
-				if (btnPlayOrPause.getText().equals("Pausar")) {
-					btnPlayOrPause.setText("Continuar");
-				} else {
-					btnPlayOrPause.setText("Pausar");
-				}
-			}
-		});
+		btnPlayOrPause = new JButton("Pausar"); //play \u25BA pause \u23F8
+		
 		btnPlayOrPause.setBounds(35, 156, 97, 25);
 		contentPanel.add(btnPlayOrPause);
 		
@@ -94,13 +93,16 @@ public class Download extends JDialog {
 		lblTempoRestante.setBounds(35, 129, 117, 16);
 		contentPanel.add(lblTempoRestante);
 		
-		JLabel lblTempo = new JLabel("0");
+		lblTempo = new JLabel("0");
 		lblTempo.setBounds(158, 129, 195, 16);
 		contentPanel.add(lblTempo);
 		
-		JButton btnReiniciar = new JButton("Reiniciar");
+		btnReiniciar = new JButton("Reiniciar");
 		btnReiniciar.setBounds(234, 156, 97, 25);
 		contentPanel.add(btnReiniciar);
+		
+		new Thread(new RecebeMusica(ModelLocator.getPorta1(), ModelLocator.getPorta2(), btnCancelar, btnReiniciar, btnPlayOrPause, 
+				progressBarDownload, lblTempo, ModelLocator.getNomeMusicas(), ModelLocator.getTamanhoMusicas())).start();
 	}
 	
 	public void iniciar(){
