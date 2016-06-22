@@ -1,7 +1,9 @@
 package model.thread;
 
 import java.io.BufferedReader;
+import java.io.DataInputStream;
 import java.io.DataOutputStream;
+import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.net.ServerSocket;
@@ -43,8 +45,35 @@ public class Conexao implements Runnable {
 		String musica;
 		int porta1;
 		int porta2;
+		DataOutputStream socketOut = null;
 		try {		
-						
+				
+			aceita = new ServerSocket(3502);
+			socketDownload = aceita.accept();
+			
+			try {
+				
+				socketOut = new DataOutputStream(socketDownload.getOutputStream());				
+				
+				
+				byte[] buffer = new byte[512]; //BUFER DE 512 BYTES
+		        FileInputStream file = new FileInputStream("C:/Users/Public/Documents/Jukebox/log.txt");       
+
+				DataInputStream arq = new DataInputStream(file);			
+				
+				 int leitura = 0;
+		         while((leitura = arq.read(buffer)) > 0) {   	        	         	  
+		              socketOut.write(buffer,0,leitura);
+		              socketOut.flush();	               
+		              
+		          }         
+		         
+		         arq.close();
+		         socketOut.close();
+			} catch (IOException e) {			
+				e.printStackTrace();
+			}
+			
 			
 			while(true){				
 							
