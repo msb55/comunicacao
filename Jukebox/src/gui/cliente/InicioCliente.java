@@ -53,7 +53,6 @@ public class InicioCliente extends JFrame implements ActionListener{
 
 		label = new JLabel(new ImageIcon(InicioCliente.class.getResource("/gui/imagens/musica.png")));
 		getContentPane().add(label);
-
 	}
 
 	public static void main(String [] args) {
