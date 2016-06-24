@@ -17,6 +17,7 @@ public class Download extends Observable implements Runnable {
 	private Thread  thisThread;
     private long  filesize;
 	private float  progress;
+	private String tempoEstimado;
 
 	public Download(Socket socketDownload, Socket socketAck, String musica) {		
 		this.socketDownload = socketDownload;
@@ -45,20 +46,40 @@ public class Download extends Observable implements Runnable {
 			filesize = f.length();
 			 int leitura = 0;
 			 int baixado = 0;
+			 
+			 int  cont=0;
+				long tempoIda, tempoVolta, tempoTotal;
+				double tempo=0;
+			
 			
 	         while((leitura = arq.read(buffer)) > 0) {         	  
 	        	         
 	        	  baixado += leitura;
 	        	  progress = ((float) baixado / filesize) * 100;
 	        	  
-	        	  setChanged();
-	              notifyObservers(this); 
+	        	  
+	              tempoIda = System.nanoTime();
 	              socketOut.write(buffer,0,leitura);
 	              socketOut.flush();	
 	            
 	              socketIn.read(); 
-	             
 	              
+	              tempoVolta = System.nanoTime();				
+				  tempoTotal = (tempoVolta - tempoIda)/1000;
+	              
+	              
+	              if(cont % 10000 == 0){
+						tempo = ((filesize-baixado)*tempoTotal)/1024;
+						tempo /= 1000000;
+						int minuto = (int) tempo/60;
+						int segundo = (int) tempo%60;
+						tempoEstimado  = minuto + " min. " + segundo + " seg.";
+					}
+					
+	              setChanged();
+	              notifyObservers(this); 
+				  cont++;	
+					
 	          }         
 	         
 	         arq.close();
@@ -93,7 +114,13 @@ public class Download extends Observable implements Runnable {
 	public void setProgress(float progress) {
 		this.progress = progress;
 	}
-	
-	
+
+	public String getTempoEstimado() {
+		return tempoEstimado;
+	}
+
+	public void setTempoEstimado(String tempoEstimado) {
+		this.tempoEstimado = tempoEstimado;
+	}
 
 }
