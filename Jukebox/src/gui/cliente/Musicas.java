@@ -32,6 +32,8 @@ import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableCellRenderer;
 
 import model.ModelLocator;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
 
 public class Musicas extends JFrame {
 
@@ -90,10 +92,10 @@ public class Musicas extends JFrame {
 				    return false;
 			  }
 			};
-			
-		table.getSelectionModel().addListSelectionListener(new ListSelectionListener(){
-	        public void valueChanged(ListSelectionEvent event) {
-	        	if(table.getSelectedColumn() == 1){
+		table.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent arg0) {
+				if(table.getSelectedColumn() == 2){
 	        		ModelLocator.setNomeMusicas(modelo.getValueAt(table.getSelectedRow(), 0).toString());
 	        		ModelLocator.setTamanhoMusicas(Double.parseDouble(modelo.getValueAt(table.getSelectedRow(), 1).toString()));
 	        		
@@ -115,12 +117,14 @@ public class Musicas extends JFrame {
 	        		download.setLocationRelativeTo(null);
 	        		download.setVisible(true);
 	        	}
-	        }
-	    });
+			}
+		});
+		table.setRowSelectionAllowed(false);
 		table.getColumnModel().getColumn(0).setPreferredWidth(400);
 		table.getColumnModel().getColumn(0).setResizable(false);
 		table.getColumnModel().getColumn(1).setResizable(false);
-		table.getColumnModel().getColumn(1).setCellRenderer(new TableCellRenderer() {			
+		table.getColumnModel().getColumn(2).setResizable(false);
+		table.getColumnModel().getColumn(2).setCellRenderer(new TableCellRenderer() {			
 			@Override
 			public Component getTableCellRendererComponent(JTable table, Object value,
 					boolean isSelected, boolean hasFocus, int row, int column) {
@@ -151,9 +155,12 @@ public class Musicas extends JFrame {
 				file.write(buffer, 0, lidos);
 				file.flush();
 			}
+			
+			conexao.close();
+			file.close();
+			in.close();
 		} catch (IOException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+			JOptionPane.showMessageDialog(null, "Servidor não conectado.");
 		}
 	}
 	
