@@ -92,7 +92,9 @@ public class Conexao implements Runnable {
 				socketAck = aceita2.accept();			
 				
 				
-				new Thread(new Download(socketDownload,socketAck,musica)).start();				
+				Thread thread = new Thread(new Download(socketDownload,socketAck,musica));
+				thread.start();
+				ModelLocator.addClientes(thread);
 				
 				
 			}

@@ -1,15 +1,14 @@
 package model.thread;
 
-import java.io.BufferedReader;
 import java.io.DataInputStream;
 import java.io.DataOutputStream;
 import java.io.FileInputStream;
 import java.io.IOException;
-import java.io.InputStreamReader;
 import java.net.Socket;
+import java.util.Observable;
 
 
-public class Download implements Runnable {
+public class Download extends Observable implements Runnable {
 	
 	private Socket socketDownload;
 	private Socket socketAck;
