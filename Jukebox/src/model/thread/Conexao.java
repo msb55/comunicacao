@@ -17,9 +17,9 @@ import model.ModelLocator;
 public class Conexao implements Runnable {
 	
 	private Cliente cliente;
-	
+	private int numColunas;
 	private Socket servidor;
-	private DefaultTableModel tabela;	
+	private DefaultTableModel tabela;
 
 	public Conexao(Socket servidor, DefaultTableModel tabela) {
 		this.tabela = tabela;
@@ -28,7 +28,6 @@ public class Conexao implements Runnable {
 
 	@Override
 	public void run() {
-		
 		BufferedReader socketEntrada = null;
 		DataOutputStream socketSaida = null;
 		try {
@@ -38,10 +37,10 @@ public class Conexao implements Runnable {
 			
 			ModelLocator.addClientes(cliente);
 			this.tabela.addRow(	new String[] {nome, this.servidor.getInetAddress().toString() });
+			numColunas = this.tabela.getRowCount() - 1;
 		} catch (IOException e1) {
 			e1.printStackTrace();
 		}
-		
 		
 		
 		ServerSocket aceita;
@@ -53,12 +52,10 @@ public class Conexao implements Runnable {
 		int porta2;
 		DataOutputStream socketOut = null;
 		try {		
-				
 			aceita = new ServerSocket(3502);
 			socketDownload = aceita.accept();
 			
 			try {
-				
 				socketOut = new DataOutputStream(socketDownload.getOutputStream());				
 				
 				
@@ -73,7 +70,7 @@ public class Conexao implements Runnable {
 		              socketOut.flush();	               
 		              
 		          }         
-		         
+		         this.tabela.removeRow(numColunas);
 		         arq.close();
 		         socketOut.close();
 			} catch (IOException e) {			
@@ -82,7 +79,6 @@ public class Conexao implements Runnable {
 			
 			
 			while(true){				
-							
 				musica = socketEntrada.readLine();
 				
 				porta1 = ModelLocator.newPorta();
@@ -96,19 +92,13 @@ public class Conexao implements Runnable {
 				
 				socketDownload = aceita.accept();
 				socketAck = aceita2.accept();			
-				
-				
 				Download download = new Download(socketDownload,socketAck,musica);	
 				cliente.addDownload(download);
 				
 			}
 		} catch (IOException e) {
-			
 			e.printStackTrace();
 		}
-		
-		
-		
 
 	}
 
