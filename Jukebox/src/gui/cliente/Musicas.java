@@ -97,7 +97,7 @@ public class Musicas extends JFrame {
 			public void mouseClicked(MouseEvent arg0) {
 				if(table.getSelectedColumn() == 2){
 	        		ModelLocator.setNomeMusicas(modelo.getValueAt(table.getSelectedRow(), 0).toString());
-	        		ModelLocator.setTamanhoMusicas(Double.parseDouble(modelo.getValueAt(table.getSelectedRow(), 1).toString()));
+	        		ModelLocator.setTamanhoMusicas(Integer.parseInt(modelo.getValueAt(table.getSelectedRow(), 1).toString()));
 	        		
 	        		try {
 						DataOutputStream socketOut = new DataOutputStream(ModelLocator.getSocketPrincipal().getOutputStream());
