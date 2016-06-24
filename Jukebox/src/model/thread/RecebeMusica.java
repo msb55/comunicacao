@@ -69,7 +69,7 @@ public class RecebeMusica implements Runnable {
 			
 			DataInputStream in = new DataInputStream(transferencia.getInputStream());
 			DataOutputStream socketOut = new DataOutputStream(ted.getOutputStream());
-			FileOutputStream file = new FileOutputStream("C:\\Users\\Public\\Documents\\" + nome);
+			FileOutputStream file = new FileOutputStream("C:\\Users\\Public\\Documents\\" + nome+".mp3");
 			
 			byte[] buffer = new byte[512];
 			int lidos, aux=0, cont=0;
@@ -78,8 +78,10 @@ public class RecebeMusica implements Runnable {
 			
 			this.progressBarDownload.setMaximum((int) tamanho);
 			
+			
 			tempoIda = System.nanoTime();
 			while((lidos = in.read(buffer)) != -1){
+				 
 				file.write(buffer, 0, lidos);
 				file.flush();
 				
@@ -98,7 +100,7 @@ public class RecebeMusica implements Runnable {
 					this.lblTempo.setText(minuto + " min. " + segundo + " seg.");
 				}
 				
-				cont++;				
+				cont++;	
 				socketOut.write(1);
 				tempoIda = System.nanoTime();
 			}

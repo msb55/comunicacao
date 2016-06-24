@@ -24,12 +24,13 @@ public class Download implements Runnable {
 	@Override
 	public void run() {
 		DataOutputStream socketOut = null;
-		BufferedReader socketIn = null;
+		//BufferedReader socketIn = null;
+		DataInputStream socketIn = null;
 		try {
 		
 			socketOut = new DataOutputStream(socketDownload.getOutputStream());			
 			
-			socketIn = new BufferedReader(new InputStreamReader(socketAck.getInputStream()));	
+			socketIn = new DataInputStream(socketAck.getInputStream());
 			
 			
 			byte[] buffer = new byte[512]; //BUFER DE 512 BYTES
@@ -38,12 +39,15 @@ public class Download implements Runnable {
 			DataInputStream arq = new DataInputStream(file);			
 			
 			 int leitura = 0;
+			
 	         while((leitura = arq.read(buffer)) > 0) {         	  
-	        	         	  
+	        	         
+	        	
 	              socketOut.write(buffer,0,leitura);
 	              socketOut.flush();	
-	              
-	              socketIn.readLine();               
+	            
+	              socketIn.read(); 
+	             
 	              
 	          }         
 	         

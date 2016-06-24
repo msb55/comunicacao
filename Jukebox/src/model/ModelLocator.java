@@ -13,7 +13,7 @@ public class ModelLocator {
 	private static String cliente;
 	
 	private static String nomeMusicas;
-	private static double tamanhoMusicas;
+	private static int tamanhoMusicas;
 	private static int porta1;
 	private static int porta2;
 	
@@ -79,10 +79,10 @@ public class ModelLocator {
 	public static void setNomeMusicas(String nomeMusicas) {
 		ModelLocator.nomeMusicas = nomeMusicas;
 	}
-	public static double getTamanhoMusicas() {
+	public static int getTamanhoMusicas() {
 		return tamanhoMusicas;
 	}
-	public static void setTamanhoMusicas(double tamanhoMusicas) {
+	public static void setTamanhoMusicas(int tamanhoMusicas) {
 		ModelLocator.tamanhoMusicas = tamanhoMusicas;
 	}
 }
