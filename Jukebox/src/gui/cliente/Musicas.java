@@ -96,8 +96,12 @@ public class Musicas extends JFrame {
 			@Override
 			public void mouseClicked(MouseEvent arg0) {
 				if(table.getSelectedColumn() == 2){
-	        		ModelLocator.setNomeMusicas(modelo.getValueAt(table.getSelectedRow(), 0).toString());
-	        		ModelLocator.setTamanhoMusicas(Integer.parseInt(modelo.getValueAt(table.getSelectedRow(), 1).toString()));
+					String nome = modelo.getValueAt(table.getSelectedRow(), 1).toString();
+					nome = nome.substring(0, nome.lastIndexOf('M'));
+					nome = nome.replace(',', '.');
+	        		//ModelLocator.setNomeMusicas();
+					ModelLocator.setNomeMusicas(modelo.getValueAt(table.getSelectedRow(), 0).toString());
+	        		ModelLocator.setTamanhoMusicas(Double.parseDouble(nome)*1024*1024);
 	        		
 	        		try {
 						DataOutputStream socketOut = new DataOutputStream(ModelLocator.getSocketPrincipal().getOutputStream());
@@ -172,8 +176,8 @@ public class Musicas extends JFrame {
 			
 			String nome = lerArquivo.readLine();
 			while(nome != null){
-				String tamanho = lerArquivo.readLine();
-				Object[] obj = {nome, tamanho, null};
+				double tamanho = ((Double.parseDouble(lerArquivo.readLine())/1024)/1024);
+				Object[] obj = {nome, String.format("%.2f",tamanho)+"MB", null};
 				
 				modelo.addRow(obj);
 				
