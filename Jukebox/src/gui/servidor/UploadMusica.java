@@ -35,6 +35,8 @@ public class UploadMusica extends JFrame {
 				try {
 					UploadMusica frame = new UploadMusica();
 					frame.setVisible(true);
+					frame.setLocationRelativeTo(null);
+					frame.setResizable(false);
 				} catch (Exception e) {
 					e.printStackTrace();
 				}
@@ -48,7 +50,7 @@ public class UploadMusica extends JFrame {
 	public UploadMusica() {
 		setTitle("Musicas");
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		setBounds(100, 100, 507, 379);
+		setBounds(100, 100, 507, 343);
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(contentPane);
@@ -82,22 +84,6 @@ public class UploadMusica extends JFrame {
 		scrollPane.setBounds(10, 10, 481, 285);
 		
 		
-		JButton btnArquivo = new JButton("Adicionar");
-	
-		btnArquivo.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {			
-			       
-			        searchFile();			       
-			
-			}			
-		
-		});
-		
-		
-		btnArquivo.setBounds(10, 306, 89, 23);
-		contentPane.add(btnArquivo);
-		
-		
 		contentPane.setLayout(null);
 		contentPane.setLayout(null);
 		scrollPane.setViewportView(table);
@@ -105,19 +91,6 @@ public class UploadMusica extends JFrame {
 		
 		table.setModel(df);
 		contentPane.add(scrollPane);
-	}
-	
-	
-	
-	private void searchFile(){
-		
-		fileChooser = new JFileChooser();
-			
-			switch(fileChooser.showOpenDialog(this)){
-				case JFileChooser.APPROVE_OPTION:				
-					//txtPathFile.setText(fileChooser.getSelectedFile().getPath());				
-					break;					
-			}			
 	}
 	
 
