@@ -101,6 +101,8 @@ public class Download extends JDialog {
 		btnReiniciar.setBounds(234, 156, 97, 25);
 		contentPanel.add(btnReiniciar);
 		
+		iniciar();
+		
 		new Thread(new RecebeMusica(ModelLocator.getPorta1(), ModelLocator.getPorta2(), btnCancelar, btnReiniciar, btnPlayOrPause, 
 				progressBarDownload, lblTempo, ModelLocator.getNomeMusicas(), ModelLocator.getTamanhoMusicas())).start();
 	}
