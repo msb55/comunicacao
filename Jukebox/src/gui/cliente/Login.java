@@ -53,7 +53,7 @@ public class Login extends JDialog {
 					DataOutputStream out = new DataOutputStream(ModelLocator.getSocketPrincipal().getOutputStream());
 					out.writeBytes(txtNome.getText() + "\n");
 					
-					ModelLocator.setCliente(txtNome.getText());
+					ModelLocator.setNome(txtNome.getText());
 					
 					Perfil perfil = new Perfil();
 					perfil.setLocationRelativeTo(null);

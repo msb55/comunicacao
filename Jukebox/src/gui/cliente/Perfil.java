@@ -67,7 +67,7 @@ public class Perfil extends JFrame {
 		btnBaixarMusicas.setBounds(585, 326, 89, 23);
 		contentPane.add(btnBaixarMusicas);
 		
-		JLabel lblOl = new JLabel("Ol\u00E1, " + ModelLocator.getCliente() + "! Seja bem-vindx!");
+		JLabel lblOl = new JLabel("Ol\u00E1, " + ModelLocator.getNome() + "! Seja bem-vindx!");
 		lblOl.setBounds(10, 11, 414, 14);
 		contentPane.add(lblOl);
 		
