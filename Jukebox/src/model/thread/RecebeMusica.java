@@ -69,7 +69,7 @@ public class RecebeMusica implements Runnable {
 			
 			DataInputStream in = new DataInputStream(transferencia.getInputStream());
 			DataOutputStream socketOut = new DataOutputStream(ted.getOutputStream());
-			FileOutputStream file = new FileOutputStream("C:\\Users\\Public\\Documents\\" + nome+".mp4");
+			FileOutputStream file = new FileOutputStream("C:\\Users\\Public\\Documents\\" + nome+".mp3");
 			
 			byte[] buffer = new byte[512];
 			int lidos, aux=0, cont=0;
