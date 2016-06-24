@@ -75,13 +75,7 @@ public class InicioServidor extends JFrame {
 		setBounds(100, 100, 507, 379);
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
-		setContentPane(contentPane);
-		
-		ArrayList<Cliente> clientes = new ArrayList<Cliente>();
-		clientes.add(new Cliente("232.2323","leo","las3"));
-		clientes.add(new Cliente("232.2323","marcos","msb5"));
-		clientes.add(new Cliente("232.2323","pedro","plal"));
-		clientes.add(new Cliente("232.2323","leo","las3"));
+		setContentPane(contentPane);	
 		
 		
 		DefaultTableModel df = new DefaultTableModel(null,	new String[] {"Login", "IP" });
@@ -94,9 +88,7 @@ public class InicioServidor extends JFrame {
 		};
 		
 		table.setModel(df);
-		for (Cliente cliente : clientes) {
-            df.addRow(new Object[] { cliente.getLogin(),cliente.getIp()});
-        }
+	
 		
 		JScrollPane scrollPane = new JScrollPane();
 		scrollPane.setBounds(10, 10, 481, 285);
