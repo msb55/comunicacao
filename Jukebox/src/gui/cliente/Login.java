@@ -29,6 +29,7 @@ public class Login extends JDialog {
 			Login dialog = new Login();
 			dialog.setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
 			dialog.setVisible(true);
+			dialog.setLocationRelativeTo(null);
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
@@ -38,6 +39,7 @@ public class Login extends JDialog {
 	 * Create the dialog.
 	 */
 	public Login() {
+		setTitle("Login");
 		setBounds(100, 100, 450, 175);
 		getContentPane().setLayout(null);
 		
