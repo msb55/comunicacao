@@ -1,17 +1,20 @@
 package model;
 
+import java.util.ArrayList;
+
+import model.thread.Download;
+
 public class Cliente {
 
 	
 	private String ip;
 	private String nome;
-	private String login;
+	private ArrayList<Download> downloads;
 	
-	
-	public Cliente(String ip, String nome, String login) {	
+	public Cliente(String ip, String nome) {	
 		this.ip = ip;
 		this.nome = nome;
-		this.login = login;
+		this.setDownloads(new ArrayList<Download>());	
 	}
 
 
@@ -35,13 +38,12 @@ public class Cliente {
 	}
 
 
-	public String getLogin() {
-		return login;
+	public ArrayList<Download> getDownloads() {
+		return downloads;
 	}
 
 
-	public void setLogin(String login) {
-		this.login = login;
+	public void setDownloads(ArrayList<Download> downloads) {
+		this.downloads = downloads;
 	}
-
 }

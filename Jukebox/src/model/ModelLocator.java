@@ -6,7 +6,7 @@ import java.util.ArrayList;
 public class ModelLocator {
 	private static ArrayList<Socket> transferencia = new ArrayList<Socket>();
 	private static ArrayList<Socket> ted = new ArrayList<Socket>();
-	private static ArrayList<Cliente> clientes =  new ArrayList<Cliente>();
+	private static ArrayList<Thread> clientes =  new ArrayList<Thread>();	
 	
 	private static Socket socketPrincipal;
 	private static String ipServidor;
@@ -42,6 +42,14 @@ public class ModelLocator {
 	public static Socket getTed(int i){
 		return ModelLocator.ted.get(i);
 	}
+	
+	public static void addClientes(Thread cliente){
+		ModelLocator.clientes.add(cliente);
+	}
+	public static Thread getClientes(int i){
+		return ModelLocator.clientes.get(i);
+	}	
+	
 	public static String getIpServidor() {
 		return ipServidor;
 	}
@@ -86,4 +94,6 @@ public class ModelLocator {
 	public static void setTamanhoMusicas(int tamanhoMusicas) {
 		ModelLocator.tamanhoMusicas = tamanhoMusicas;
 	}
+	
+	
 }
