@@ -20,6 +20,8 @@ public class StatusCliente extends JDialog {
 			StatusCliente dialog = new StatusCliente();
 			dialog.setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
 			dialog.setVisible(true);
+			dialog.setResizable(false);
+			dialog.setLocationRelativeTo(null);
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
