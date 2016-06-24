@@ -22,37 +22,37 @@ public class InicioCliente extends JFrame implements ActionListener{
 	
 	public InicioCliente() {
 		
-		setSize(600, 400); //tamanho da tela
-		setTitle("MUSICAS");
+		setSize(600, 285); //tamanho da tela
+		setTitle("Jukebox");
 		setDefaultCloseOperation(EXIT_ON_CLOSE); //Fechar o programa
-		//setResizable(false); //Não permite maximar a tela
+		
 		
 		//instanciando os componentes
 		tfIP = new JTextField(15);
-		btEntrar = new JButton("Entrar");
 		btSair = new JButton("Sair");
 
 		//Definindo o Layout
 		getContentPane().setLayout(new FlowLayout(FlowLayout.CENTER)); 
 
-		textoIp = new JLabel("IP");
-		add(textoIp);
+		textoIp = new JLabel("Digite seu endereço IP:");
+		getContentPane().add(textoIp);
 
 		
 		//Adicionar os objetos a tela
 		getContentPane().add(tfIP);
+		btEntrar = new JButton("Entrar");
 		getContentPane().add(btEntrar);
+		
+				//Adicionar ações aos componentes
+				btEntrar.addActionListener(this);
 		getContentPane().add(btSair);
-
-		//Adicionar ações aos componentes
-		btEntrar.addActionListener(this);
 		btSair.addActionListener(this);
 
 
-		imagem = new ImageIcon(getClass().getResource("/gui/imagens/musica.jpg"));
+		imagem = new ImageIcon(getClass().getResource("/gui/imagens/musica.png"));
 
-		label = new JLabel(imagem);
-		add(label);
+		label = new JLabel(new ImageIcon(InicioCliente.class.getResource("/gui/imagens/musica.png")));
+		getContentPane().add(label);
 
 	}
 
@@ -61,7 +61,9 @@ public class InicioCliente extends JFrame implements ActionListener{
 		InicioCliente framePrincipal = new InicioCliente();
 		
 		framePrincipal.setVisible(true); //Para a tela ficar visivel
-		
+		framePrincipal.setLocationRelativeTo(null);
+		framePrincipal.setResizable(false);
+		framePrincipal.getContentPane().setBackground(Color.WHITE);
 	}
 
 	@Override
@@ -91,8 +93,7 @@ public class InicioCliente extends JFrame implements ActionListener{
 			}
 
 		} catch(Exception e2) {
-
-			JOptionPane.showMessageDialog(null, "Digite novamente");
+			JOptionPane.showMessageDialog(null, "Digite um endereço IP válido");
 		}
 	}
 
