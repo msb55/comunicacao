@@ -6,7 +6,7 @@ import java.util.ArrayList;
 public class ModelLocator {
 	private static ArrayList<Socket> transferencia = new ArrayList<Socket>();
 	private static ArrayList<Socket> ted = new ArrayList<Socket>();
-	private static ArrayList<Thread> clientes =  new ArrayList<Thread>();	
+	private static ArrayList<Cliente> clientes =  new ArrayList<Cliente>();	
 	
 	private static Socket socketPrincipal;
 	private static String ipServidor;
@@ -43,10 +43,11 @@ public class ModelLocator {
 		return ModelLocator.ted.get(i);
 	}
 	
-	public static void addClientes(Thread cliente){
+	public static void addClientes(Cliente cliente){
 		ModelLocator.clientes.add(cliente);
+		
 	}
-	public static Thread getClientes(int i){
+	public static Cliente getClientes(int i){
 		return ModelLocator.clientes.get(i);
 	}	
 	

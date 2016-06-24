@@ -11,13 +11,15 @@ import java.net.Socket;
 
 import javax.swing.table.DefaultTableModel;
 
+import model.Cliente;
 import model.ModelLocator;
 
 public class Conexao implements Runnable {
 	
-	String nome;
-	Socket servidor;
-	DefaultTableModel tabela;	
+	private Cliente cliente;
+	
+	private Socket servidor;
+	private DefaultTableModel tabela;	
 
 	public Conexao(Socket servidor, DefaultTableModel tabela) {
 		this.tabela = tabela;
@@ -31,11 +33,15 @@ public class Conexao implements Runnable {
 		DataOutputStream socketSaida = null;
 		try {
 			socketEntrada = new BufferedReader(new InputStreamReader(this.servidor.getInputStream()));
-			nome = socketEntrada.readLine();
-			this.tabela.addRow(	new String[] {this.nome, this.servidor.getInetAddress().toString() });
+			String nome = socketEntrada.readLine();
+			Cliente cliente = new Cliente(this.servidor.getInetAddress().toString(), nome);			
+			
+			ModelLocator.addClientes(cliente);
+			this.tabela.addRow(	new String[] {nome, this.servidor.getInetAddress().toString() });
 		} catch (IOException e1) {
 			e1.printStackTrace();
 		}
+		
 		
 		
 		ServerSocket aceita;
@@ -92,9 +98,7 @@ public class Conexao implements Runnable {
 				socketAck = aceita2.accept();			
 				
 				
-				Thread thread = new Thread(new Download(socketDownload,socketAck,musica));
-				thread.start();
-				ModelLocator.addClientes(thread);
+				Download downlaod = new Download(socketDownload,socketAck,musica);	
 				
 				
 			}

@@ -13,11 +13,14 @@ public class Download extends Observable implements Runnable {
 	private Socket socketDownload;
 	private Socket socketAck;
 	private String musica;
+	private Thread  thisThread;
 
 	public Download(Socket socketDownload, Socket socketAck, String musica) {		
 		this.socketDownload = socketDownload;
 		this.socketAck = socketAck;
 		this.musica = musica;
+		this.thisThread = new Thread(this);
+	    this.thisThread.start();
 	}
 
 	@Override

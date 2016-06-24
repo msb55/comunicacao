@@ -1,5 +1,6 @@
 package model;
 
+import java.net.Socket;
 import java.util.ArrayList;
 
 import model.thread.Download;
@@ -42,8 +43,14 @@ public class Cliente {
 		return downloads;
 	}
 
-
 	public void setDownloads(ArrayList<Download> downloads) {
 		this.downloads = downloads;
+	}
+	
+	public  void addDownload(Download download){
+		this.downloads.add(download);
+	}
+	public  Download getDownload(int i){
+		return this.downloads.get(i);
 	}
 }
