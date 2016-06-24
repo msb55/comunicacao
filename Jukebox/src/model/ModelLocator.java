@@ -6,6 +6,7 @@ import java.util.ArrayList;
 public class ModelLocator {
 	private static ArrayList<Socket> transferencia = new ArrayList<Socket>();
 	private static ArrayList<Socket> ted = new ArrayList<Socket>();
+	private static ArrayList<Cliente> clientes =  new ArrayList<Cliente>();
 	
 	private static Socket socketPrincipal;
 	private static String ipServidor;
