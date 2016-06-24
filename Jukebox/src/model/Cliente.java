@@ -1,6 +1,5 @@
 package model;
 
-import java.net.Socket;
 import java.util.ArrayList;
 
 import model.thread.Download;

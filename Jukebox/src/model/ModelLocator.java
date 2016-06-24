@@ -11,7 +11,8 @@ public class ModelLocator {
 	private static Socket socketPrincipal;
 	private static String ipServidor;
 	private static int porta = 0;
-	private static String cliente;
+	private static String nome;
+	private static Cliente cliente;
 	
 	private static String nomeMusicas;
 	private static double tamanhoMusicas;
@@ -63,12 +64,13 @@ public class ModelLocator {
 	public static void setPorta(int porta) {
 		ModelLocator.porta = porta;
 	}
-	public static String getCliente() {
-		return cliente;
+		
+	public static String getNome() {
+		return nome;
 	}
-	public static void setCliente(String cliente) {
-		ModelLocator.cliente = cliente;
-	}	
+	public static void setNome(String nome) {
+		ModelLocator.nome = nome;
+	}
 	public static Socket getSocketPrincipal() {
 		return socketPrincipal;
 	}
@@ -94,6 +96,12 @@ public class ModelLocator {
 	}
 	public static void setTamanhoMusicas(double tamanhoMusicas) {
 		ModelLocator.tamanhoMusicas = tamanhoMusicas;
+	}
+	public static Cliente getCliente() {
+		return cliente;
+	}
+	public static void setCliente(Cliente cliente) {
+		ModelLocator.cliente = cliente;
 	}
 	
 	

@@ -14,6 +14,8 @@ public class Download extends Observable implements Runnable {
 	private Socket socketAck;
 	private String musica;
 	private Thread  thisThread;
+    private int     filesize;
+	private float   progress;
 
 	public Download(Socket socketDownload, Socket socketAck, String musica) {		
 		this.socketDownload = socketDownload;
@@ -61,5 +63,31 @@ public class Download extends Observable implements Runnable {
 		}		
 		
 	}
+
+	public String getMusica() {
+		return musica;
+	}
+
+	public void setMusica(String musica) {
+		this.musica = musica;
+	}
+
+	public int getFilesize() {
+		return filesize;
+	}
+
+	public void setFilesize(int filesize) {
+		this.filesize = filesize;
+	}
+
+	public float getProgress() {
+		return progress;
+	}
+
+	public void setProgress(float progress) {
+		this.progress = progress;
+	}
+	
+	
 
 }

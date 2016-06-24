@@ -98,8 +98,8 @@ public class Conexao implements Runnable {
 				socketAck = aceita2.accept();			
 				
 				
-				Download downlaod = new Download(socketDownload,socketAck,musica);	
-				
+				Download download = new Download(socketDownload,socketAck,musica);	
+				cliente.addDownload(download);
 				
 			}
 		} catch (IOException e) {
