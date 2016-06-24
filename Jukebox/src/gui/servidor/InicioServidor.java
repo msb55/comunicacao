@@ -97,6 +97,7 @@ public class InicioServidor extends JFrame {
 		table.addMouseListener(new MouseAdapter() { // ABRE O JFRAME STATUS
 		    public void mouseClicked(MouseEvent e) {  
 		        if (e.getClickCount() == 2) { 
+		        	ModelLocator.setCliente(ModelLocator.getClientes(table.getSelectedRow()));
 		        	StatusCliente status = new StatusCliente();
 		        	status.setLocationRelativeTo(null);
 		        	status.setVisible(true);
@@ -117,6 +118,7 @@ public class InicioServidor extends JFrame {
 		btnAdicionarMusicas.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mousePressed(MouseEvent arg0) {
+				
 				UploadMusica uploadMusica = new UploadMusica();
 				uploadMusica.setLocationRelativeTo(null);
 				uploadMusica.setVisible(true);

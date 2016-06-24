@@ -2,6 +2,7 @@ package model.thread;
 
 import java.io.DataInputStream;
 import java.io.DataOutputStream;
+import java.io.File;
 import java.io.FileInputStream;
 import java.io.IOException;
 import java.net.Socket;
@@ -14,8 +15,8 @@ public class Download extends Observable implements Runnable {
 	private Socket socketAck;
 	private String musica;
 	private Thread  thisThread;
-    private int     filesize;
-	private float   progress;
+    private long  filesize;
+	private float  progress;
 
 	public Download(Socket socketDownload, Socket socketAck, String musica) {		
 		this.socketDownload = socketDownload;
@@ -39,14 +40,19 @@ public class Download extends Observable implements Runnable {
 			
 			byte[] buffer = new byte[512]; //BUFER DE 512 BYTES
 	        FileInputStream file = new FileInputStream("C:/Users/Public/Documents/Jukebox/"+ this.musica);       
-
+	        File f = new File("C:/Users/Public/Documents/Jukebox/"+ this.musica);
 			DataInputStream arq = new DataInputStream(file);			
-			
+			filesize = f.length();
 			 int leitura = 0;
+			 int baixado = 0;
 			
 	         while((leitura = arq.read(buffer)) > 0) {         	  
 	        	         
-	        	
+	        	  baixado += leitura;
+	        	  progress = ((float) baixado / filesize) * 100;
+	        	  
+	        	  setChanged();
+	              notifyObservers(this); 
 	              socketOut.write(buffer,0,leitura);
 	              socketOut.flush();	
 	            
@@ -72,11 +78,11 @@ public class Download extends Observable implements Runnable {
 		this.musica = musica;
 	}
 
-	public int getFilesize() {
+	public long getFilesize() {
 		return filesize;
 	}
 
-	public void setFilesize(int filesize) {
+	public void setFilesize(long filesize) {
 		this.filesize = filesize;
 	}
 

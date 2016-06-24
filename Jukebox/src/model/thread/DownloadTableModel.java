@@ -10,7 +10,7 @@ import javax.swing.table.AbstractTableModel;
 
 public class DownloadTableModel extends AbstractTableModel implements Observer {
    // holds the strings to be displayed in the column headers of our table
-   final String[] columnNames = {"Filename", "Filesize", "Progress"};
+   final String[] columnNames = {"Musica", "Filesize", "Progress"};
   
    // holds the data types for all our columns
    final Class[] columnClasses = {String.class, Integer.class, JProgressBar.class};
@@ -53,7 +53,7 @@ public class DownloadTableModel extends AbstractTableModel implements Observer {
    public Object getValueAt(int row, int col) {
       Download download = (Download) data.elementAt(row);
       if (col == 0)      return download.getMusica();
-      else if (col == 1) return new Integer(download.getFilesize());
+      else if (col == 1) return new Float(download.getFilesize());
       else if (col == 2) return new Float(download.getProgress());
       else return null;
    }

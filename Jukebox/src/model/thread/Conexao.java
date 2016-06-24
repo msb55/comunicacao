@@ -34,7 +34,7 @@ public class Conexao implements Runnable {
 		try {
 			socketEntrada = new BufferedReader(new InputStreamReader(this.servidor.getInputStream()));
 			String nome = socketEntrada.readLine();
-			Cliente cliente = new Cliente(this.servidor.getInetAddress().toString(), nome);			
+			cliente = new Cliente(this.servidor.getInetAddress().toString(), nome);			
 			
 			ModelLocator.addClientes(cliente);
 			this.tabela.addRow(	new String[] {nome, this.servidor.getInetAddress().toString() });
