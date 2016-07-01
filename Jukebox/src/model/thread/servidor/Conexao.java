@@ -98,7 +98,7 @@ public class Conexao implements Runnable {
 				
 			}
 		} catch (IOException e) {
-			e.printStackTrace();
+			System.out.println("ERRO DE CONEXÃO");
 		}
 
 	}

@@ -23,6 +23,7 @@ public class Download extends Observable implements Runnable {
 		this.socketDownload = socketDownload;
 		this.socketAck = socketAck;
 		this.musica = musica;
+		this.tempoEstimado = "";
 		this.thisThread = new Thread(this);
 	    this.thisThread.start();
 	}
