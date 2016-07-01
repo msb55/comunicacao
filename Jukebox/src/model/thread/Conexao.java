@@ -70,7 +70,7 @@ public class Conexao implements Runnable {
 		              socketOut.flush();	               
 		              
 		          }         
-		         this.tabela.removeRow(numColunas);
+		        
 		         arq.close();
 		         socketOut.close();
 			} catch (IOException e) {			
