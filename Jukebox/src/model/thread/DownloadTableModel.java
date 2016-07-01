@@ -13,7 +13,7 @@ public class DownloadTableModel extends AbstractTableModel implements Observer {
    final String[] columnNames = {"Musica", "Tamanho", "Progresso", "Tempo Estimado"};
   
    // holds the data types for all our columns
-   final Class[] columnClasses = {String.class, Integer.class, JProgressBar.class, String.class};
+   final Class[] columnClasses = {String.class, String.class, JProgressBar.class, String.class};
   
    // holds our data
    final Vector data = new Vector();
@@ -53,7 +53,10 @@ public class DownloadTableModel extends AbstractTableModel implements Observer {
    public Object getValueAt(int row, int col) {
       Download download = (Download) data.elementAt(row);
       if (col == 0)      return download.getMusica();
-      else if (col == 1) return new Float(download.getFilesize());
+      else if (col == 1){
+    	  Double tamanho = Double.parseDouble(((download.getFilesize()/1024)/1024)+"");
+    	  return new String(String.format("%.2f",tamanho)+"MB");
+      }
       else if (col == 2) return new Float(download.getProgress());
       else if (col == 3) return new String(download.getTempoEstimado());
       else return null;
