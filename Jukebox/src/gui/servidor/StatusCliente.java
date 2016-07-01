@@ -45,12 +45,10 @@ public class StatusCliente extends JDialog {
 		contentPanel.setBorder(new EmptyBorder(5, 5, 5, 5));
 		getContentPane().add(contentPanel, BorderLayout.CENTER);
 		
-		   DownloadTableModel downloadModel = new DownloadTableModel();
-		      JTable table = new JTable(downloadModel);
+		DownloadTableModel downloadModel = ModelLocator.getCliente().getTableModelDownloads();
+		JTable table = new JTable(downloadModel);
 		  
-		      for(Download download:ModelLocator.getCliente().getDownloads()){
-		    	  downloadModel.addDownload(download);
-		      }
+		
 		  
 		      // render the columns with class JProgressBar as such
 		      ProgressBarRenderer pbr = new ProgressBarRenderer(0, 100);
