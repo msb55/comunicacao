@@ -50,7 +50,7 @@ public class ClienteOnline implements Runnable {
 			while(true){
 				socketEntrada.readLine();
 				socketSaida.writeBytes("ACK\n");	
-				Thread.sleep(10000);
+				Thread.sleep(5000);
 			}
 		} catch (IOException e) {
 			tabela.removeRow(row);
