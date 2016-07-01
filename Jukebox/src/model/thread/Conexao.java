@@ -33,18 +33,17 @@ public class Conexao implements Runnable {
 		try {
 			socketEntrada = new BufferedReader(new InputStreamReader(this.servidor.getInputStream()));
 			String nome = socketEntrada.readLine();
-			cliente = new Cliente(this.servidor.getInetAddress().toString(), nome);			
+			cliente = new Cliente(this.servidor.getInetAddress().toString(), nome);		
 			
-			ModelLocator.addClientes(cliente);
-			this.tabela.addRow(	new String[] {nome, this.servidor.getInetAddress().toString() });
-			numColunas = this.tabela.getRowCount() - 1;
+			new Thread(new ClienteOnline(cliente, tabela)).start();			
+			
 		} catch (IOException e1) {
 			e1.printStackTrace();
 		}
 		
 		
 		
-		new Thread(new ClienteOnline()).start();
+		
 		
 		ServerSocket aceita;
 		ServerSocket aceita2;

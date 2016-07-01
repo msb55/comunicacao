@@ -7,18 +7,32 @@ import java.io.InputStreamReader;
 import java.net.ServerSocket;
 import java.net.Socket;
 
+import javax.swing.table.DefaultTableModel;
+
+import model.Cliente;
 import model.ModelLocator;
 
 public class ClienteOnline implements Runnable {
 	
 	private Socket servidor;
+	private Cliente cliente;
+	private DefaultTableModel tabela;
+	private int row;
 
-	public ClienteOnline() {
+	public ClienteOnline(Cliente cliente, DefaultTableModel tabela) {
+		this.cliente = cliente;
+		this.tabela = tabela;
+		
 		
 	}
 
 	@Override
 	public void run() {
+		
+		ModelLocator.addClientes(this.cliente);
+		this.tabela.addRow(	new String[] {this.cliente.getNome(), this.cliente.getIp() });
+		row = this.tabela.getRowCount()-1;
+		
 		
 		try {
 			ServerSocket aceita = new ServerSocket(3000);
@@ -39,12 +53,21 @@ public class ClienteOnline implements Runnable {
 				Thread.sleep(10000);
 			}
 		} catch (IOException e) {
-			
-			e.printStackTrace();
+			tabela.removeRow(row);
 		} catch (InterruptedException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
+		
+	}
+	
+	
+	private void atualizaTabela(){
+		//tabela.setRowCount(0);
+		
+		
+		
+		
 		
 	}
 

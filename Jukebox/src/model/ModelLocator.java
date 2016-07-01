@@ -50,6 +50,10 @@ public class ModelLocator {
 	}
 	public static Cliente getClientes(int i){
 		return ModelLocator.clientes.get(i);
+	}
+	
+	public static ArrayList<Cliente> getClientes(){
+		return ModelLocator.clientes;
 	}	
 	
 	public static String getIpServidor() {
