@@ -61,14 +61,6 @@ public class ClienteOnline implements Runnable {
 		
 	}
 	
-	
-	private void atualizaTabela(){
-		//tabela.setRowCount(0);
-		
-		
-		
-		
-		
-	}
+
 
 }
