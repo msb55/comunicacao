@@ -17,7 +17,6 @@ import model.ModelLocator;
 public class Conexao implements Runnable {
 	
 	private Cliente cliente;
-	private int numColunas;
 	private Socket servidor;
 	private DefaultTableModel tabela;
 
