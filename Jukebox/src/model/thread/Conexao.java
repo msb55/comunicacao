@@ -43,6 +43,9 @@ public class Conexao implements Runnable {
 		}
 		
 		
+		
+		new Thread(new ClienteOnline()).start();
+		
 		ServerSocket aceita;
 		ServerSocket aceita2;
 		Socket socketDownload;

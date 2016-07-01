@@ -7,6 +7,7 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
+import java.net.Socket;
 
 import javax.swing.JFrame;
 import javax.swing.JPanel;
@@ -18,6 +19,9 @@ import javax.swing.JLabel;
 import javax.swing.JTable;
 
 import model.ModelLocator;
+import model.thread.Online;
+import model.thread.Servidor;
+
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 
@@ -96,7 +100,16 @@ public class Perfil extends JFrame {
 		
 		barraRolagem = new JScrollPane(table);
 		barraRolagem.setBounds(10, 36, 664, 279);
-		contentPane.add(barraRolagem);		
+		contentPane.add(barraRolagem);
+		
+		
+		Socket transferencia = null;
+		try {
+			transferencia = new Socket(ModelLocator.getIpServidor(), 3000);
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+		new Thread(new Online(transferencia)).start();
 	}
 	
 	public void carregarMusicas(){		
