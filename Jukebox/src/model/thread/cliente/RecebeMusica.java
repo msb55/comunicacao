@@ -1,4 +1,4 @@
-package model.thread;
+package model.thread.cliente;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;

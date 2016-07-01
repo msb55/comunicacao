@@ -11,7 +11,7 @@ import javax.swing.JProgressBar;
 import javax.swing.JLabel;
 
 import model.ModelLocator;
-import model.thread.RecebeMusica;
+import model.thread.cliente.RecebeMusica;
 
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;

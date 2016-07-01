@@ -3,8 +3,10 @@ package model;
 import java.util.ArrayList;
 
 
-import model.thread.Download;
-import model.thread.DownloadTableModel;
+
+
+import model.thread.servidor.Download;
+import model.thread.servidor.DownloadTableModel;
 
 public class Cliente {
 

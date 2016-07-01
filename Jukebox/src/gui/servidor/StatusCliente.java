@@ -12,8 +12,7 @@ import javax.swing.border.EmptyBorder;
 
 import model.ModelLocator;
 import model.ProgressBarRenderer;
-
-import model.thread.DownloadTableModel;
+import model.thread.servidor.DownloadTableModel;
 
 public class StatusCliente extends JDialog {
 

@@ -1,4 +1,4 @@
-package model.thread;
+package model.thread.servidor;
 
 import java.util.Observable;
 import java.util.Observer;

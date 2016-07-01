@@ -1,4 +1,4 @@
-package model.thread;
+package model.thread.cliente;
 
 import java.io.BufferedReader;
 import java.io.DataOutputStream;

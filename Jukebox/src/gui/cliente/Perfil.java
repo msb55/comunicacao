@@ -19,8 +19,8 @@ import javax.swing.JLabel;
 import javax.swing.JTable;
 
 import model.ModelLocator;
-import model.thread.Online;
-import model.thread.Servidor;
+import model.thread.cliente.Online;
+import model.thread.servidor.Servidor;
 
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
