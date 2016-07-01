@@ -3,7 +3,6 @@ package gui.servidor;
 import java.awt.BorderLayout;
 import java.awt.FlowLayout;
 
-import javax.swing.JButton;
 import javax.swing.JDialog;
 import javax.swing.JPanel;
 import javax.swing.JProgressBar;
@@ -13,7 +12,7 @@ import javax.swing.border.EmptyBorder;
 
 import model.ModelLocator;
 import model.ProgressBarRenderer;
-import model.thread.Download;
+
 import model.thread.DownloadTableModel;
 
 public class StatusCliente extends JDialog {

@@ -1,46 +1,27 @@
 package gui.servidor;
 
-import java.awt.BorderLayout;
+
 import java.awt.EventQueue;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
-import java.util.ArrayList;
+
 
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
-import javax.swing.event.ListSelectionEvent;
-import javax.swing.event.ListSelectionListener;
+
 import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
 
-import model.Cliente;
+
 import model.ModelLocator;
-import model.thread.Conexao;
+
 import model.thread.Servidor;
 
 import javax.swing.ListSelectionModel;
-import javax.swing.JScrollBar;
+
 import javax.swing.JScrollPane;
-import javax.swing.JButton;
 
-import java.awt.event.ActionListener;
-import java.awt.event.ActionEvent;
-
-import javax.swing.GroupLayout;
-import javax.swing.GroupLayout.Alignment;
-
-import java.awt.CardLayout;
-
-import javax.swing.LayoutStyle.ComponentPlacement;
-
-import java.awt.FlowLayout;
-
-import javax.swing.BoxLayout;
-
-import java.awt.GridLayout;
-
-import javax.swing.JLabel;
 
 
 public class InicioServidor extends JFrame {
