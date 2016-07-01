@@ -113,23 +113,6 @@ public class InicioServidor extends JFrame {
 		
 		contentPane.add(scrollPane);
 		
-		JButton btnAdicionarMusicas = new JButton("Adicionar Musicas");
-		btnAdicionarMusicas.setBounds(10, 306, 152, 23);
-		btnAdicionarMusicas.addMouseListener(new MouseAdapter() {
-			@Override
-			public void mousePressed(MouseEvent arg0) {
-				
-				UploadMusica uploadMusica = new UploadMusica();
-				uploadMusica.setLocationRelativeTo(null);
-				uploadMusica.setVisible(true);
-			}
-		});
-		btnAdicionarMusicas.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent arg0) {
-			}
-		});
-		contentPane.add(btnAdicionarMusicas);
-		
 		new Thread(new Servidor(df)).start(); //INICIA O SERVIDOR
 	}
 }
