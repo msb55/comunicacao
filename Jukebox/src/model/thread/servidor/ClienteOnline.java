@@ -19,9 +19,10 @@ public class ClienteOnline implements Runnable {
 	private DefaultTableModel tabela;
 	private int row;
 
-	public ClienteOnline(Cliente cliente, DefaultTableModel tabela) {
+	public ClienteOnline(Cliente cliente, Socket socketOnline, DefaultTableModel tabela) {
 		this.cliente = cliente;
 		this.tabela = tabela;
+		this.servidor = socketOnline;
 		
 		
 	}
@@ -31,15 +32,7 @@ public class ClienteOnline implements Runnable {
 		
 		ModelLocator.addClientes(this.cliente);
 		this.tabela.addRow(	new String[] {this.cliente.getNome(), this.cliente.getIp() });
-		row = this.tabela.getRowCount()-1;
-		
-		
-		try {
-			ServerSocket aceita = new ServerSocket(3000);
-			servidor = aceita.accept();
-		} catch (IOException e1) {			
-			e1.printStackTrace();
-		}
+		row = this.tabela.getRowCount()-1;	
 		
 		
 		BufferedReader socketEntrada = null;

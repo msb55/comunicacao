@@ -18,11 +18,13 @@ public class Conexao implements Runnable {
 	private Socket servidor;
 	private DefaultTableModel tabela;
 	private ServerSocket serverLog;
+	private Socket socketOnline;
 
-	public Conexao(Socket servidor,ServerSocket serverLog, DefaultTableModel tabela) {
+	public Conexao(Socket servidor,Socket socketOnline, ServerSocket serverLog, DefaultTableModel tabela) {
 		this.tabela = tabela;
 		this.servidor = servidor;
 		this.serverLog = serverLog;
+		this.socketOnline = socketOnline;
 	}
 
 	@Override
@@ -34,7 +36,7 @@ public class Conexao implements Runnable {
 			String nome = socketEntrada.readLine();
 			cliente = new Cliente(this.servidor.getInetAddress().toString(), nome);		
 			
-			new Thread(new ClienteOnline(cliente, tabela)).start();			
+			new Thread(new ClienteOnline(cliente,socketOnline, tabela)).start();			
 			
 		} catch (IOException e1) {
 			e1.printStackTrace();
