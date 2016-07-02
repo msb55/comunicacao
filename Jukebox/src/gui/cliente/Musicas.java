@@ -58,7 +58,6 @@ public class Musicas extends JDialog {
 					dialog.setVisible(true);
 					dialog.setResizable(false);
 					dialog.setLocationRelativeTo(null);
-					dialog.setModal(true);
 				} catch (Exception e) {
 					e.printStackTrace();
 				}
