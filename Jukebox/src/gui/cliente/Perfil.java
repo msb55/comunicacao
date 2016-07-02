@@ -38,7 +38,7 @@ public class Perfil extends JFrame {
 	private JButton btnPlay;
 	private JButton btnPause;
 	private JButton btnStop;
-	private MP3Player mpp = new MP3Player(new File("C:\\Users\\Caio\\Desktop\\99vidas-22-chrono-trigger.mp3"));
+	private MP3Player mpp;
 
 	/**
 	 * Launch the application.
@@ -117,15 +117,12 @@ public class Perfil extends JFrame {
 			public void mouseClicked(MouseEvent e) {
 				if (e.getClickCount() == 1) {
 					String nome = table.getValueAt(table.getSelectedRow(), 0).toString();
-					mpp = new MP3Player(new File("C:\\Users\\Public\\Documents\\"+nome+".mp3"));
-					
-				}
-			
 
-				
+					if(mpp != null) mpp.stop();
+					mpp = new MP3Player(new File("C:\\Users\\Public\\Documents\\"+nome+".mp3"));				
+				}			
 			}
 		});
-
 		
 		barraRolagem = new JScrollPane(table);
 		barraRolagem.setBounds(10, 36, 664, 279);
