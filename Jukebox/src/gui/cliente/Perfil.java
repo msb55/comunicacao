@@ -20,6 +20,7 @@ import javax.swing.JTable;
 
 import model.ModelLocator;
 import model.thread.cliente.Online;
+import model.thread.cliente.GerenciaBotaoBaixar;
 import model.thread.servidor.Servidor;
 
 import java.awt.event.ActionListener;
@@ -77,12 +78,13 @@ public class Perfil extends JFrame {
 		JButton btnBaixarMusicas = new JButton("Baixar");
 		btnBaixarMusicas.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
-				Musicas musicas = new Musicas();
-				musicas.setLocationRelativeTo(null);
-				//musicas.setModal(true);
-				musicas.setVisible(true);
-				
-				
+				if(btnBaixarMusicas.isEnabled()){
+					Musicas musicas = new Musicas();
+					musicas.setLocationRelativeTo(null);
+					musicas.setVisible(true);
+					
+					new Thread(new GerenciaBotaoBaixar(musicas, btnBaixarMusicas)).start();
+				}				
 			}
 		});
 		btnBaixarMusicas.setBounds(585, 326, 89, 23);
