@@ -69,7 +69,7 @@ public class Download extends Observable implements Runnable {
 				  tempoTotal = (tempoVolta - tempoIda)/1000;
 	              
 	              
-	              if(cont % 10000 == 0){
+	              if(cont % 2 == 0){
 						tempo = ((filesize-baixado)*tempoTotal)/1024;
 						tempo /= 1000000;
 						int minuto = (int) tempo/60;

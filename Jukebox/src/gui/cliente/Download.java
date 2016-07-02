@@ -38,6 +38,7 @@ public class Download extends JDialog {
 		try {
 			Download dialog = new Download();
 			dialog.setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
+			dialog.setResizable(false);
 			dialog.setVisible(true);
 		} catch (Exception e) {
 			e.printStackTrace();
