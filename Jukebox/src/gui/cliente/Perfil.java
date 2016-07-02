@@ -23,6 +23,8 @@ import model.thread.cliente.Online;
 import model.thread.servidor.Servidor;
 
 import java.awt.event.ActionListener;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
 import java.awt.event.ActionEvent;
 
 import jaco.mp3.player.*;
@@ -41,6 +43,9 @@ public class Perfil extends JFrame {
 	/**
 	 * Launch the application.
 	 */
+	
+	
+	
 	public static void main(String[] args) {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
@@ -52,8 +57,9 @@ public class Perfil extends JFrame {
 				}
 			}
 		});
-	}
 
+	}
+	
 	/**
 	 * Create the frame.
 	 */
@@ -105,6 +111,21 @@ public class Perfil extends JFrame {
 		table.getColumnModel().getColumn(1).setResizable(false);
 		table.getColumnModel().getColumn(2).setResizable(false);
 		table.getColumnModel().getColumn(3).setResizable(false);
+		
+		
+		table.addMouseListener(new MouseAdapter() {
+			public void mouseClicked(MouseEvent e) {
+				if (e.getClickCount() == 1) {
+					String nome = table.getValueAt(table.getSelectedRow(), 0).toString();
+					mpp = new MP3Player(new File("C:\\Users\\Public\\Documents\\"+nome+".mp3"));
+					
+				}
+			
+
+				
+			}
+		});
+
 		
 		barraRolagem = new JScrollPane(table);
 		barraRolagem.setBounds(10, 36, 664, 279);
