@@ -11,6 +11,7 @@ public class ModelLocator {
 	private static ArrayList<Cliente> clientes =  new ArrayList<Cliente>();	
 	
 	private static Socket socketPrincipal;
+	private static Socket socketOnline;
 	private static String ipServidor;
 	private static int porta = 0;
 	private static String nome;
@@ -116,6 +117,12 @@ public class ModelLocator {
 	}
 	public static void setModel(DefaultTableModel model) {
 		ModelLocator.model = model;
+	}
+	public static Socket getSocketOnline() {
+		return socketOnline;
+	}
+	public static void setSocketOnline(Socket socketOnline) {
+		ModelLocator.socketOnline = socketOnline;
 	}
 	
 	

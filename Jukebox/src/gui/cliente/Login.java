@@ -17,6 +17,7 @@ import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 import java.io.DataOutputStream;
 import java.io.IOException;
+import java.net.Socket;
 
 public class Login extends JDialog {
 	private JTextField txtNome;
@@ -51,7 +52,7 @@ public class Login extends JDialog {
 		JButton btnEntrar = new JButton("Entrar");
 		btnEntrar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				try {
+				try {				
 					DataOutputStream out = new DataOutputStream(ModelLocator.getSocketPrincipal().getOutputStream());
 					out.writeBytes(txtNome.getText() + "\n");
 					

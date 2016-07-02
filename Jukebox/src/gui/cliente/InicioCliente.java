@@ -78,6 +78,9 @@ public class InicioCliente extends JFrame implements ActionListener{
 				ModelLocator.setSocketPrincipal(socket);
 				ModelLocator.setIpServidor(ip.getText());
 				ModelLocator.setPorta(3493);
+				
+				Socket socketOnline = new Socket(ModelLocator.getIpServidor(), 3000);
+				ModelLocator.setSocketOnline(socketOnline);
 
 				Login frameSecundario = new Login();
 				frameSecundario.setLocationRelativeTo(null);
