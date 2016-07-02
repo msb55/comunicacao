@@ -109,6 +109,6 @@ public class Download extends JDialog {
 	
 	public void iniciar(){
 		lblNomeMusica.setText(ModelLocator.getNomeMusicas());
-		lblTamanhoMusica.setText(""+ModelLocator.getTamanhoMusicas());		
+		lblTamanhoMusica.setText(""+((ModelLocator.getTamanhoMusicas()/1024)/1024));		
 	}
 }
