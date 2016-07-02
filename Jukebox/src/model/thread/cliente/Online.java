@@ -6,6 +6,8 @@ import java.io.IOException;
 import java.io.InputStreamReader;
 import java.net.Socket;
 
+import javax.swing.JOptionPane;
+
 import model.ModelLocator;
 
 public class Online implements Runnable{
@@ -30,7 +32,7 @@ public class Online implements Runnable{
 			}
 		} catch (IOException e) {
 			
-			e.printStackTrace();
+			JOptionPane.showMessageDialog(null, "Conexão com servidor Perdida!");
 		}
 		
 	}

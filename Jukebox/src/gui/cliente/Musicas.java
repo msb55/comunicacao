@@ -4,6 +4,7 @@ import java.awt.Component;
 import java.awt.EventQueue;
 
 import javax.swing.ImageIcon;
+import javax.swing.JDialog;
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
@@ -32,10 +33,11 @@ import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableCellRenderer;
 
 import model.ModelLocator;
+
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 
-public class Musicas extends JFrame {
+public class Musicas extends JDialog {
 
 	private JPanel contentPane;
 	private JTable table;
@@ -51,9 +53,12 @@ public class Musicas extends JFrame {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
-					Musicas frame = new Musicas();
-					frame.setLocationRelativeTo(null);
-					frame.setVisible(true);
+					Musicas dialog = new Musicas();
+					dialog.setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
+					dialog.setVisible(true);
+					dialog.setResizable(false);
+					dialog.setLocationRelativeTo(null);
+					dialog.setModal(true);
 				} catch (Exception e) {
 					e.printStackTrace();
 				}

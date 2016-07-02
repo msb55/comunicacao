@@ -80,9 +80,8 @@ public class InicioServidor extends JFrame {
 		        	ModelLocator.setCliente(ModelLocator.getClientes(table.getSelectedRow()));
 		        	StatusCliente status = new StatusCliente();
 		        	status.setLocationRelativeTo(null);
-		        	status.setVisible(true);
-		        	
-		        	
+		        	status.setModal(true);
+		        	status.setVisible(true);	        	
 		        }  
 		    }  
 		}); 
