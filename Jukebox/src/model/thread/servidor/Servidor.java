@@ -15,6 +15,7 @@ public class Servidor implements Runnable {
 
 	public Servidor(DefaultTableModel tabela) {
 		this.tabela = tabela;
+		ModelLocator.setClientesOnline(tabela);
 	}
 
 	@Override
@@ -33,7 +34,7 @@ public class Servidor implements Runnable {
 			while(true){
 				socket = aceita.accept();	
 				socketOnline = aceitaOnline.accept();
-				new Thread(new Conexao(socket,socketOnline,serverLog,tabela)).start();			
+				new Thread(new Conexao(socket,socketOnline,serverLog)).start();			
 				
 				
 			}

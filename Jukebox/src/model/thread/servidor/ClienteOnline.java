@@ -16,25 +16,22 @@ public class ClienteOnline implements Runnable {
 	
 	private Socket servidor;
 	private Cliente cliente;
-	private DefaultTableModel tabela;
-	private int row;
+	
 
-	public ClienteOnline(Cliente cliente, Socket socketOnline, DefaultTableModel tabela) {
-		this.cliente = cliente;
-		this.tabela = tabela;
-		this.servidor = socketOnline;
-		
-		
+	public ClienteOnline(Cliente cliente, Socket socketOnline) {
+		this.cliente = cliente;		
+		this.servidor = socketOnline;		
 	}
 
 	@Override
 	public void run() {
 		
-		ModelLocator.addClientes(this.cliente);
-		this.tabela.addRow(	new String[] {this.cliente.getNome(), this.cliente.getIp() });
-		row = this.tabela.getRowCount()-1;	
-		System.out.println("Cliente online");
+		System.out.println("vai add");
 		
+		ModelLocator.addClientes(this.cliente);
+		
+		System.out.println("Adicionou");
+				
 		BufferedReader socketEntrada = null;
 		DataOutputStream socketSaida = null;
 		try {
@@ -46,9 +43,11 @@ public class ClienteOnline implements Runnable {
 				Thread.sleep(5000);
 			}
 		} catch (IOException e) {
-			e.printStackTrace();
-		} catch (InterruptedException e) {
-			// TODO Auto-generated catch block
+			ModelLocator.removeByIpClientes(this.cliente.getIp());
+			System.out.println("Cliente ON IOException");
+			e.printStackTrace();			
+		} catch (InterruptedException e) {	
+			System.out.println("Cliente ON InterruptedException");
 			e.printStackTrace();
 		}
 		

@@ -16,12 +16,10 @@ public class Conexao implements Runnable {
 	
 	private Cliente cliente;
 	private Socket servidor;
-	private DefaultTableModel tabela;
 	private ServerSocket serverLog;
 	private Socket socketOnline;
 
-	public Conexao(Socket servidor,Socket socketOnline, ServerSocket serverLog, DefaultTableModel tabela) {
-		this.tabela = tabela;
+	public Conexao(Socket servidor,Socket socketOnline, ServerSocket serverLog) {
 		this.servidor = servidor;
 		this.serverLog = serverLog;
 		this.socketOnline = socketOnline;
@@ -38,7 +36,7 @@ public class Conexao implements Runnable {
 			System.out.println("leu o nome");
 			cliente = new Cliente(this.servidor.getInetAddress().toString(), nome);		
 			
-			new Thread(new ClienteOnline(cliente,socketOnline, tabela)).start();			
+			new Thread(new ClienteOnline(cliente,socketOnline)).start();			
 			
 		} catch (IOException e1) {
 			e1.printStackTrace();
@@ -73,7 +71,9 @@ public class Conexao implements Runnable {
 				
 			}
 		} catch (IOException e) {
-			System.out.println("ERRO DE CONEXÃO");
+			System.out.println("IOException Conexão");
+			e.printStackTrace();
+			
 		}
 
 	}

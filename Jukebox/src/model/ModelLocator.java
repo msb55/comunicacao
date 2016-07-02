@@ -8,7 +8,7 @@ import javax.swing.table.DefaultTableModel;
 public class ModelLocator {
 	private static ArrayList<Socket> transferencia = new ArrayList<Socket>();
 	private static ArrayList<Socket> ted = new ArrayList<Socket>();
-	private static ArrayList<Cliente> clientes =  new ArrayList<Cliente>();	
+	private static ArrayList<Cliente> clientes =  new ArrayList<Cliente>();
 	
 	private static Socket socketPrincipal;
 	private static Socket socketOnline;
@@ -18,6 +18,7 @@ public class ModelLocator {
 	private static Cliente cliente;
 	
 	private static DefaultTableModel model;
+	private static DefaultTableModel clientesOnline;
 	
 	private static String nomeMusicas;
 	private static double tamanhoMusicas;
@@ -50,9 +51,28 @@ public class ModelLocator {
 	}
 	
 	public static void addClientes(Cliente cliente){
-		ModelLocator.clientes.add(cliente);
-		
+		ModelLocator.clientes.add(cliente);		
+		ModelLocator.clientesOnline.addRow(	new String[] {cliente.getNome(), cliente.getIp() });
 	}
+	
+	public static DefaultTableModel getClientesOnline() {
+		return clientesOnline;
+	}
+	public static void setClientesOnline(DefaultTableModel clientesOnline) {
+		ModelLocator.clientesOnline = clientesOnline;
+	}
+	public static void removeByIpClientes(String ip){
+		int index = 0;
+		for(Cliente c: ModelLocator.clientes){
+			if(c.getIp().equals(ip)){
+				ModelLocator.clientes.remove(index);
+				clientesOnline.removeRow(index);
+				break;
+			}
+			index++;
+		}		
+	}
+
 	public static Cliente getClientes(int i){
 		return ModelLocator.clientes.get(i);
 	}
