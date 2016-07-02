@@ -55,7 +55,7 @@ public class DownloadTableModel extends AbstractTableModel implements Observer {
       if (col == 0)      return download.getMusica();
       else if (col == 1){
     	  Double tamanho = Double.parseDouble(((download.getFilesize()/1024)/1024)+"");
-    	  return new String(String.format("%.2f",tamanho)+"MB");
+    	  return new String(String.format("%.2f",tamanho)+" MB");
       }
       else if (col == 2) return new Float(download.getProgress());
       else if (col == 3) return new String(download.getTempoEstimado()+"");
