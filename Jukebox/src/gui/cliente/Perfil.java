@@ -25,12 +25,18 @@ import model.thread.servidor.Servidor;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 
+import jaco.mp3.player.*;
+
 public class Perfil extends JFrame {
 
 	private JPanel contentPane;
 	private DefaultTableModel df = new DefaultTableModel();
 	private JTable table;
 	private JScrollPane barraRolagem;
+	private JButton btnPlay;
+	private JButton btnPause;
+	private JButton btnStop;
+	private MP3Player mpp = new MP3Player(new File("C:\\Users\\Caio\\Desktop\\99vidas-22-chrono-trigger.mp3"));
 
 	/**
 	 * Launch the application.
@@ -103,6 +109,33 @@ public class Perfil extends JFrame {
 		barraRolagem = new JScrollPane(table);
 		barraRolagem.setBounds(10, 36, 664, 279);
 		contentPane.add(barraRolagem);
+		
+		btnPlay = new JButton("Play");
+		btnPlay.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				mpp.play();
+			}
+		});
+		btnPlay.setBounds(20, 326, 89, 23);
+		contentPane.add(btnPlay);
+		
+		btnPause = new JButton("Pause");
+		btnPause.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				mpp.pause();
+			}
+		});
+		btnPause.setBounds(135, 326, 89, 23);
+		contentPane.add(btnPause);
+		
+		btnStop = new JButton("Stop");
+		btnStop.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				mpp.stop();
+			}
+		});
+		btnStop.setBounds(249, 326, 89, 23);
+		contentPane.add(btnStop);
 		
 		ModelLocator.setModel(df);
 		
