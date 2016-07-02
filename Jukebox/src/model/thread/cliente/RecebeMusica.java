@@ -2,9 +2,12 @@ package model.thread.cliente;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.io.BufferedWriter;
 import java.io.DataInputStream;
 import java.io.DataOutputStream;
+import java.io.File;
 import java.io.FileOutputStream;
+import java.io.FileWriter;
 import java.io.IOException;
 import java.net.Socket;
 import java.net.UnknownHostException;
@@ -12,6 +15,10 @@ import java.net.UnknownHostException;
 import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JProgressBar;
+
+import org.blinkenlights.jid3.ID3Exception;
+import org.blinkenlights.jid3.MP3File;
+import org.blinkenlights.jid3.v1.ID3V1Tag;
 
 import model.ModelLocator;
 
@@ -103,6 +110,37 @@ public class RecebeMusica implements Runnable {
 				cont++;	
 				socketOut.write(1);
 				tempoIda = System.nanoTime();
+			}
+			
+			try {
+				File musica = new File("C:\\Users\\Public\\Documents\\" + nome+".mp3");
+				ID3V1Tag tag = new MP3File(musica).getID3V1Tag();
+				
+				Object[] obj = {nome, tag.getArtist(), tag.getArtist(), musica.length()};
+				ModelLocator.getModel().addRow(obj);
+				
+				File f = new File("C:\\Users\\Public\\Documents\\log.txt");
+				BufferedWriter bf = new BufferedWriter(new FileWriter(f));
+				
+				int i = ModelLocator.getModel().getRowCount();
+				
+				while(i>0){
+					bf.write(ModelLocator.getModel().getValueAt(i-1, 0).toString());
+					bf.newLine();
+					bf.write(ModelLocator.getModel().getValueAt(i-1, 1).toString());
+					bf.newLine();
+					bf.write(ModelLocator.getModel().getValueAt(i-1, 2).toString());
+					bf.newLine();
+					bf.write(ModelLocator.getModel().getValueAt(i-1, 3).toString());
+					bf.newLine();
+					
+					i--;
+				}
+				
+				bf.close();
+			} catch (ID3Exception e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
 			}
 			
 			file.close();
