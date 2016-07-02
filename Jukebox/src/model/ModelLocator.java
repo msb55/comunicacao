@@ -3,6 +3,8 @@ package model;
 import java.net.Socket;
 import java.util.ArrayList;
 
+import javax.swing.table.DefaultTableModel;
+
 public class ModelLocator {
 	private static ArrayList<Socket> transferencia = new ArrayList<Socket>();
 	private static ArrayList<Socket> ted = new ArrayList<Socket>();
@@ -13,6 +15,8 @@ public class ModelLocator {
 	private static int porta = 0;
 	private static String nome;
 	private static Cliente cliente;
+	
+	private static DefaultTableModel model;
 	
 	private static String nomeMusicas;
 	private static double tamanhoMusicas;
@@ -106,6 +110,12 @@ public class ModelLocator {
 	}
 	public static void setCliente(Cliente cliente) {
 		ModelLocator.cliente = cliente;
+	}
+	public static DefaultTableModel getModel() {
+		return model;
+	}
+	public static void setModel(DefaultTableModel model) {
+		ModelLocator.model = model;
 	}
 	
 	
