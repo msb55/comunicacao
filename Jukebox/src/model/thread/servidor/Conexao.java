@@ -1,9 +1,7 @@
 package model.thread.servidor;
 
 import java.io.BufferedReader;
-import java.io.DataInputStream;
 import java.io.DataOutputStream;
-import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.net.ServerSocket;
@@ -19,10 +17,12 @@ public class Conexao implements Runnable {
 	private Cliente cliente;
 	private Socket servidor;
 	private DefaultTableModel tabela;
+	private ServerSocket serverLog;
 
-	public Conexao(Socket servidor, DefaultTableModel tabela) {
+	public Conexao(Socket servidor,ServerSocket serverLog, DefaultTableModel tabela) {
 		this.tabela = tabela;
 		this.servidor = servidor;
+		this.serverLog = serverLog;
 	}
 
 	@Override
@@ -38,47 +38,18 @@ public class Conexao implements Runnable {
 			
 		} catch (IOException e1) {
 			e1.printStackTrace();
-		}
+		}	
 		
-		
-		
-		
+		new Thread(new EnviaLog(this.serverLog)).start();	
 		
 		ServerSocket aceita;
 		ServerSocket aceita2;
 		Socket socketDownload;
 		Socket socketAck;
 		String musica;
-		int porta1;
-		int porta2;
-		DataOutputStream socketOut = null;
-		try {		
-			aceita = new ServerSocket(3502);
-			socketDownload = aceita.accept();
-			
-			try {
-				socketOut = new DataOutputStream(socketDownload.getOutputStream());				
+		int porta1, porta2;
 				
-				
-				byte[] buffer = new byte[512]; //BUFER DE 512 BYTES
-		        FileInputStream file = new FileInputStream("C:/Users/Public/Documents/Jukebox/log.txt");       
-
-				DataInputStream arq = new DataInputStream(file);			
-				
-				 int leitura = 0;
-		         while((leitura = arq.read(buffer)) > 0) {   	        	         	  
-		              socketOut.write(buffer,0,leitura);
-		              socketOut.flush();	               
-		              
-		          }         
-		        
-		         arq.close();
-		         socketOut.close();
-			} catch (IOException e) {			
-				e.printStackTrace();
-			}
-			
-			
+		try {				
 			while(true){				
 				musica = socketEntrada.readLine();
 				

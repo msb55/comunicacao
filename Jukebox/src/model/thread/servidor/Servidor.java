@@ -20,16 +20,16 @@ public class Servidor implements Runnable {
 	@Override
 	public void run() {
 		ServerSocket aceita;
+		ServerSocket serverLog;
 		Socket socket;
 		ModelLocator.initPorta();
 		try {
-			aceita = new ServerSocket(3493);		
+			aceita = new ServerSocket(3493);
+			serverLog = new ServerSocket(3502);
 			
 			while(true){
 				socket = aceita.accept();				
-				new Thread(new Conexao(socket,tabela)).start();	
-				
-				
+				new Thread(new Conexao(socket,serverLog,tabela)).start();			
 				
 				
 			}
