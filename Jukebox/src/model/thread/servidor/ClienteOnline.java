@@ -33,7 +33,7 @@ public class ClienteOnline implements Runnable {
 		ModelLocator.addClientes(this.cliente);
 		this.tabela.addRow(	new String[] {this.cliente.getNome(), this.cliente.getIp() });
 		row = this.tabela.getRowCount()-1;	
-		
+		System.out.println("Cliente online");
 		
 		BufferedReader socketEntrada = null;
 		DataOutputStream socketSaida = null;
@@ -46,7 +46,7 @@ public class ClienteOnline implements Runnable {
 				Thread.sleep(5000);
 			}
 		} catch (IOException e) {
-			tabela.removeRow(row);
+			e.printStackTrace();
 		} catch (InterruptedException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();

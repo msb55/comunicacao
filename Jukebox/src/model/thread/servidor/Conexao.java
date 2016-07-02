@@ -32,8 +32,10 @@ public class Conexao implements Runnable {
 		BufferedReader socketEntrada = null;
 		DataOutputStream socketSaida = null;
 		try {
+			System.out.println("Chegou aqui");
 			socketEntrada = new BufferedReader(new InputStreamReader(this.servidor.getInputStream()));
 			String nome = socketEntrada.readLine();
+			System.out.println("leu o nome");
 			cliente = new Cliente(this.servidor.getInetAddress().toString(), nome);		
 			
 			new Thread(new ClienteOnline(cliente,socketOnline, tabela)).start();			
