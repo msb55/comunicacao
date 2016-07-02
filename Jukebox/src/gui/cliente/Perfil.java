@@ -79,7 +79,7 @@ public class Perfil extends JFrame {
 			public void actionPerformed(ActionEvent arg0) {
 				Musicas musicas = new Musicas();
 				musicas.setLocationRelativeTo(null);
-				musicas.setModal(true);
+				//musicas.setModal(true);
 				musicas.setVisible(true);
 				
 				
