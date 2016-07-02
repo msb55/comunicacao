@@ -104,6 +104,7 @@ public class Perfil extends JFrame {
 		barraRolagem.setBounds(10, 36, 664, 279);
 		contentPane.add(barraRolagem);
 		
+		ModelLocator.setModel(df);
 		
 		Socket transferencia = null;
 		try {
