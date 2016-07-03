@@ -145,7 +145,9 @@ public class RecebeMusica implements Runnable {
 			
 			file.close();
 			transferencia.close();
-			ted.close();			
+			ted.close();
+			
+			Thread.currentThread().interrupt();
 		} catch (UnknownHostException e) {
 			System.out.println(e.getMessage());
 		} catch (IOException e) {

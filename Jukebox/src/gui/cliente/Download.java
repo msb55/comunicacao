@@ -1,7 +1,6 @@
 package gui.cliente;
 
 import java.awt.BorderLayout;
-import java.awt.FlowLayout;
 
 import javax.swing.JButton;
 import javax.swing.JDialog;
@@ -13,12 +12,11 @@ import javax.swing.JLabel;
 import model.ModelLocator;
 import model.thread.cliente.RecebeMusica;
 
-import java.awt.event.ActionListener;
-import java.awt.event.ActionEvent;
-import java.awt.event.MouseAdapter;
-import java.awt.event.MouseEvent;
-
 public class Download extends JDialog {
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = -943899494153017516L;
 
 	private final JPanel contentPanel = new JPanel();
 
@@ -59,6 +57,7 @@ public class Download extends JDialog {
 		progressBarDownload = new JProgressBar();
 		progressBarDownload.setBounds(35, 91, 500, 37);
 		progressBarDownload.setValue(0);
+		progressBarDownload.setStringPainted(true);
 		contentPanel.add(progressBarDownload);
 		
 		JLabel lblNomeArquivo = new JLabel("Progresso...");
@@ -102,14 +101,10 @@ public class Download extends JDialog {
 		btnReiniciar.setBounds(234, 156, 97, 25);
 		contentPanel.add(btnReiniciar);
 		
-		iniciar();
+		lblNomeMusica.setText(ModelLocator.getNomeMusicas());
+		lblTamanhoMusica.setText(""+((ModelLocator.getTamanhoMusicas()/1024)/1024));
 		
 		new Thread(new RecebeMusica(ModelLocator.getPorta1(), ModelLocator.getPorta2(), btnCancelar, btnReiniciar, btnPlayOrPause, 
 				progressBarDownload, lblTempo, ModelLocator.getNomeMusicas(), ModelLocator.getTamanhoMusicas())).start();
-	}
-	
-	public void iniciar(){
-		lblNomeMusica.setText(ModelLocator.getNomeMusicas());
-		lblTamanhoMusica.setText(""+((ModelLocator.getTamanhoMusicas()/1024)/1024));		
 	}
 }

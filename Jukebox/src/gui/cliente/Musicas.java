@@ -27,6 +27,7 @@ import java.io.IOException;
 import java.io.InputStreamReader;
 import java.io.ObjectOutputStream;
 import java.net.Socket;
+import java.util.ArrayList;
 
 import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
@@ -43,6 +44,8 @@ public class Musicas extends JDialog {
 	private JTable table;
 	private JScrollPane barraRolagem;
 	private DefaultTableModel modelo = new DefaultTableModel();
+	
+	private ArrayList<Double> tamanhos = new ArrayList<Double>();
 	
 	//private Socket socket;
 
@@ -70,6 +73,7 @@ public class Musicas extends JDialog {
 	 */
 	public Musicas() {
 		setResizable(false);
+		setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE);
 		setBounds(100, 100, 531, 490);
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
@@ -99,12 +103,13 @@ public class Musicas extends JDialog {
 			@Override
 			public void mouseClicked(MouseEvent arg0) {
 				if(table.getSelectedColumn() == 2){
-					String nome = modelo.getValueAt(table.getSelectedRow(), 1).toString();
-					nome = nome.substring(0, nome.lastIndexOf('M'));
-					nome = nome.replace(',', '.');
+					String tamanho = modelo.getValueAt(table.getSelectedRow(), 1).toString();
+					tamanho = tamanho.substring(0, tamanho.lastIndexOf('M'));
+					tamanho = tamanho.replace(',', '.');
 	        		//ModelLocator.setNomeMusicas();
 					ModelLocator.setNomeMusicas(modelo.getValueAt(table.getSelectedRow(), 0).toString());
-	        		ModelLocator.setTamanhoMusicas(Double.parseDouble(nome)*1024*1024);
+					ModelLocator.setTamanhoMusicas(tamanhos.get(table.getSelectedRow()));
+	        		//ModelLocator.setTamanhoMusicas(Double.parseDouble(tamanho)*1024*1024);
 	        		
 	        		try {
 						DataOutputStream socketOut = new DataOutputStream(ModelLocator.getSocketPrincipal().getOutputStream());
@@ -179,8 +184,10 @@ public class Musicas extends JDialog {
 			
 			String nome = lerArquivo.readLine();
 			while(nome != null){
-				double tamanho = ((Double.parseDouble(lerArquivo.readLine())/1024)/1024);
-				Object[] obj = {nome, String.format("%.2f",tamanho)+"MB", null};
+				
+				double tamanho = Double.parseDouble(lerArquivo.readLine());
+				tamanhos.add(tamanho);
+				Object[] obj = {nome, String.format("%.2f",((tamanho/1024)/1024))+"MB", null};
 				
 				modelo.addRow(obj);
 				
