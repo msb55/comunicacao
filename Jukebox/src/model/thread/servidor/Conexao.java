@@ -72,8 +72,8 @@ public class Conexao implements Runnable {
 			}
 		} catch (IOException e) {
 			System.out.println("IOException Conexão");
-			e.printStackTrace();
-			
+			//e.printStackTrace();
+			System.out.println(e.getMessage());
 		}
 
 	}

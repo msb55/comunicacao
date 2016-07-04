@@ -45,10 +45,10 @@ public class ClienteOnline implements Runnable {
 		} catch (IOException e) {
 			ModelLocator.removeByIpClientes(this.cliente.getIp());
 			System.out.println("Cliente ON IOException");
-			e.printStackTrace();			
+			//e.printStackTrace();			
 		} catch (InterruptedException e) {	
 			System.out.println("Cliente ON InterruptedException");
-			e.printStackTrace();
+			//e.printStackTrace();
 		}
 		
 	}

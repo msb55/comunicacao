@@ -6,6 +6,7 @@ import java.io.File;
 import java.io.FileInputStream;
 import java.io.IOException;
 import java.net.Socket;
+import java.net.SocketException;
 import java.util.Observable;
 
 
@@ -52,7 +53,7 @@ public class Download extends Observable implements Runnable {
 				long tempoIda, tempoVolta, tempoTotal;
 				double tempo=0;
 			
-			
+			try{
 	         while((leitura = arq.read(buffer)) > 0) {         	  
 	        	         
 	        	  baixado += leitura;
@@ -63,7 +64,8 @@ public class Download extends Observable implements Runnable {
 	              socketOut.write(buffer,0,leitura);
 	              socketOut.flush();	
 	            
-	              socketIn.read(); 
+	              socketIn.read();
+	              System.out.println(baixado);
 	              
 	              tempoVolta = System.nanoTime();				
 				  tempoTotal = (tempoVolta - tempoIda)/1000;
@@ -81,7 +83,10 @@ public class Download extends Observable implements Runnable {
 	              notifyObservers(this); 
 				  cont++;	
 					
-	          }         
+	          }
+			}catch(SocketException e){
+				System.out.println(e.getMessage());
+			}
 	         
 	         arq.close();
 	         socketOut.close();

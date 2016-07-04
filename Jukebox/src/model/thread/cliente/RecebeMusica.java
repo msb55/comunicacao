@@ -35,6 +35,8 @@ public class RecebeMusica implements Runnable {
 	private String nome;
 	private double tamanho;
 	
+	private boolean pausa;
+	
 	public RecebeMusica(int portaTransferencia, int portaTed, JButton btnCancelar, JButton btnReiniciar, 
 			JButton btnPlayOrPause, JProgressBar progressBarDownload, JLabel lblTempo, String nome, double tamanho) {
 		
@@ -47,7 +49,7 @@ public class RecebeMusica implements Runnable {
 		this.lblTempo = lblTempo;
 		this.nome = nome;
 		this.tamanho = tamanho;
-		
+		this.pausa = false;
 	}
 
 	@Override
@@ -56,16 +58,12 @@ public class RecebeMusica implements Runnable {
 			public void actionPerformed(ActionEvent arg0) {
 				if (btnPlayOrPause.getText().equals("Pausar")) {
 					btnPlayOrPause.setText("Continuar");
-					/*try {
-						while(true){
-							if(!btnPlayOrPause.getText().equals("Pausar")) break;
-							Thread.currentThread().sleep(Long.MAX_VALUE);
-						}
-					} catch (InterruptedException e) {
-						System.out.println(e.getMessage());
-					}*/
+					pausa = true;
+					System.out.println(pausa);
 				} else {
 					btnPlayOrPause.setText("Pausar");
+					pausa = false;
+					System.out.println(pausa);
 				}
 			}
 		});
@@ -83,8 +81,7 @@ public class RecebeMusica implements Runnable {
 			long tempoIda, tempoVolta, tempoTotal;
 			double tempo=0;
 			
-			this.progressBarDownload.setMaximum((int) tamanho);
-			
+			this.progressBarDownload.setMaximum((int) tamanho);			
 			
 			tempoIda = System.nanoTime();
 			while((lidos = in.read(buffer)) != -1){
@@ -107,7 +104,11 @@ public class RecebeMusica implements Runnable {
 					this.lblTempo.setText(minuto + " min. " + segundo + " seg.");
 				}
 				
-				cont++;	
+				cont++;
+				while(pausa){
+					System.out.print("");
+				}
+
 				socketOut.write(1);
 				tempoIda = System.nanoTime();
 			}
@@ -140,7 +141,7 @@ public class RecebeMusica implements Runnable {
 				bf.close();
 			} catch (ID3Exception e) {
 				// TODO Auto-generated catch block
-				e.printStackTrace();
+				System.out.println(e.getMessage());
 			}
 			
 			file.close();
