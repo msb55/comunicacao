@@ -62,6 +62,7 @@ public class Perfil extends JFrame {
 	 * Create the frame.
 	 */
 	public Perfil() {
+		setTitle("Jukebox");
 		setIconImage(Toolkit.getDefaultToolkit().getImage(Perfil.class.getResource("/gui/imagens/headphones.png")));
 		setResizable(false);
 		setLocationRelativeTo(null);
