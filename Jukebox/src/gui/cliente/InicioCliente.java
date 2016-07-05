@@ -42,7 +42,7 @@ public class InicioCliente extends JFrame implements ActionListener{
 		//Adicionar os objetos a tela
 		getContentPane().add(tfIP);
 		btEntrar = new JButton("In");
-		btEntrar.setBounds(288, 7, 46, 23);
+		btEntrar.setBounds(298, 8, 46, 23);
 		getContentPane().add(btEntrar);
 		
 				//Adicionar ações aos componentes
