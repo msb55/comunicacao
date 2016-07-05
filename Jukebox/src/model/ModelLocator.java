@@ -6,12 +6,9 @@ import java.util.ArrayList;
 import javax.swing.table.DefaultTableModel;
 
 public class ModelLocator {
-	private static ArrayList<Socket> transferencia = new ArrayList<Socket>();
-	private static ArrayList<Socket> ted = new ArrayList<Socket>();
 	private static ArrayList<Cliente> clientes =  new ArrayList<Cliente>();
 	
 	private static Socket socketPrincipal;
-	private static Socket socketOnline;
 	private static String ipServidor;
 	private static int porta = 0;
 	private static String nome;
@@ -36,20 +33,7 @@ public class ModelLocator {
 	}
 	public static void setPorta2(int porta2) {
 		ModelLocator.porta2 = porta2;
-	}
-	public static void addTransferencia(Socket socket){
-		ModelLocator.transferencia.add(socket);
-	}
-	public static Socket getTransferencia(int i){
-		return ModelLocator.transferencia.get(i);
-	}
-	public static void addTed(Socket socket){
-		ModelLocator.ted.add(socket);
-	}
-	public static Socket getTed(int i){
-		return ModelLocator.ted.get(i);
-	}
-	
+	}	
 	public static void addClientes(Cliente cliente){
 		ModelLocator.clientes.add(cliente);		
 		ModelLocator.clientesOnline.addRow(	new String[] {cliente.getNome(), cliente.getIp() });
@@ -143,13 +127,5 @@ public class ModelLocator {
 	}
 	public static void setModel(DefaultTableModel model) {
 		ModelLocator.model = model;
-	}
-	public static Socket getSocketOnline() {
-		return socketOnline;
-	}
-	public static void setSocketOnline(Socket socketOnline) {
-		ModelLocator.socketOnline = socketOnline;
-	}
-	
-	
+	}	
 }
