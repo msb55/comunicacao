@@ -19,6 +19,11 @@ import model.ModelLocator;
 import model.thread.cliente.PerfilCliente;
 
 import jaco.mp3.player.*;
+import javax.swing.ImageIcon;
+import javax.swing.SwingConstants;
+import java.awt.event.ActionListener;
+import java.awt.event.ActionEvent;
+import java.awt.Toolkit;
 
 public class Perfil extends JFrame {
 
@@ -57,6 +62,7 @@ public class Perfil extends JFrame {
 	 * Create the frame.
 	 */
 	public Perfil() {
+		setIconImage(Toolkit.getDefaultToolkit().getImage(Perfil.class.getResource("/gui/imagens/headphones.png")));
 		setResizable(false);
 		setLocationRelativeTo(null);
 		setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE);
@@ -79,8 +85,13 @@ public class Perfil extends JFrame {
 			}
 		});
 		
-		btnBaixarMusicas = new JButton("Baixar");		
-		btnBaixarMusicas.setBounds(585, 326, 89, 23);
+		btnBaixarMusicas = new JButton("");		
+		btnBaixarMusicas.setIcon(new ImageIcon(Perfil.class.getResource("/gui/imagens/download.png")));
+		btnBaixarMusicas.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+			}
+		});
+		btnBaixarMusicas.setBounds(592, 319, 82, 41);
 		contentPane.add(btnBaixarMusicas);
 		
 		JLabel lblOl = new JLabel("Ol\u00E1, " + ModelLocator.getNome() + "! Seja bem-vindx!");
@@ -112,16 +123,19 @@ public class Perfil extends JFrame {
 		barraRolagem.setBounds(10, 36, 664, 279);
 		contentPane.add(barraRolagem);
 		
-		btnPlay = new JButton("Play");
-		btnPlay.setBounds(20, 326, 89, 23);
+		btnPlay = new JButton("");
+		btnPlay.setIcon(new ImageIcon(Perfil.class.getResource("/gui/imagens/play.png")));
+		btnPlay.setBounds(10, 319, 82, 41);
 		contentPane.add(btnPlay);
 		
-		btnPause = new JButton("Pause");
-		btnPause.setBounds(135, 326, 89, 23);
+		btnPause = new JButton("");
+		btnPause.setIcon(new ImageIcon(Perfil.class.getResource("/gui/imagens/pause.png")));
+		btnPause.setBounds(102, 319, 82, 41);
 		contentPane.add(btnPause);
 		
-		btnStop = new JButton("Stop");
-		btnStop.setBounds(249, 326, 89, 23);
+		btnStop = new JButton("");
+		btnStop.setIcon(new ImageIcon(Perfil.class.getResource("/gui/imagens/stop.png")));
+		btnStop.setBounds(194, 319, 82, 41);
 		contentPane.add(btnStop);
 		
 		ModelLocator.setModel(df);
