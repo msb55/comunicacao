@@ -87,7 +87,7 @@ public class Perfil extends JFrame {
 		});
 		
 		btnBaixarMusicas = new JButton("");		
-		btnBaixarMusicas.setIcon(new ImageIcon(Perfil.class.getResource("/gui/imagens/download.png")));
+		btnBaixarMusicas.setIcon(new ImageIcon(Perfil.class.getResource("/gui/imagens/cloud.png")));
 		btnBaixarMusicas.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 			}
