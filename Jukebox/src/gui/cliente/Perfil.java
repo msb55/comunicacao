@@ -1,6 +1,10 @@
 package gui.cliente;
 
 import java.awt.EventQueue;
+import java.awt.event.WindowAdapter;
+import java.awt.event.WindowEvent;
+import java.io.IOException;
+import java.net.Socket;
 
 import javax.swing.JFrame;
 import javax.swing.JPanel;
@@ -55,12 +59,25 @@ public class Perfil extends JFrame {
 	public Perfil() {
 		setResizable(false);
 		setLocationRelativeTo(null);
-		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE);
 		setBounds(100, 100, 700, 399);
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(contentPane);
-		contentPane.setLayout(null);		
+		contentPane.setLayout(null);
+		
+		this.addWindowListener(new WindowAdapter() {
+			@Override
+			public void windowClosing(WindowEvent e) {
+				try {
+					ModelLocator.getSocketPrincipal().close();
+					
+					System.exit(0);
+				} catch (IOException e1) {
+					System.out.println(e1.getMessage());
+				}
+			}
+		});
 		
 		btnBaixarMusicas = new JButton("Baixar");		
 		btnBaixarMusicas.setBounds(585, 326, 89, 23);
