@@ -18,6 +18,7 @@ import java.awt.event.ActionEvent;
 import java.io.DataOutputStream;
 import java.io.IOException;
 import java.net.Socket;
+import java.awt.Toolkit;
 
 public class Login extends JDialog {
 	private JTextField txtNome;
@@ -40,6 +41,7 @@ public class Login extends JDialog {
 	 * Create the dialog.
 	 */
 	public Login() {
+		setIconImage(Toolkit.getDefaultToolkit().getImage(Login.class.getResource("/gui/imagens/headphones.png")));
 		setTitle("Login");
 		setBounds(100, 100, 450, 175);
 		getContentPane().setLayout(null);

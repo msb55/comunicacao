@@ -51,7 +51,7 @@ public class InicioCliente extends JFrame implements ActionListener{
 
 		imagem = new ImageIcon(getClass().getResource("/gui/imagens/musica.png"));
 
-		label = new JLabel(new ImageIcon("C:\\Users\\crp3\\Downloads\\oi.PNG"));
+		label = new JLabel(new ImageIcon(InicioCliente.class.getResource("/gui/imagens/cat.PNG")));
 		label.setBounds(0, 0, 447, 272);
 		getContentPane().add(label);
 	}
