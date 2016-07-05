@@ -66,11 +66,17 @@ public class ModelLocator {
 		for(Cliente c: ModelLocator.clientes){
 			if(c.getIp().equals(ip)){
 				ModelLocator.clientes.remove(index);
-				clientesOnline.removeRow(index);
 				break;
 			}
 			index++;
-		}		
+		}
+		
+		clientesOnline.setRowCount(0);
+		for(Cliente c: ModelLocator.clientes){	
+			System.out.println("cliente = " + c.getIp());
+			ModelLocator.clientesOnline.addRow(	new String[] {c.getNome(), c.getIp() });		
+		}
+		
 	}
 
 	public static Cliente getClientes(int i){
