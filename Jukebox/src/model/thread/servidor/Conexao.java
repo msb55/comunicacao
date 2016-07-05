@@ -7,8 +7,6 @@ import java.io.InputStreamReader;
 import java.net.ServerSocket;
 import java.net.Socket;
 
-import javax.swing.table.DefaultTableModel;
-
 import model.Cliente;
 import model.ModelLocator;
 
@@ -16,13 +14,11 @@ public class Conexao implements Runnable {
 	
 	private Cliente cliente;
 	private Socket servidor;
-	private ServerSocket serverLog;
-	private Socket socketOnline;
+	private ServerSocket serverLog;	
 
-	public Conexao(Socket servidor,Socket socketOnline, ServerSocket serverLog) {
+	public Conexao(Socket servidor, ServerSocket serverLog) {
 		this.servidor = servidor;
-		this.serverLog = serverLog;
-		this.socketOnline = socketOnline;
+		this.serverLog = serverLog;		
 	}
 
 	@Override
@@ -36,7 +32,7 @@ public class Conexao implements Runnable {
 			System.out.println("leu o nome");
 			cliente = new Cliente(this.servidor.getInetAddress().toString(), nome);		
 			
-			new Thread(new ClienteOnline(cliente,socketOnline)).start();			
+			ModelLocator.addClientes(this.cliente);
 			
 		} catch (IOException e1) {
 			e1.printStackTrace();
@@ -54,6 +50,7 @@ public class Conexao implements Runnable {
 		try {				
 			while(true){				
 				musica = socketEntrada.readLine();
+				
 				
 				porta1 = ModelLocator.newPorta();
 				porta2 = ModelLocator.newPorta();				
@@ -74,6 +71,7 @@ public class Conexao implements Runnable {
 			System.out.println("IOException Conexão");
 			//e.printStackTrace();
 			System.out.println(e.getMessage());
+			ModelLocator.removeByIpClientes(this.cliente.getIp());
 		}
 
 	}

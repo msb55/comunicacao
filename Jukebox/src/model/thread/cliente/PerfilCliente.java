@@ -87,13 +87,7 @@ public class PerfilCliente implements Runnable{
 			}
 		});
 		
-		Socket transferencia = null;
-		try {
-			transferencia = new Socket(ModelLocator.getIpServidor(), 3000);
-		} catch (IOException e) {
-			e.printStackTrace();
-		}
-		new Thread(new Online(transferencia)).start();
+		
 	}
 	
 	public void carregarMusicas(){		

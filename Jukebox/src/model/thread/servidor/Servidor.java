@@ -22,21 +22,15 @@ public class Servidor implements Runnable {
 	public void run() {
 		ServerSocket aceita;
 		ServerSocket serverLog;
-		ServerSocket aceitaOnline;
 		Socket socket;
-		Socket socketOnline;
 		ModelLocator.initPorta();
 		try {
 			aceita = new ServerSocket(3493);
-			serverLog = new ServerSocket(3502);
-			aceitaOnline = new ServerSocket(3000);
+			serverLog = new ServerSocket(3502);	
 			
 			while(true){
-				socket = aceita.accept();	
-				socketOnline = aceitaOnline.accept();
-				new Thread(new Conexao(socket,socketOnline,serverLog)).start();			
-				
-				
+				socket = aceita.accept();			
+				new Thread(new Conexao(socket,serverLog)).start();					
 			}
 		} catch (IOException e) {
 			
