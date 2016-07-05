@@ -96,7 +96,7 @@ public class RecebeMusica implements Runnable {
 				
 				this.progressBarDownload.setValue((int)aux);
 				
-				if(cont % 10000 == 0){
+				if(cont % 2 == 0){
 					tempo = ((tamanho-aux)*tempoTotal)/1024;
 					tempo /= 1000000;
 					int minuto = (int) tempo/60;
