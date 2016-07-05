@@ -21,6 +21,9 @@ import java.io.DataOutputStream;
 import java.io.IOException;
 import java.net.Socket;
 import java.awt.Toolkit;
+import javax.swing.Icon;
+import javax.swing.ImageIcon;
+import javax.swing.SwingConstants;
 
 public class Login extends JDialog {
 	private JTextField txtNome;
@@ -46,11 +49,11 @@ public class Login extends JDialog {
 		setIconImage(Toolkit.getDefaultToolkit().getImage(Login.class.getResource("/gui/imagens/headphones.png")));
 		setTitle("Login");
 		setDefaultCloseOperation(JDialog.DO_NOTHING_ON_CLOSE);
-		setBounds(100, 100, 450, 175);
+		setSize(446, 296); //tamanho da tela
 		getContentPane().setLayout(null);
 		
 		txtNome = new JTextField();
-		txtNome.setBounds(66, 57, 259, 20);
+		txtNome.setBounds(70, 11, 259, 23);
 		getContentPane().add(txtNome);
 		txtNome.setColumns(10);
 		
@@ -66,7 +69,7 @@ public class Login extends JDialog {
 			}
 		});
 		
-		JButton btnEntrar = new JButton("Entrar");
+		JButton btnEntrar = new JButton("In");
 		btnEntrar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				try {				
@@ -84,11 +87,16 @@ public class Login extends JDialog {
 				}
 			}
 		});
-		btnEntrar.setBounds(335, 54, 89, 27);
+		btnEntrar.setBounds(339, 11, 46, 23);
 		getContentPane().add(btnEntrar);
 				
 		JLabel lblNome = new JLabel("Nome:");
-		lblNome.setBounds(10, 60, 46, 14);
+		lblNome.setHorizontalAlignment(SwingConstants.RIGHT);
+		lblNome.setBounds(14, 15, 46, 14);
 		getContentPane().add(lblNome);
+		
+		JLabel label = new JLabel(new ImageIcon(Login.class.getResource("/gui/imagens/cat.PNG")));
+		label.setBounds(0, 0, 447, 272);
+		getContentPane().add(label);
 	}
 }
