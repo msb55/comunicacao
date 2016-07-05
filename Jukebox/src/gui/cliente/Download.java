@@ -104,7 +104,55 @@ public class Download extends JDialog {
 		lblNomeMusica.setText(ModelLocator.getNomeMusicas());
 		lblTamanhoMusica.setText(""+((ModelLocator.getTamanhoMusicas()/1024)/1024));
 		
-		new Thread(new RecebeMusica(ModelLocator.getPorta1(), ModelLocator.getPorta2(), btnCancelar, btnReiniciar, btnPlayOrPause, 
-				progressBarDownload, lblTempo, ModelLocator.getNomeMusicas(), ModelLocator.getTamanhoMusicas())).start();
+//		new Thread(new RecebeMusica(ModelLocator.getPorta1(), ModelLocator.getPorta2(), btnCancelar, btnReiniciar, btnPlayOrPause, 
+//				progressBarDownload, lblTempo, ModelLocator.getNomeMusicas(), ModelLocator.getTamanhoMusicas())).start();
+	}
+	
+	public JButton getBtnCancelar() {
+		return btnCancelar;
+	}
+
+	public void setBtnCancelar(JButton btnCancelar) {
+		this.btnCancelar = btnCancelar;
+	}
+
+	public JButton getBtnReiniciar() {
+		return btnReiniciar;
+	}
+
+	public void setBtnReiniciar(JButton btnReiniciar) {
+		this.btnReiniciar = btnReiniciar;
+	}
+
+	public JButton getBtnPlayOrPause() {
+		return btnPlayOrPause;
+	}
+
+	public void setBtnPlayOrPause(JButton btnPlayOrPause) {
+		this.btnPlayOrPause = btnPlayOrPause;
+	}
+
+	public JProgressBar getProgressBarDownload() {
+		return progressBarDownload;
+	}
+
+	public void setProgressBarDownload(JProgressBar progressBarDownload) {
+		this.progressBarDownload = progressBarDownload;
+	}
+
+	public JLabel getLblTempo() {
+		return lblTempo;
+	}
+
+	public void setLblTempo(JLabel lblTempo) {
+		this.lblTempo = lblTempo;
+	}
+
+	public JLabel getLblTamanhoMusica() {
+		return lblTamanhoMusica;
+	}
+
+	public void setLblTamanhoMusica(JLabel lblTamanhoMusica) {
+		this.lblTamanhoMusica = lblTamanhoMusica;
 	}
 }

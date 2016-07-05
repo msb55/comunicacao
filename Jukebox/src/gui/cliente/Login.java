@@ -14,6 +14,8 @@ import model.Cliente;
 import model.ModelLocator;
 
 import java.awt.event.ActionListener;
+import java.awt.event.WindowAdapter;
+import java.awt.event.WindowEvent;
 import java.awt.event.ActionEvent;
 import java.io.DataOutputStream;
 import java.io.IOException;
@@ -43,6 +45,7 @@ public class Login extends JDialog {
 	public Login() {
 		setIconImage(Toolkit.getDefaultToolkit().getImage(Login.class.getResource("/gui/imagens/headphones.png")));
 		setTitle("Login");
+		setDefaultCloseOperation(JDialog.DO_NOTHING_ON_CLOSE);
 		setBounds(100, 100, 450, 175);
 		getContentPane().setLayout(null);
 		
@@ -50,6 +53,18 @@ public class Login extends JDialog {
 		txtNome.setBounds(66, 57, 259, 20);
 		getContentPane().add(txtNome);
 		txtNome.setColumns(10);
+		
+		this.addWindowListener(new WindowAdapter() {
+			@Override
+			public void windowClosing(WindowEvent e) {
+				try {
+					ModelLocator.getSocketPrincipal().close();
+					System.exit(0);
+				} catch (IOException e1) {
+					System.out.println(e1.getMessage());
+				}
+			}
+		});
 		
 		JButton btnEntrar = new JButton("Entrar");
 		btnEntrar.addActionListener(new ActionListener() {

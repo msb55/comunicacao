@@ -34,6 +34,7 @@ import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableCellRenderer;
 
 import model.ModelLocator;
+import model.thread.cliente.RecebeMusica;
 
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
@@ -57,7 +58,6 @@ public class Musicas extends JDialog {
 			public void run() {
 				try {
 					Musicas dialog = new Musicas();
-					dialog.setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
 					dialog.setVisible(true);
 					dialog.setResizable(false);
 					dialog.setLocationRelativeTo(null);
@@ -73,7 +73,6 @@ public class Musicas extends JDialog {
 	 */
 	public Musicas() {
 		setResizable(false);
-		setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE);
 		setBounds(100, 100, 531, 490);
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
@@ -106,10 +105,8 @@ public class Musicas extends JDialog {
 					String tamanho = modelo.getValueAt(table.getSelectedRow(), 1).toString();
 					tamanho = tamanho.substring(0, tamanho.lastIndexOf('M'));
 					tamanho = tamanho.replace(',', '.');
-	        		//ModelLocator.setNomeMusicas();
 					ModelLocator.setNomeMusicas(modelo.getValueAt(table.getSelectedRow(), 0).toString());
 					ModelLocator.setTamanhoMusicas(tamanhos.get(table.getSelectedRow()));
-	        		//ModelLocator.setTamanhoMusicas(Double.parseDouble(tamanho)*1024*1024);
 	        		
 	        		try {
 						DataOutputStream socketOut = new DataOutputStream(ModelLocator.getSocketPrincipal().getOutputStream());
@@ -128,6 +125,15 @@ public class Musicas extends JDialog {
 	        		Download download = new Download();
 	        		download.setLocationRelativeTo(null);
 	        		download.setVisible(true);
+	        		
+	        		try {
+						Socket transferencia = new Socket(ModelLocator.getIpServidor(), ModelLocator.getPorta1());
+						Socket ted = new Socket(ModelLocator.getIpServidor(), ModelLocator.getPorta1());
+		        		
+		        		new Thread(new RecebeMusica(transferencia, ted, ModelLocator.getNomeMusicas(), ModelLocator.getTamanhoMusicas(), download)).start();
+					} catch (IOException e) {
+						System.out.println(e.getMessage());
+					}
 	        	}
 			}
 		});
