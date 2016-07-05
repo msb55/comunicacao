@@ -13,6 +13,7 @@ import java.net.Socket;
 import java.net.UnknownHostException;
 
 import javax.swing.JButton;
+import javax.swing.JDialog;
 import javax.swing.JLabel;
 import javax.swing.JProgressBar;
 
@@ -20,6 +21,7 @@ import org.blinkenlights.jid3.ID3Exception;
 import org.blinkenlights.jid3.MP3File;
 import org.blinkenlights.jid3.v1.ID3V1Tag;
 
+import gui.cliente.Download;
 import model.ModelLocator;
 
 public class RecebeMusica implements Runnable {
@@ -35,7 +37,14 @@ public class RecebeMusica implements Runnable {
 	private String nome;
 	private double tamanho;
 	
+	private Download tela;
+	
+	private int transferencia;
+	private int ted;
+	
 	private boolean pausa;
+	private boolean cancelar;
+	private boolean reiniciar;
 	
 	public RecebeMusica(int portaTransferencia, int portaTed, JButton btnCancelar, JButton btnReiniciar, 
 			JButton btnPlayOrPause, JProgressBar progressBarDownload, JLabel lblTempo, String nome, double tamanho) {
@@ -51,26 +60,44 @@ public class RecebeMusica implements Runnable {
 		this.tamanho = tamanho;
 		this.pausa = false;
 	}
+	
+	public RecebeMusica(int portaTransferencia, int portaTed, String nome, double tamanho, JDialog tela) {
+		this.transferencia = portaTransferencia;
+		this.ted = portaTed;
+		this.nome = nome;
+		this.tamanho = tamanho;		
+		this.tela = (Download) tela;
+		this.pausa = false;
+		this.cancelar = false;
+		this.reiniciar = false;
+	}
 
 	@Override
 	public void run() {
-		btnPlayOrPause.addActionListener(new ActionListener() {
+		this.tela.getBtnPlayOrPause().addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
-				if (btnPlayOrPause.getText().equals("Pausar")) {
-					btnPlayOrPause.setText("Continuar");
+				if (tela.getBtnPlayOrPause().getText().equals("Pausar")) {
+					tela.getBtnPlayOrPause().setText("Continuar");
 					pausa = true;
 					System.out.println(pausa);
 				} else {
-					btnPlayOrPause.setText("Pausar");
+					tela.getBtnPlayOrPause().setText("Pausar");
 					pausa = false;
 					System.out.println(pausa);
 				}
 			}
 		});
 		
+		this.tela.getBtnCancelar().addActionListener(new ActionListener() {			
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				cancelar = true;
+			}
+		});
+		
 		try {
-			Socket transferencia = new Socket(ModelLocator.getIpServidor(), this.portaTransferencia);
-			Socket ted = new Socket(ModelLocator.getIpServidor(), this.portaTed);
+			Socket transferencia = new Socket(ModelLocator.getIpServidor(), this.transferencia);
+			Socket ted = new Socket(ModelLocator.getIpServidor(), this.ted);
 			
 			DataInputStream in = new DataInputStream(transferencia.getInputStream());
 			DataOutputStream socketOut = new DataOutputStream(ted.getOutputStream());
@@ -81,7 +108,7 @@ public class RecebeMusica implements Runnable {
 			long tempoIda, tempoVolta, tempoTotal;
 			double tempo=0;
 			
-			this.progressBarDownload.setMaximum((int) tamanho);			
+			this.tela.getProgressBarDownload().setMaximum((int) tamanho);			
 			
 			tempoIda = System.nanoTime();
 			while((lidos = in.read(buffer)) != -1){
@@ -94,19 +121,34 @@ public class RecebeMusica implements Runnable {
 				
 				aux += lidos;
 				
-				this.progressBarDownload.setValue((int)aux);
+				this.tela.getProgressBarDownload().setValue((int)aux);
 				
 				if(cont % 2 == 0){
 					tempo = ((tamanho-aux)*tempoTotal)/1024;
 					tempo /= 1000000;
 					int minuto = (int) tempo/60;
 					int segundo = (int) tempo%60;
-					this.lblTempo.setText(minuto + " min. " + segundo + " seg.");
+					this.tela.getLblTempo().setText(minuto + " min. " + segundo + " seg.");
 				}
 				
 				cont++;
 				while(pausa){
 					System.out.print("");
+				}
+				
+				if(cancelar){
+					socketOut.write(2);
+					
+					transferencia.close();
+					ted.close();
+					file.close();
+					in.close();
+					socketOut.close();
+					
+					new File("C:\\Users\\Public\\Documents\\" + nome+".mp3").delete();
+					this.tela.dispose();
+					
+					break;
 				}
 
 				socketOut.write(1);

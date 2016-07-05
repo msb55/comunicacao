@@ -66,25 +66,12 @@ public class Perfil extends JFrame {
 		setIconImage(Toolkit.getDefaultToolkit().getImage(Perfil.class.getResource("/gui/imagens/headphones.png")));
 		setResizable(false);
 		setLocationRelativeTo(null);
-		setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE);
+		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 700, 399);
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(contentPane);
 		contentPane.setLayout(null);
-		
-		this.addWindowListener(new WindowAdapter() {
-			@Override
-			public void windowClosing(WindowEvent e) {
-				try {
-					ModelLocator.getSocketPrincipal().close();
-					
-					System.exit(0);
-				} catch (IOException e1) {
-					System.out.println(e1.getMessage());
-				}
-			}
-		});
 		
 		btnBaixarMusicas = new JButton("");		
 		btnBaixarMusicas.setIcon(new ImageIcon(Perfil.class.getResource("/gui/imagens/cloud.png")));

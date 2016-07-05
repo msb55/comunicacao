@@ -126,14 +126,16 @@ public class Musicas extends JDialog {
 	        		download.setLocationRelativeTo(null);
 	        		download.setVisible(true);
 	        		
-	        		try {
+	        		new Thread(new RecebeMusica(ModelLocator.getPorta1(), ModelLocator.getPorta2(), ModelLocator.getNomeMusicas(), ModelLocator.getTamanhoMusicas(), download)).start();
+	        		
+	        		/*try {
 						Socket transferencia = new Socket(ModelLocator.getIpServidor(), ModelLocator.getPorta1());
 						Socket ted = new Socket(ModelLocator.getIpServidor(), ModelLocator.getPorta1());
 		        		
 		        		new Thread(new RecebeMusica(transferencia, ted, ModelLocator.getNomeMusicas(), ModelLocator.getTamanhoMusicas(), download)).start();
 					} catch (IOException e) {
 						System.out.println(e.getMessage());
-					}
+					}*/
 	        	}
 			}
 		});
