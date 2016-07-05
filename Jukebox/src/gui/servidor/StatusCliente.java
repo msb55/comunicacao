@@ -13,6 +13,7 @@ import javax.swing.border.EmptyBorder;
 import model.ModelLocator;
 import model.ProgressBarRenderer;
 import model.thread.servidor.DownloadTableModel;
+import java.awt.Toolkit;
 
 public class StatusCliente extends JDialog {
 
@@ -37,6 +38,8 @@ public class StatusCliente extends JDialog {
 	 * Create the dialog.
 	 */
 	public StatusCliente() {
+		setTitle("Downloads");
+		setIconImage(Toolkit.getDefaultToolkit().getImage(StatusCliente.class.getResource("/gui/imagens/headphones.png")));
 		setBounds(100, 100, 450, 300);
 		getContentPane().setLayout(new BorderLayout());
 		contentPanel.setLayout(new FlowLayout());

@@ -20,6 +20,7 @@ import model.thread.servidor.Servidor;
 
 import javax.swing.ListSelectionModel;
 import javax.swing.JScrollPane;
+import java.awt.Toolkit;
 
 
 
@@ -50,6 +51,7 @@ public class InicioServidor extends JFrame {
 	 * Create the frame.
 	 */
 	public InicioServidor() {
+		setIconImage(Toolkit.getDefaultToolkit().getImage(InicioServidor.class.getResource("/gui/imagens/headphones.png")));
 		setTitle("Servidor");
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 507, 379);
