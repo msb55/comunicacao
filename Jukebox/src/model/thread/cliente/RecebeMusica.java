@@ -26,6 +26,7 @@ import model.ModelLocator;
 
 public class RecebeMusica implements Runnable {
 	
+	
 	private JButton btnCancelar;
 	private JButton btnReiniciar;
 	private JButton btnPlayOrPause;
@@ -105,8 +106,7 @@ public class RecebeMusica implements Runnable {
 		try {
 			Socket transferencia = new Socket(ModelLocator.getIpServidor(), this.transferencia);
 			Socket ted = new Socket(ModelLocator.getIpServidor(), this.ted);
-
-			DataInputStream socketIn = new DataInputStream(ted.getInputStream());
+			
 			DataInputStream in = new DataInputStream(transferencia.getInputStream());
 			DataOutputStream socketOut = new DataOutputStream(ted.getOutputStream());
 			FileOutputStream file = new FileOutputStream("C:\\Users\\Public\\Documents\\" + nome+".mp3");
@@ -141,8 +141,7 @@ public class RecebeMusica implements Runnable {
 				
 				cont++;
 				while(pausa & !cancelar &!reiniciar){
-					socketOut.write(1);
-					socketIn.read();
+					System.out.print("");
 				}
 				
 				if(reiniciar){
