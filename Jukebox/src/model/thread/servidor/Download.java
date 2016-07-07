@@ -46,7 +46,7 @@ public class Download extends Observable implements Runnable {
 			filesize = f.length();
 			
 			int leitura = 0; int baixado = 0; int  cont=0;
-			long tempoIda, tempoVolta, tempoTotal;
+			long tempoIda, tempoVolta, tempoTotal, TempoAcumulado = 0;
 			double tempo=0;
 			
 			
@@ -63,7 +63,7 @@ public class Download extends Observable implements Runnable {
 	            int x = socketIn.read(); 
 	            
 	            if(x == 2){
-	            	tempo=0; baixado = 0;cont =0;
+	            	tempo=0; baixado = 0;cont =0;TempoAcumulado=0;
 	            	d.seek(0);
 	            	continue;
 	            }
@@ -74,8 +74,9 @@ public class Download extends Observable implements Runnable {
 	             
 	            System.out.println(baixado);
 	              
-	            tempoVolta = System.nanoTime();				
-				tempoTotal = (tempoVolta - tempoIda)/1000;
+	            tempoVolta = System.nanoTime();		
+	            TempoAcumulado += (tempoVolta - tempoIda)/1000;
+				tempoTotal = TempoAcumulado/cont;
 	              
 	              
 	            if(cont % 2 == 0){
