@@ -61,8 +61,9 @@ public class Download extends Observable implements Runnable {
 	            socketOut.flush();	
 	            
 	            int x = socketIn.read(); 
-	            
+	           
 	            if(x == 2){
+	            	 System.out.println("RESTART");
 	            	tempo=0; baixado = 0;cont =0;TempoAcumulado=0;
 	            	d.seek(0);
 	            	continue;
