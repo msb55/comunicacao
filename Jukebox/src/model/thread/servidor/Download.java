@@ -75,12 +75,12 @@ public class Download extends Observable implements Runnable {
 	            System.out.println(baixado);
 	              
 	            tempoVolta = System.nanoTime();		
-	            TempoAcumulado += (tempoVolta - tempoIda)/1000000;
+	            TempoAcumulado += (tempoVolta - tempoIda)/1000;
 				tempoTotal = TempoAcumulado/cont;
 	              
 	              
 	            if(cont % 2 == 0){
-	            	tempo = ((filesize-baixado)*tempoTotal)/1024;
+	            	tempo = ((filesize-baixado)*tempoTotal)/(1024*30);
 					tempo /= 1000000;
 					int minuto = (int) tempo/60;
 					int segundo = (int) tempo%60;
