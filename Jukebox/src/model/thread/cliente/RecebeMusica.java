@@ -26,41 +26,16 @@ import model.ModelLocator;
 
 public class RecebeMusica implements Runnable {
 	
-	
-	private JButton btnCancelar;
-	private JButton btnReiniciar;
-	private JButton btnPlayOrPause;
-	private JProgressBar progressBarDownload;
-	private JLabel lblTempo;
-	
-	private int portaTransferencia;
-	private int portaTed;
 	private String nome;
-	private double tamanho;
-	
-	private Download tela;
-	
+	private double tamanho;	
+	private Download tela;	
 	private int transferencia;
-	private int ted;
-	
+	private int ted;	
 	private boolean pausa;
 	private boolean cancelar;
 	private boolean reiniciar;
 	
-	public RecebeMusica(int portaTransferencia, int portaTed, JButton btnCancelar, JButton btnReiniciar, 
-			JButton btnPlayOrPause, JProgressBar progressBarDownload, JLabel lblTempo, String nome, double tamanho) {
-		
-		this.portaTransferencia = portaTransferencia;
-		this.portaTed = portaTed;
-		this.btnCancelar = btnCancelar;
-		this.btnReiniciar = btnReiniciar;
-		this.btnPlayOrPause = btnPlayOrPause;
-		this.progressBarDownload = progressBarDownload;
-		this.lblTempo = lblTempo;
-		this.nome = nome;
-		this.tamanho = tamanho;
-		this.pausa = false;
-	}
+
 	
 	public RecebeMusica(int portaTransferencia, int portaTed, String nome, double tamanho, JDialog tela) {
 		this.transferencia = portaTransferencia;
@@ -157,9 +132,7 @@ public class RecebeMusica implements Runnable {
 				
 				
 				
-				if(cancelar){
-					
-					
+				if(cancelar){					
 					transferencia.close();
 					ted.close();
 					file.close();
@@ -193,9 +166,6 @@ public class RecebeMusica implements Runnable {
 						Object[] array = {nome, "","", musica.length()};
 						obj = array;
 					}
-					
-					
-					
 					ModelLocator.getModel().addRow(obj);
 					
 					File f = new File("C:\\Users\\Public\\Documents\\log.txt");
@@ -217,8 +187,7 @@ public class RecebeMusica implements Runnable {
 					}
 					
 					bf.close();
-				} catch (ID3Exception e) {
-					// TODO Auto-generated catch block
+				} catch (ID3Exception e) {					
 					System.out.println(e.getMessage());
 				}
 				
