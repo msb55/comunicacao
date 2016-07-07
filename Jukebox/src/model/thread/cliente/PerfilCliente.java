@@ -11,15 +11,10 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
-import java.net.Socket;
-
 import jaco.mp3.player.MP3Player;
-
 import javax.swing.JButton;
 import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
-
-import model.ModelLocator;
 
 public class PerfilCliente implements Runnable{
 	
