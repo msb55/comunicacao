@@ -40,11 +40,13 @@ public class Download extends Observable implements Runnable {
 	@Override
 	public void run() {
 		DataOutputStream socketOut = null;
+		DataOutputStream socketOut2 = null;
 		//BufferedReader socketIn = null;
 		DataInputStream socketIn = null;
 		try {
 		
-			socketOut = new DataOutputStream(socketDownload.getOutputStream());			
+			socketOut = new DataOutputStream(socketDownload.getOutputStream());	
+			socketOut2 = new DataOutputStream(socketAck.getOutputStream());		
 			
 			socketIn = new DataInputStream(socketAck.getInputStream());
 			
@@ -90,7 +92,13 @@ public class Download extends Observable implements Runnable {
 						int segundo = (int) tempo%60;
 						tempoEstimado  = minuto + " min. " + segundo + " seg.";
 					}
-	              
+	              if(x == 1) {
+	            	  socketOut2.write(1);
+	            	  System.out.println("socket2 mandou");
+	            	  socketIn.read();
+	            	  System.out.println("socketIn download recebeu");
+	            	  
+	              }
 	              if(x == 2){
 	            	  
 	            	  tempo=0; baixado = 0;cont =0;

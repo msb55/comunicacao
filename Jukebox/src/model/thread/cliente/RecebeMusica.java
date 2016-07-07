@@ -105,7 +105,8 @@ public class RecebeMusica implements Runnable {
 		try {
 			Socket transferencia = new Socket(ModelLocator.getIpServidor(), this.transferencia);
 			Socket ted = new Socket(ModelLocator.getIpServidor(), this.ted);
-			
+
+			DataInputStream socketIn = new DataInputStream(ted.getInputStream());
 			DataInputStream in = new DataInputStream(transferencia.getInputStream());
 			DataOutputStream socketOut = new DataOutputStream(ted.getOutputStream());
 			FileOutputStream file = new FileOutputStream("C:\\Users\\Public\\Documents\\" + nome+".mp3");
@@ -140,7 +141,8 @@ public class RecebeMusica implements Runnable {
 				
 				cont++;
 				while(pausa & !cancelar &!reiniciar){
-					System.out.print("");
+					socketOut.write(1);
+					socketIn.read();
 				}
 				
 				if(reiniciar){
