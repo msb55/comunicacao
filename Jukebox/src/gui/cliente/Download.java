@@ -102,7 +102,7 @@ public class Download extends JDialog {
 		contentPanel.add(btnReiniciar);
 		
 		lblNomeMusica.setText(ModelLocator.getNomeMusicas());
-		lblTamanhoMusica.setText(""+((ModelLocator.getTamanhoMusicas()/1024)/1024));
+		lblTamanhoMusica.setText(""+String.format("%.2f",((ModelLocator.getTamanhoMusicas()/1024)/1024))+"MB");
 		
 //		new Thread(new RecebeMusica(ModelLocator.getPorta1(), ModelLocator.getPorta2(), btnCancelar, btnReiniciar, btnPlayOrPause, 
 //				progressBarDownload, lblTempo, ModelLocator.getNomeMusicas(), ModelLocator.getTamanhoMusicas())).start();
