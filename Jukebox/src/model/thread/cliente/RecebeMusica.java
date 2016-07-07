@@ -148,7 +148,7 @@ public class RecebeMusica implements Runnable {
 					file.close();
 					new File("C:\\Users\\Public\\Documents\\" + nome+".mp3").delete();
 					file = new FileOutputStream("C:\\Users\\Public\\Documents\\" + nome+".mp3");
-					buffer = new byte[1024];
+					buffer = new byte[1024*30];
 					lidos = 0; aux = 0; cont = 0; tempo = 0;
 					reiniciar = false;
 					
