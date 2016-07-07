@@ -95,6 +95,13 @@ public class RecebeMusica implements Runnable {
 			}
 		});
 		
+		this.tela.getBtnReiniciar().addActionListener(new ActionListener() {			
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				reiniciar = true;
+			}
+		});
+		
 		try {
 			Socket transferencia = new Socket(ModelLocator.getIpServidor(), this.transferencia);
 			Socket ted = new Socket(ModelLocator.getIpServidor(), this.ted);
@@ -132,14 +139,25 @@ public class RecebeMusica implements Runnable {
 				}
 				
 				cont++;
-				while(pausa & !cancelar){
+				while(pausa & !cancelar &!reiniciar){
 					System.out.print("");
+				}
+				
+				if(reiniciar){
+					socketOut.write(2);
+					file.close();
+					new File("C:\\Users\\Public\\Documents\\" + nome+".mp3").delete();
+					file = new FileOutputStream("C:\\Users\\Public\\Documents\\" + nome+".mp3");
+					buffer = new byte[1024];
+					lidos = 0; aux = 0; cont = 0; tempo = 0;
+					reiniciar = false;
+					
 				}
 				
 				
 				
 				if(cancelar){
-					socketOut.write(2);
+					
 					
 					transferencia.close();
 					ted.close();

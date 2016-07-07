@@ -1,10 +1,12 @@
 package model.thread.servidor;
 
+import java.io.BufferedInputStream;
 import java.io.DataInputStream;
 import java.io.DataOutputStream;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.IOException;
+import java.io.RandomAccessFile;
 import java.net.Socket;
 import java.net.SocketException;
 import java.util.Observable;
@@ -50,17 +52,22 @@ public class Download extends Observable implements Runnable {
 			byte[] buffer = new byte[1024]; //BUFER DE 512 BYTES
 	        FileInputStream file = new FileInputStream("C:/Users/Public/Documents/Jukebox/"+ this.musica);       
 	        File f = new File("C:/Users/Public/Documents/Jukebox/"+ this.musica);
-			DataInputStream arq = new DataInputStream(file);			
+			DataInputStream arq = new DataInputStream(file);
+			RandomAccessFile d = new RandomAccessFile("C:/Users/Public/Documents/Jukebox/"+ this.musica, "rw");
 			filesize = f.length();
 			 int leitura = 0;
 			 int baixado = 0;
 			 
+			
+			 
 			 int  cont=0;
 				long tempoIda, tempoVolta, tempoTotal;
 				double tempo=0;
+				
+				arq.mark((int) (f.length()/8));
 			
 			try{
-	         while((leitura = arq.read(buffer)) > 0) {         	  
+	         while((leitura = d.read(buffer)) > 0) {         	  
 	        	         
 	        	  baixado += leitura;
 	        	  progress = ((float) baixado / filesize) * 100;
@@ -70,7 +77,8 @@ public class Download extends Observable implements Runnable {
 	              socketOut.write(buffer,0,leitura);
 	              socketOut.flush();	
 	            
-	              socketIn.read();
+	              int x = socketIn.read(); 
+	              
 	              System.out.println(baixado);
 	              
 	              tempoVolta = System.nanoTime();				
@@ -84,6 +92,15 @@ public class Download extends Observable implements Runnable {
 						int segundo = (int) tempo%60;
 						tempoEstimado  = minuto + " min. " + segundo + " seg.";
 					}
+	              
+	              if(x == 2){
+	            	  
+	            	  tempo=0; baixado = 0;cont =0;
+	            	  d.seek(0);
+	            	  
+	            	  
+	            	  
+	              }
 					
 	              setChanged();
 	              notifyObservers(this); 
@@ -97,7 +114,7 @@ public class Download extends Observable implements Runnable {
 				
 			}
 	         
-	         arq.close();
+	         d.close();
 	         socketOut.close();
 	         socketIn.close();
 		} catch (IOException e) {			
