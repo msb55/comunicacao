@@ -10,9 +10,10 @@ import javax.swing.JScrollPane;
 import javax.swing.JTable;
 import javax.swing.border.EmptyBorder;
 
+import model.DownloadTableModel;
 import model.ModelLocator;
 import model.ProgressBarRenderer;
-import model.thread.servidor.DownloadTableModel;
+
 import java.awt.Toolkit;
 
 public class StatusCliente extends JDialog {

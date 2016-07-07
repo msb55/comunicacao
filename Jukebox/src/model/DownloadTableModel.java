@@ -1,4 +1,4 @@
-package model.thread.servidor;
+package model;
 
 import java.util.Observable;
 import java.util.Observer;
@@ -6,6 +6,8 @@ import java.util.Vector;
 
 import javax.swing.JProgressBar;
 import javax.swing.table.AbstractTableModel;
+
+import model.thread.servidor.Download;
 
 
 public class DownloadTableModel extends AbstractTableModel implements Observer {

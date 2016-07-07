@@ -6,7 +6,6 @@ import java.util.ArrayList;
 
 
 import model.thread.servidor.Download;
-import model.thread.servidor.DownloadTableModel;
 
 public class Cliente {
 
