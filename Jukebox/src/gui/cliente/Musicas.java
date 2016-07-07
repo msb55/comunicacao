@@ -105,37 +105,60 @@ public class Musicas extends JDialog {
 					String tamanho = modelo.getValueAt(table.getSelectedRow(), 1).toString();
 					tamanho = tamanho.substring(0, tamanho.lastIndexOf('M'));
 					tamanho = tamanho.replace(',', '.');
-					ModelLocator.setNomeMusicas(modelo.getValueAt(table.getSelectedRow(), 0).toString());
+					String x = modelo.getValueAt(table.getSelectedRow(),0).toString();
+					boolean bool = true;
+					File f = new File("C:\\Users\\Public\\Documents\\log.txt");
+					System.out.println(x);
+					try{
+						BufferedReader br = new BufferedReader(new FileReader(f));
+						String linha;
+						while((linha = br.readLine())!= null){
+							System.out.println(linha);
+							if(linha.equals(x)){
+								System.out.println(linha);
+								bool = false;
+								break;
+							}
+						}
+						br.close();
+					} catch(Exception e){
+						System.out.println(e.getMessage());
+					}
+					ModelLocator.setNomeMusicas(x);
 					ModelLocator.setTamanhoMusicas(tamanhos.get(table.getSelectedRow()));
 	        		
-	        		try {
-						DataOutputStream socketOut = new DataOutputStream(ModelLocator.getSocketPrincipal().getOutputStream());
-						socketOut.writeBytes(ModelLocator.getNomeMusicas() + ".mp3" + "\n");
-						
-						BufferedReader socketIn = new BufferedReader(new InputStreamReader(ModelLocator.getSocketPrincipal().getInputStream()));
-						String portas = socketIn.readLine();
-						
-						String p[] = portas.split("-");
-						ModelLocator.setPorta1(Integer.parseInt(p[0]));
-						ModelLocator.setPorta2(Integer.parseInt(p[1]));
-					} catch (IOException e) {
-						JOptionPane.showMessageDialog(null, "Erro na solicitação da música.");
-					}
-	        		
-	        		Download download = new Download();
-	        		download.setLocationRelativeTo(null);
-	        		download.setVisible(true);
-	        		
-	        		new Thread(new RecebeMusica(ModelLocator.getPorta1(), ModelLocator.getPorta2(), ModelLocator.getNomeMusicas(), ModelLocator.getTamanhoMusicas(), download)).start();
-	        		
-	        		/*try {
-						Socket transferencia = new Socket(ModelLocator.getIpServidor(), ModelLocator.getPorta1());
-						Socket ted = new Socket(ModelLocator.getIpServidor(), ModelLocator.getPorta1());
+					if(bool == true){
+		        		try {
+							DataOutputStream socketOut = new DataOutputStream(ModelLocator.getSocketPrincipal().getOutputStream());
+							socketOut.writeBytes(ModelLocator.getNomeMusicas() + ".mp3" + "\n");
+							
+							BufferedReader socketIn = new BufferedReader(new InputStreamReader(ModelLocator.getSocketPrincipal().getInputStream()));
+							String portas = socketIn.readLine();
+							
+							String p[] = portas.split("-");
+							ModelLocator.setPorta1(Integer.parseInt(p[0]));
+							ModelLocator.setPorta2(Integer.parseInt(p[1]));
+						} catch (IOException e) {
+							JOptionPane.showMessageDialog(null, "Erro na solicitação da música.");
+						}
 		        		
-		        		new Thread(new RecebeMusica(transferencia, ted, ModelLocator.getNomeMusicas(), ModelLocator.getTamanhoMusicas(), download)).start();
-					} catch (IOException e) {
-						System.out.println(e.getMessage());
-					}*/
+		        		Download download = new Download();
+		        		download.setLocationRelativeTo(null);
+		        		download.setVisible(true);
+		        		
+		        		new Thread(new RecebeMusica(ModelLocator.getPorta1(), ModelLocator.getPorta2(), ModelLocator.getNomeMusicas(), ModelLocator.getTamanhoMusicas(), download)).start();
+		        		
+		        		/*try {
+							Socket transferencia = new Socket(ModelLocator.getIpServidor(), ModelLocator.getPorta1());
+							Socket ted = new Socket(ModelLocator.getIpServidor(), ModelLocator.getPorta1());
+			        		
+			        		new Thread(new RecebeMusica(transferencia, ted, ModelLocator.getNomeMusicas(), ModelLocator.getTamanhoMusicas(), download)).start();
+						} catch (IOException e) {
+							System.out.println(e.getMessage());
+						}*/
+					} else {
+						JOptionPane.showMessageDialog(null, "Música já baixada.");
+					}
 	        	}
 			}
 		});
