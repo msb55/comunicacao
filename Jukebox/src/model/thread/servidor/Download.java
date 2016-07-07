@@ -52,7 +52,6 @@ public class Download extends Observable implements Runnable {
 			byte[] buffer = new byte[1024]; //BUFER DE 512 BYTES
 	        FileInputStream file = new FileInputStream("C:/Users/Public/Documents/Jukebox/"+ this.musica);       
 	        File f = new File("C:/Users/Public/Documents/Jukebox/"+ this.musica);
-			DataInputStream arq = new DataInputStream(file);
 			RandomAccessFile d = new RandomAccessFile("C:/Users/Public/Documents/Jukebox/"+ this.musica, "rw");
 			filesize = f.length();
 			 int leitura = 0;
@@ -63,8 +62,7 @@ public class Download extends Observable implements Runnable {
 			 int  cont=0;
 				long tempoIda, tempoVolta, tempoTotal;
 				double tempo=0;
-				
-				arq.mark((int) (f.length()/8));
+			
 			
 			try{
 	         while((leitura = d.read(buffer)) > 0) {         	  
