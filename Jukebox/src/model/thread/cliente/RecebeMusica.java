@@ -155,38 +155,44 @@ public class RecebeMusica implements Runnable {
 				tempoIda = System.nanoTime();
 			}
 			
-			try {
-				File musica = new File("C:\\Users\\Public\\Documents\\" + nome+".mp3");
-				ID3V1Tag tag = new MP3File(musica).getID3V1Tag();
+			
+			if(!cancelar){
 				
-				Object[] obj = {nome, tag.getAlbum(), tag.getArtist(), musica.length()};
-				ModelLocator.getModel().addRow(obj);
-				
-				File f = new File("C:\\Users\\Public\\Documents\\log.txt");
-				BufferedWriter bf = new BufferedWriter(new FileWriter(f));
-				
-				int i = ModelLocator.getModel().getRowCount();
-				
-				while(i>0){
-					bf.write(ModelLocator.getModel().getValueAt(i-1, 0).toString());
-					bf.newLine();
-					bf.write(ModelLocator.getModel().getValueAt(i-1, 1).toString());
-					bf.newLine();
-					bf.write(ModelLocator.getModel().getValueAt(i-1, 2).toString());
-					bf.newLine();
-					bf.write(ModelLocator.getModel().getValueAt(i-1, 3).toString());
-					bf.newLine();
+				try {
+					File musica = new File("C:\\Users\\Public\\Documents\\" + nome+".mp3");
+					ID3V1Tag tag = new MP3File(musica).getID3V1Tag();
 					
-					i--;
+					Object[] obj = {nome, tag.getAlbum(), tag.getArtist(), musica.length()};
+					ModelLocator.getModel().addRow(obj);
+					
+					File f = new File("C:\\Users\\Public\\Documents\\log.txt");
+					BufferedWriter bf = new BufferedWriter(new FileWriter(f));
+					
+					int i = ModelLocator.getModel().getRowCount();
+					
+					while(i>0){
+						bf.write(ModelLocator.getModel().getValueAt(i-1, 0).toString());
+						bf.newLine();
+						bf.write(ModelLocator.getModel().getValueAt(i-1, 1).toString());
+						bf.newLine();
+						bf.write(ModelLocator.getModel().getValueAt(i-1, 2).toString());
+						bf.newLine();
+						bf.write(ModelLocator.getModel().getValueAt(i-1, 3).toString());
+						bf.newLine();
+						
+						i--;
+					}
+					
+					bf.close();
+				} catch (ID3Exception e) {
+					// TODO Auto-generated catch block
+					System.out.println(e.getMessage());
 				}
 				
-				bf.close();
-			} catch (ID3Exception e) {
-				// TODO Auto-generated catch block
-				System.out.println(e.getMessage());
+				file.close();
+				
 			}
 			
-			file.close();
 			transferencia.close();
 			ted.close();
 			
