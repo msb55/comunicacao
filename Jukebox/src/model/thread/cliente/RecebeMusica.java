@@ -12,11 +12,7 @@ import java.io.IOException;
 import java.net.Socket;
 import java.net.UnknownHostException;
 
-import javax.swing.JButton;
 import javax.swing.JDialog;
-import javax.swing.JLabel;
-import javax.swing.JProgressBar;
-
 import org.blinkenlights.jid3.ID3Exception;
 import org.blinkenlights.jid3.MP3File;
 import org.blinkenlights.jid3.v1.ID3V1Tag;
