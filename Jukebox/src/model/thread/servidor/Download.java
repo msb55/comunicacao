@@ -9,6 +9,9 @@ import java.net.Socket;
 import java.net.SocketException;
 import java.util.Observable;
 
+import model.Cliente;
+import model.ModelLocator;
+
 
 public class Download extends Observable implements Runnable {
 	
@@ -19,14 +22,17 @@ public class Download extends Observable implements Runnable {
     private long  filesize;
 	private float  progress;
 	private String tempoEstimado;
+	private Cliente cliente;
 
-	public Download(Socket socketDownload, Socket socketAck, String musica) {		
+	public Download(Socket socketDownload, Socket socketAck, String musica, Cliente cliente) {		
 		this.socketDownload = socketDownload;
 		this.socketAck = socketAck;
 		this.musica = musica;
 		this.tempoEstimado = "";
+		this.cliente = cliente;
 		this.thisThread = new Thread(this);
 	    this.thisThread.start();
+	  
 	}
 
 	@Override
@@ -86,6 +92,9 @@ public class Download extends Observable implements Runnable {
 	          }
 			}catch(SocketException e){
 				System.out.println(e.getMessage());
+				System.out.println("AQUI");
+				cliente.RemoveDownload(this);
+				
 			}
 	         
 	         arq.close();

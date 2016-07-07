@@ -26,6 +26,12 @@ public class DownloadTableModel extends AbstractTableModel implements Observer {
       d.addObserver(this);
       fireTableRowsInserted(data.size()-1, data.size()-1);
    }
+   
+   public void removeall(){	   
+	   fireTableRowsDeleted(0, data.size()-1);
+	   data.removeAllElements();
+	   
+   }
   
    // is called by a download object when its state changes
    public void update(Observable observable, Object o) {

@@ -63,7 +63,7 @@ public class Conexao implements Runnable {
 				
 				socketDownload = aceita.accept();
 				socketAck = aceita2.accept();			
-				Download download = new Download(socketDownload,socketAck,musica);	
+				Download download = new Download(socketDownload,socketAck,musica, cliente);	
 				cliente.addDownload(download);
 				
 			}
