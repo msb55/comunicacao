@@ -12,13 +12,13 @@ public class InicioCliente extends JFrame implements ActionListener{
 
 	//ActionListener - interface para adicionar ações
 
-	JTextField tfIP; //Caixas
-	JButton btEntrar;
+	private JTextField tfIP; //Caixas
+	private JButton btEntrar;
 
-	public JTextField ip;
-	public JLabel textoIp;
-	public ImageIcon imagem;
-	public JLabel label;
+	private JTextField ip;
+	private JLabel textoIp;
+	private ImageIcon imagem;
+	private JLabel label;
 	
 	public InicioCliente() {
 		setIconImage(Toolkit.getDefaultToolkit().getImage(InicioCliente.class.getResource("/gui/imagens/headphones.png")));
