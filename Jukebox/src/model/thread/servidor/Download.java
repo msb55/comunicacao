@@ -61,6 +61,16 @@ public class Download extends Observable implements Runnable {
 	            socketOut.flush();	
 	            
 	            int x = socketIn.read(); 
+	            
+	            if(x == 2){
+	            	tempo=0; baixado = 0;cont =0;
+	            	d.seek(0);
+	            	continue;
+	            }
+					
+	            setChanged();
+	            notifyObservers(this); 
+				cont++;	
 	             
 	            System.out.println(baixado);
 	              
@@ -76,14 +86,7 @@ public class Download extends Observable implements Runnable {
 					tempoEstimado  = minuto + " min. " + segundo + " seg.";
 	            }
 	              
-	            if(x == 2){
-	            	tempo=0; baixado = 0;cont =0;
-	            	d.seek(0);   	  
-	            }
-					
-	            setChanged();
-	            notifyObservers(this); 
-				cont++;		          
+	          	          
 				}
 			}catch(SocketException e){
 				System.out.println(e.getMessage());
