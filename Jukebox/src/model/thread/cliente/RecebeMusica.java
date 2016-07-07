@@ -122,7 +122,8 @@ public class RecebeMusica implements Runnable {
 					file = new FileOutputStream("C:\\Users\\Public\\Documents\\" + nome+".mp3");
 					buffer = new byte[1024*15];
 					lidos = 0; aux = 0; cont = 0; tempo = 0;
-					reiniciar = false;					
+					reiniciar = false;
+					continue;
 				}				
 				
 				if(cancelar){					
