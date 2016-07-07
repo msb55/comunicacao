@@ -58,6 +58,18 @@ public class Cliente {
 		this.downloads.add(download);
 	}
 	
+	
+	public  void RemoveDownload(Download download){
+		this.tableModelDownloads.removeall();
+		this.downloads.remove(download);
+		
+		for(Download d: this.downloads){
+			this.tableModelDownloads.addDownload(d);
+		}
+	}
+	
+	
+	
 	public  Download getDownload(int i){
 		return this.downloads.get(i);
 	}	
