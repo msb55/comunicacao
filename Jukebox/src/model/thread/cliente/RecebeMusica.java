@@ -84,33 +84,40 @@ public class RecebeMusica implements Runnable {
 			
 			byte[] buffer = new byte[1024*15];
 			int lidos, aux=0, cont=0;
-			long tempoIda, tempoVolta, tempoTotal;
+			long tempoIda = 0, tempoVolta, tempoTotal,TempoAcumulado=0;
 			double tempo=0;
 			
 			this.tela.getProgressBarDownload().setMaximum((int) tamanho);			
 			
+			
 			tempoIda = System.nanoTime();
+			
 			while((lidos = in.read(buffer)) != -1){
-				 
+				
+				
+				
 				file.write(buffer, 0, lidos);
 				file.flush();
 				
-				tempoVolta = System.nanoTime();				
-				tempoTotal = (tempoVolta - tempoIda)/1000;
+							
+				cont++;
+				tempoVolta = System.nanoTime();	
+				TempoAcumulado += (tempoVolta - tempoIda)/1000;
+				tempoTotal = TempoAcumulado/cont;
 				
 				aux += lidos;
 				
 				this.tela.getProgressBarDownload().setValue((int)aux);
 				
 				if(cont % 2 == 0){
-					tempo = ((tamanho-aux)*tempoTotal)/1024;
+					tempo = ((tamanho-aux)*tempoTotal)/(1024*15);
 					tempo /= 1000000;
 					int minuto = (int) tempo/60;
 					int segundo = (int) tempo%60;
 					this.tela.getLblTempo().setText(minuto + " min. " + segundo + " seg.");
 				}
 				
-				cont++;
+				
 				while(pausa & !cancelar &!reiniciar){
 					System.out.print("");
 				}
@@ -121,7 +128,7 @@ public class RecebeMusica implements Runnable {
 					new File("C:\\Users\\Public\\Documents\\" + nome+".mp3").delete();
 					file = new FileOutputStream("C:\\Users\\Public\\Documents\\" + nome+".mp3");
 					buffer = new byte[1024*15];
-					lidos = 0; aux = 0; cont = 0; tempo = 0;
+					lidos = 0; aux = 0; cont = 0; tempo = 0;TempoAcumulado=0;
 					reiniciar = false;
 					continue;
 				}				
@@ -138,9 +145,9 @@ public class RecebeMusica implements Runnable {
 					
 					break;
 				}
-
-				socketOut.write(1);
 				tempoIda = System.nanoTime();
+				socketOut.write(1);
+				
 			}
 			
 			
