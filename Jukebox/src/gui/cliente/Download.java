@@ -10,7 +10,7 @@ import javax.swing.JProgressBar;
 import javax.swing.JLabel;
 
 import model.ModelLocator;
-import model.thread.cliente.RecebeMusica;
+
 
 public class Download extends JDialog {
 	/**
