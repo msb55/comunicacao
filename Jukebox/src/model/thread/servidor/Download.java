@@ -49,7 +49,7 @@ public class Download extends Observable implements Runnable {
 			socketIn = new DataInputStream(socketAck.getInputStream());
 			
 			
-			byte[] buffer = new byte[1024]; //BUFER DE 512 BYTES
+			byte[] buffer = new byte[1024*30]; //BUFER DE 512 BYTES
 	        FileInputStream file = new FileInputStream("C:/Users/Public/Documents/Jukebox/"+ this.musica);       
 	        File f = new File("C:/Users/Public/Documents/Jukebox/"+ this.musica);
 			RandomAccessFile d = new RandomAccessFile("C:/Users/Public/Documents/Jukebox/"+ this.musica, "rw");
