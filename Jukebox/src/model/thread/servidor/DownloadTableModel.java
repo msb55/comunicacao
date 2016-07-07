@@ -57,6 +57,7 @@ public class DownloadTableModel extends AbstractTableModel implements Observer {
    }
   
    public Object getValueAt(int row, int col) {
+	   if(data.isEmpty()) return null;
       Download download = (Download) data.elementAt(row);
       if (col == 0)      return download.getMusica();
       else if (col == 1){
