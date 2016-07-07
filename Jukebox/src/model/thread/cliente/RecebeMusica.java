@@ -159,7 +159,7 @@ public class RecebeMusica implements Runnable {
 				File musica = new File("C:\\Users\\Public\\Documents\\" + nome+".mp3");
 				ID3V1Tag tag = new MP3File(musica).getID3V1Tag();
 				
-				Object[] obj = {nome, tag.getArtist(), tag.getArtist(), musica.length()};
+				Object[] obj = {nome, tag.getAlbum(), tag.getArtist(), musica.length()};
 				ModelLocator.getModel().addRow(obj);
 				
 				File f = new File("C:\\Users\\Public\\Documents\\log.txt");
