@@ -3,16 +3,12 @@ package model.thread.servidor;
 import java.io.DataInputStream;
 import java.io.DataOutputStream;
 import java.io.File;
-import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.RandomAccessFile;
 import java.net.Socket;
 import java.net.SocketException;
 import java.util.Observable;
-
 import model.Cliente;
-import model.ModelLocator;
-
 
 public class Download extends Observable implements Runnable {
 	
@@ -32,92 +28,75 @@ public class Download extends Observable implements Runnable {
 		this.tempoEstimado = "";
 		this.cliente = cliente;
 		this.thisThread = new Thread(this);
-	    this.thisThread.start();
-	  
+		this.thisThread.start();	  
 	}
 
 	@Override
 	public void run() {
-		DataOutputStream socketOut = null;
-		//BufferedReader socketIn = null;
+		DataOutputStream socketOut = null;		
 		DataInputStream socketIn = null;
-		try {
 		
+		try {		
 			socketOut = new DataOutputStream(socketDownload.getOutputStream());			
+			socketIn = new DataInputStream(socketAck.getInputStream());		
 			
-			socketIn = new DataInputStream(socketAck.getInputStream());
-			
-			
-			byte[] buffer = new byte[1024*30]; //BUFER DE 512 BYTES
-	        FileInputStream file = new FileInputStream("C:/Users/Public/Documents/Jukebox/"+ this.musica);       
+			byte[] buffer = new byte[1024*30]; //BUFER DE 512 BYTES     
 	        File f = new File("C:/Users/Public/Documents/Jukebox/"+ this.musica);
 			RandomAccessFile d = new RandomAccessFile("C:/Users/Public/Documents/Jukebox/"+ this.musica, "rw");
 			filesize = f.length();
-			 int leitura = 0;
-			 int baixado = 0;
-			 
 			
-			 
-			 int  cont=0;
-				long tempoIda, tempoVolta, tempoTotal;
-				double tempo=0;
+			int leitura = 0; int baixado = 0; int  cont=0;
+			long tempoIda, tempoVolta, tempoTotal;
+			double tempo=0;
 			
 			
 			try{
-	         while((leitura = d.read(buffer)) > 0) {         	  
+				while((leitura = d.read(buffer)) > 0) {         	  
 	        	         
-	        	  baixado += leitura;
-	        	  progress = ((float) baixado / filesize) * 100;
-	        	  
-	        	  
-	              tempoIda = System.nanoTime();
-	              socketOut.write(buffer,0,leitura);
-	              socketOut.flush();	
+	        	baixado += leitura;
+	        	progress = ((float) baixado / filesize) * 100;	        	  
+	        	 
+	            tempoIda = System.nanoTime();
+	            socketOut.write(buffer,0,leitura);
+	            socketOut.flush();	
 	            
-	              int x = socketIn.read(); 
+	            int x = socketIn.read(); 
+	             
+	            System.out.println(baixado);
 	              
-	              System.out.println(baixado);
-	              
-	              tempoVolta = System.nanoTime();				
-				  tempoTotal = (tempoVolta - tempoIda)/1000;
+	            tempoVolta = System.nanoTime();				
+				tempoTotal = (tempoVolta - tempoIda)/1000;
 	              
 	              
-	              if(cont % 2 == 0){
-						tempo = ((filesize-baixado)*tempoTotal)/1024;
-						tempo /= 1000000;
-						int minuto = (int) tempo/60;
-						int segundo = (int) tempo%60;
-						tempoEstimado  = minuto + " min. " + segundo + " seg.";
-					}
+	            if(cont % 2 == 0){
+	            	tempo = ((filesize-baixado)*tempoTotal)/1024;
+					tempo /= 1000000;
+					int minuto = (int) tempo/60;
+					int segundo = (int) tempo%60;
+					tempoEstimado  = minuto + " min. " + segundo + " seg.";
+	            }
 	              
-	              if(x == 2){
-	            	  
-	            	  tempo=0; baixado = 0;cont =0;
-	            	  d.seek(0);
-	            	  
-	            	  
-	            	  
-	              }
+	            if(x == 2){
+	            	tempo=0; baixado = 0;cont =0;
+	            	d.seek(0);   	  
+	            }
 					
-	              setChanged();
-	              notifyObservers(this); 
-				  cont++;	
-					
-	          }
+	            setChanged();
+	            notifyObservers(this); 
+				cont++;		          
+				}
 			}catch(SocketException e){
 				System.out.println(e.getMessage());
 				System.out.println("AQUI");
-				cliente.RemoveDownload(this);
-				
+				cliente.RemoveDownload(this);				
 			}
-	         
-	         d.close();
-	         socketOut.close();
-	         socketIn.close();
+			
+	        d.close();
+	        socketOut.close();
+	        socketIn.close();
 		} catch (IOException e) {			
 			e.printStackTrace();
 		}		
-		
 	}
 
 	public String getMusica() {
