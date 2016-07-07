@@ -61,17 +61,19 @@ public class PerfilCliente implements Runnable{
 		this.table.addMouseListener(new MouseAdapter() {
 			public void mouseClicked(MouseEvent e) {
 				if (e.getClickCount() == 1) {
-					String nome = table.getValueAt(table.getSelectedRow(), 0).toString();
-
+					String nome = table.getValueAt(table.getSelectedRow(), 0).toString();	
+					
 					if(mpp != null) mpp.stop();
-					mpp = new MP3Player(new File("C:\\Users\\Public\\Documents\\"+nome+".mp3"));				
+					
+					File f = new File("C:\\Users\\Public\\Documents\\"+nome+".mp3");
+					if(f.exists()) mpp = new MP3Player(f);
 				}			
 			}
 		});
 		
 		this.btnPlay.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
-				mpp.play();
+				if(mpp != null)	mpp.play();
 			}
 		});
 		
