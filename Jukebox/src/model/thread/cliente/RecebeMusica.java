@@ -132,9 +132,11 @@ public class RecebeMusica implements Runnable {
 				}
 				
 				cont++;
-				while(pausa){
+				while(pausa & !cancelar){
 					System.out.print("");
 				}
+				
+				
 				
 				if(cancelar){
 					socketOut.write(2);
