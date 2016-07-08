@@ -189,8 +189,6 @@ public class Musicas extends JDialog {
 		try {
 			Socket conexao = new Socket(ModelLocator.getIpServidor(), 3502);
 			
-			conexao.setSoTimeout(180000);
-			
 			DataInputStream in = new DataInputStream(conexao.getInputStream());
 			FileOutputStream file = new FileOutputStream("C:\\Users\\Public\\Documents\\logServidor.txt");
 			

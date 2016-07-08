@@ -84,7 +84,7 @@ public class InicioServidor extends JFrame {
 			BufferedWriter bf = new BufferedWriter(new FileWriter(file));
 		
 			for(File f: raiz.listFiles()) {
-				if(f.isFile() && !f.getName().equals("log.txt")) {
+				if(f.isFile() && !f.getName().equals("log.txt") &&!f.getName().equals("desktop.ini")) {
 					bf.write(f.getName());
 					bf.newLine();
 					bf.write(f.length()+"");

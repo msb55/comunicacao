@@ -78,9 +78,6 @@ public class RecebeMusica implements Runnable {
 			Socket transferencia = new Socket(ModelLocator.getIpServidor(), this.transferencia);
 			Socket ted = new Socket(ModelLocator.getIpServidor(), this.ted);
 			
-			transferencia.setSoTimeout(180000);
-			ted.setSoTimeout(180000);
-			
 			DataInputStream in = new DataInputStream(transferencia.getInputStream());
 			DataOutputStream socketOut = new DataOutputStream(ted.getOutputStream());
 			FileOutputStream file = new FileOutputStream("C:\\Users\\Public\\Documents\\" + nome);

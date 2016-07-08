@@ -73,7 +73,7 @@ public class Download extends Observable implements Runnable {
 	            notifyObservers(this); 
 				cont++;	
 	             
-	            System.out.println(baixado);
+	            //System.out.println(baixado);
 	              
 	            tempoVolta = System.nanoTime();		
 	            TempoAcumulado += (tempoVolta - tempoIda)/1000;
