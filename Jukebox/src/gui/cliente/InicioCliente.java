@@ -76,6 +76,7 @@ public class InicioCliente extends JFrame implements ActionListener{
 
 			if(e.getSource()==btEntrar) {
 				Socket socket = new Socket(ip.getText(), 3493);
+				socket.setSoTimeout(180000);
 				ModelLocator.setSocketPrincipal(socket);
 				ModelLocator.setIpServidor(ip.getText());
 				ModelLocator.setPorta(3493);

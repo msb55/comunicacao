@@ -99,7 +99,7 @@ public class PerfilCliente implements Runnable{
 				String artista = lerArquivo.readLine();
 				String tamanho = lerArquivo.readLine();
 				
-				Object[] obj = {nome, album, artista, String.format("%.2f",((Double.parseDouble(tamanho)/1024)/1024))+" MB"};
+				Object[] obj = {nome, album, artista, tamanho};
 				
 				this.modelo.addRow(obj);
 				

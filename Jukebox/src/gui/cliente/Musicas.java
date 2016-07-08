@@ -130,7 +130,7 @@ public class Musicas extends JDialog {
 					if(bool == true){
 		        		try {
 							DataOutputStream socketOut = new DataOutputStream(ModelLocator.getSocketPrincipal().getOutputStream());
-							socketOut.writeBytes(ModelLocator.getNomeMusicas() + ".mp3" + "\n");
+							socketOut.writeBytes(ModelLocator.getNomeMusicas() + "\n");
 							
 							BufferedReader socketIn = new BufferedReader(new InputStreamReader(ModelLocator.getSocketPrincipal().getInputStream()));
 							String portas = socketIn.readLine();
@@ -188,6 +188,8 @@ public class Musicas extends JDialog {
 	public void carregarMusicas(){
 		try {
 			Socket conexao = new Socket(ModelLocator.getIpServidor(), 3502);
+			
+			conexao.setSoTimeout(180000);
 			
 			DataInputStream in = new DataInputStream(conexao.getInputStream());
 			FileOutputStream file = new FileOutputStream("C:\\Users\\Public\\Documents\\logServidor.txt");
