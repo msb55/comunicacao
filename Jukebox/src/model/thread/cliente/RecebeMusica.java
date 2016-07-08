@@ -78,9 +78,12 @@ public class RecebeMusica implements Runnable {
 			Socket transferencia = new Socket(ModelLocator.getIpServidor(), this.transferencia);
 			Socket ted = new Socket(ModelLocator.getIpServidor(), this.ted);
 			
+			transferencia.setSoTimeout(180000);
+			ted.setSoTimeout(180000);
+			
 			DataInputStream in = new DataInputStream(transferencia.getInputStream());
 			DataOutputStream socketOut = new DataOutputStream(ted.getOutputStream());
-			FileOutputStream file = new FileOutputStream("C:\\Users\\Public\\Documents\\" + nome+".mp3");
+			FileOutputStream file = new FileOutputStream("C:\\Users\\Public\\Documents\\" + nome);
 			
 			byte[] buffer = new byte[1024*15];
 			int lidos, aux=0, cont=0;
@@ -125,8 +128,8 @@ public class RecebeMusica implements Runnable {
 				if(reiniciar){
 					socketOut.write(2);
 					file.close();
-					new File("C:\\Users\\Public\\Documents\\" + nome+".mp3").delete();
-					file = new FileOutputStream("C:\\Users\\Public\\Documents\\" + nome+".mp3");
+					new File("C:\\Users\\Public\\Documents\\" + nome).delete();
+					file = new FileOutputStream("C:\\Users\\Public\\Documents\\" + nome);
 					buffer = new byte[1024*15];
 					lidos = 0; aux = 0; cont = 0; tempo = 0;TempoAcumulado=0;
 					reiniciar = false;
@@ -140,7 +143,7 @@ public class RecebeMusica implements Runnable {
 					in.close();
 					socketOut.close();
 					
-					new File("C:\\Users\\Public\\Documents\\" + nome+".mp3").delete();
+					new File("C:\\Users\\Public\\Documents\\" + nome).delete();
 					this.tela.dispose();
 					
 					break;
@@ -154,7 +157,7 @@ public class RecebeMusica implements Runnable {
 			if(concluido){
 				
 				try {
-					File musica = new File("C:\\Users\\Public\\Documents\\" + nome+".mp3");
+					File musica = new File("C:\\Users\\Public\\Documents\\" + nome);
 					ID3V1Tag tag = new MP3File(musica).getID3V1Tag();
 					Object[] obj = null;
 					

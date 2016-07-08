@@ -60,7 +60,7 @@ public class PerfilCliente implements Runnable{
 					
 					if(mpp != null) mpp.stop();
 					
-					File f = new File("C:\\Users\\Public\\Documents\\"+nome+".mp3");
+					File f = new File("C:\\Users\\Public\\Documents\\"+nome);
 					if(f.exists()) mpp = new MP3Player(f);
 				}			
 			}

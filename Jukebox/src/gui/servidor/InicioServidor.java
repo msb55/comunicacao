@@ -4,8 +4,10 @@ package gui.servidor;
 import java.awt.EventQueue;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
-
-
+import java.io.BufferedWriter;
+import java.io.File;
+import java.io.FileWriter;
+import java.io.IOException;
 
 import javax.swing.JFrame;
 import javax.swing.JPanel;
@@ -74,6 +76,25 @@ public class InicioServidor extends JFrame {
 		
 		JScrollPane scrollPane = new JScrollPane();
 		scrollPane.setBounds(10, 10, 481, 285);
+		
+		
+		File raiz = new File("C:\\Users\\Public\\Documents\\JukeBox");
+		try {
+			File file = new File("C:\\Users\\Public\\Documents\\JukeBox\\log.txt");
+			BufferedWriter bf = new BufferedWriter(new FileWriter(file));
+		
+			for(File f: raiz.listFiles()) {
+				if(f.isFile() && !f.getName().equals("log.txt")) {
+					bf.write(f.getName());
+					bf.newLine();
+					bf.write(f.length()+"");
+					bf.newLine();
+				}
+			}
+			bf.close();		
+		} catch (IOException e1) {
+			System.out.println(e1);
+		}
 		
 		
 		table.addMouseListener(new MouseAdapter() { // ABRE O JFRAME STATUS
