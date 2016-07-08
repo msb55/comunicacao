@@ -86,7 +86,7 @@ public class RecebeMusica implements Runnable {
 			int lidos, aux=0, cont=0;
 			long tempoIda = 0, tempoVolta, tempoTotal,TempoAcumulado=0;
 			double tempo=0;
-			
+			boolean concluido = false;
 			this.tela.getProgressBarDownload().setMaximum((int) tamanho);			
 			
 			
@@ -106,7 +106,7 @@ public class RecebeMusica implements Runnable {
 				tempoTotal = TempoAcumulado/cont;
 				
 				aux += lidos;
-				
+				if(aux >= tamanho)concluido = true;
 				this.tela.getProgressBarDownload().setValue((int)aux);
 				
 				if(cont % 2 == 0){
@@ -151,7 +151,7 @@ public class RecebeMusica implements Runnable {
 			}
 			
 			
-			if(!cancelar){
+			if(concluido){
 				
 				try {
 					File musica = new File("C:\\Users\\Public\\Documents\\" + nome+".mp3");
