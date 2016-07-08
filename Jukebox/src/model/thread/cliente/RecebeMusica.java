@@ -109,7 +109,10 @@ public class RecebeMusica implements Runnable {
 				tempoTotal = TempoAcumulado/cont;
 				
 				aux += lidos;
-				if(aux >= tamanho)concluido = true;
+				if(aux >= tamanho){					
+					concluido = true;
+					this.tela.getProgressBarDownload().setValue((int)tamanho);
+				}
 				this.tela.getProgressBarDownload().setValue((int)aux);
 				
 				if(cont % 2 == 0){
